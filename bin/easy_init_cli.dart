@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:args/args.dart';
-import 'package:easy_init_cli/commands/create_project/create_project.dart';
 import 'package:dcli/dcli.dart';
+import 'package:easy_init_cli/commands/create_project/create_project.dart';
 
 const String version = '0.0.1';
 
@@ -13,6 +13,12 @@ ArgParser buildParser() {
       abbr: 'h',
       negatable: false,
       help: 'Print this usage information.',
+    )
+    ..addFlag(
+      'verbose',
+      abbr: 'v',
+      negatable: false,
+      help: 'Show additional command output.',
     )
     ..addFlag(
       'version',
@@ -44,9 +50,7 @@ void main(List<String> arguments) async {
       // print(yellow('$a'));
       return;
     }
-    if (results.wasParsed('verbose')) {
-      verbose = true;
-    }
+
     if (arguments[0] == "create") {
       CreateProject().excecute();
       return;
