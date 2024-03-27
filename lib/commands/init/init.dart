@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:easy_init_cli/common/utils/shell_utils.dart';
 import 'package:easy_init_cli/core/structure.dart';
 import 'package:easy_init_cli/functions/create.dart';
 import 'package:easy_init_cli/interfaces/command.dart';
@@ -11,20 +12,13 @@ class InitProject extends Command with Logging {
 
   @override
   Future<void> excecute() async {
+    blueLog("Project initialization started");
     List<Directory> directories =
         Structure.cleanArchitectureStructure.values.toList();
     createListDirectories(directories);
-    createFiles(Structure.files);
-
-//     File file = File(filePath);
-//     String content = '''
-// // This is the content of the generated file
-
-// void main() {
-//   print('Hello from generated file!');
-// }
-// ''';
-//     await file.writeAsString(content);
-//     greenLog("is it working, :$currentPath");
+    createFiles(Structure.cleanArchFiles);
+    await ShellUtils().addDependancies();
+    await ShellUtils().runBuildRunner();
+    greenLog("Project initialized with TDD Clean architecture");
   }
 }

@@ -11,4 +11,15 @@ class ShellUtils with Logging {
     print("Open terminal from project's root folder and run the command ");
     blueLog("   \$ easy init");
   }
+
+  Future<void> addDependancies() async {
+    await run(
+        "flutter pub add dartz flutter_bloc injectable freezed_annotation get_it dio");
+    await run(
+        "flutter pub add --dev build_runner freezed injectable_generator");
+  }
+
+  Future<void> runBuildRunner() async {
+    await run("dart run build_runner build");
+  }
 }

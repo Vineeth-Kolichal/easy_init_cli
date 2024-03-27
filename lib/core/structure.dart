@@ -4,67 +4,112 @@ import 'package:easy_init_cli/core/file_contents.dart';
 
 class Structure {
   static Map<String, Directory> cleanArchitectureStructure = {
-    DirName.core: Directory(
+    CleanDirName.core: Directory(
       replaceAsExpected(
         path: "lib/core",
       ),
     ),
-    DirName.apiEndpoints: Directory(
+    CleanDirName.apiEndpoints: Directory(
       replaceAsExpected(
         path: "lib/core/api_endpoints",
       ),
     ),
-    DirName.baseUsecase: Directory(
+    CleanDirName.baseUsecase: Directory(
       replaceAsExpected(
         path: "lib/core/base_usecase",
       ),
     ),
-    DirName.dependancyInjection: Directory(
+    CleanDirName.dependancyInjection: Directory(
       replaceAsExpected(
         path: "lib/core/dependancy_injection",
       ),
     ),
-    DirName.failures: Directory(
+    CleanDirName.failures: Directory(
       replaceAsExpected(
         path: "lib/core/failures",
       ),
     ),
-    DirName.networkExceptions: Directory(
+    CleanDirName.networkExceptions: Directory(
       replaceAsExpected(
         path: "lib/core/network_exceptions",
       ),
     ),
-    DirName.routes: Directory(
+    CleanDirName.routes: Directory(
       replaceAsExpected(
         path: "lib/core/routes",
       ),
     ),
-    DirName.theme: Directory(
+    CleanDirName.theme: Directory(
       replaceAsExpected(
         path: "lib/core/theme",
       ),
     ),
-    DirName.config: Directory(
+    CleanDirName.config: Directory(
       replaceAsExpected(
         path: "lib/core/dependancy_injection/config",
       ),
     ),
-    DirName.modules: Directory(
+    CleanDirName.modules: Directory(
       replaceAsExpected(
         path: "lib/core/dependancy_injection/modules",
       ),
     ),
   };
-  static List<FileModel> files = [
+  static List<FileModel> cleanArchFiles = [
     FileModel(
-      cleanArchitectureStructure[DirName.apiEndpoints]!.path,
+      cleanArchitectureStructure[CleanDirName.apiEndpoints]!.path,
       "api_endpoints.dart",
       apiEndpointContent,
     ),
     FileModel(
-      cleanArchitectureStructure[DirName.baseUsecase]!.path,
+      cleanArchitectureStructure[CleanDirName.baseUsecase]!.path,
       "base_usecase.dart",
       usecaseContent,
+    ),
+    FileModel(
+      cleanArchitectureStructure[CleanDirName.config]!.path,
+      "configure_injection.dart",
+      configInjectionContent,
+    ),
+    FileModel(
+      cleanArchitectureStructure[CleanDirName.modules]!.path,
+      "dio_module.dart",
+      dioModuleContent,
+    ),
+    FileModel(
+      cleanArchitectureStructure[CleanDirName.failures]!.path,
+      "failures.dart",
+      failuresContent,
+    ),
+    FileModel(
+      cleanArchitectureStructure[CleanDirName.networkExceptions]!.path,
+      "network_exceptions.dart",
+      networkExceptionContent,
+    ),
+    FileModel(
+      cleanArchitectureStructure[CleanDirName.routes]!.path,
+      "app_routes.dart",
+      routesContent,
+    ),
+    FileModel(
+      cleanArchitectureStructure[CleanDirName.theme]!.path,
+      "theme.dart",
+      themeContent,
+    ),
+    FileModel(
+      cleanArchitectureStructure[CleanDirName.theme]!.path,
+      "colors.dart",
+      colorsContent,
+    ),
+    FileModel(
+      'lib',
+      "main.dart",
+      mainContent,
+    ),
+    FileModel(
+      'lib',
+      "app.dart",
+      appContent,
     ),
   ];
 
@@ -97,7 +142,7 @@ class FileModel {
   String get content => _content;
 }
 
-class DirName {
+class CleanDirName {
   static String core = "core";
   static String apiEndpoints = "apiEndpoints";
   static String baseUsecase = "base_usecase";
