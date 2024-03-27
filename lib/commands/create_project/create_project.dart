@@ -7,9 +7,9 @@ import 'package:recase/recase.dart';
 
 import '../../interfaces/command.dart';
 
-class CreateProject implements Command {
+class CreateProject extends Command {
   @override
-  String get commandName => "create";
+  String get commandName => "project";
 
   @override
   Future<void> excecute() async {
