@@ -29,7 +29,7 @@ class EasyInitCli {
 
 class ErrorCommand extends Command with Logging {
   @override
-  String get commandName => 'onerror';
+  String get commandName => 'onError';
   String error;
   ErrorCommand(this.error);
 
