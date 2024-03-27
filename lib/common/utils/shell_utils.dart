@@ -8,5 +8,7 @@ class ShellUtils with Logging {
     blueLog("Project creating.....");
     await run('flutter create $projectName --no-pub --org $org');
     greenLog("🚀🚀 Successfully created project");
+    print("Open terminal from project's root folder and run the command ");
+    blueLog("   \$ easy init");
   }
 }
