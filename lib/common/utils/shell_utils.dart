@@ -3,6 +3,8 @@
 import 'package:easy_init_cli/interfaces/logging.dart';
 import 'package:process_run/shell.dart';
 
+import '../../core/file_contents.dart';
+
 class ShellUtils with Logging {
   void flutterCreate({required String projectName, required String org}) async {
     blueLog("Project creating.....");
@@ -25,6 +27,9 @@ class ShellUtils with Logging {
 
   Future<void> update() async {
     blueLog("Updating....");
+    print("");
+    blueLog(logo);
+    print('');
     await run(
         "dart pub global activate --source git https://github.com/Vineeth-Kolichal/easy_init_cli");
     greenLog("Updated successfully");
