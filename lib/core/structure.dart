@@ -79,7 +79,7 @@ class Structure {
     FileModel(
       cleanArchitectureStructure[CleanDirName.commonWidgets]!.path,
       "responsive.dart",
-      spaceContent,
+      responsiveContent,
     ),
     FileModel(
       cleanArchitectureStructure[CleanDirName.apiEndpoints]!.path,
