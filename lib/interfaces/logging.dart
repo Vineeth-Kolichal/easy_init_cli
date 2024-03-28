@@ -12,4 +12,8 @@ mixin Logging {
   void blueLog(String text) {
     print(blue(text));
   }
+
+  void redLog(String text) {
+    print(red(text));
+  }
 }
