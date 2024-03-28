@@ -1,6 +1,7 @@
 import 'package:args/args.dart';
 import 'package:dcli/dcli.dart';
 import 'package:easy_init_cli/common/utils/shell_utils.dart';
+import 'package:easy_init_cli/core/file_contents.dart';
 import 'package:easy_init_cli/core/generator.dart';
 
 const String version = '0.0.3';
@@ -39,8 +40,7 @@ void main(List<String> arguments) async {
   final ArgParser argParser = buildParser();
   try {
     if (arguments.isEmpty) {
-      print(blue(''' Easy Init CLI version:$version
-'''));
+      print(blue(logo));
       //printUsage(argParser);
       return;
     }
