@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:easy_init_cli/common/utils/shell_utils.dart';
@@ -12,6 +13,7 @@ class InitProject extends Command with Logging {
 
   @override
   Future<void> excecute() async {
+    
     blueLog("Project initialization started");
     List<Directory> directories =
         Structure.cleanArchitectureStructure.values.toList();

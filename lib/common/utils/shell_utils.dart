@@ -22,4 +22,11 @@ class ShellUtils with Logging {
   Future<void> runBuildRunner() async {
     await run("dart run build_runner build");
   }
+
+  Future<void> update() async {
+    blueLog("Updating....");
+    await run(
+        "dart pub global activate --source git https://github.com/Vineeth-Kolichal/easy_init_cli");
+    greenLog("Updated successfully");
+  }
 }

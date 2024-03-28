@@ -1,5 +1,6 @@
 import 'package:args/args.dart';
 import 'package:dcli/dcli.dart';
+import 'package:easy_init_cli/common/utils/shell_utils.dart';
 import 'package:easy_init_cli/core/generator.dart';
 
 const String version = '0.0.1';
@@ -18,9 +19,9 @@ ArgParser buildParser() {
       help: 'Print the tool version.',
     )
     ..addFlag(
-      'createproject',
+      'update',
       negatable: true,
-      help: 'Create new Flutter project',
+      help: 'update easy init cli',
     )
     ..addFlag(
       'init',
@@ -52,6 +53,10 @@ void main(List<String> arguments) async {
     }
     if (results.wasParsed('version')) {
       print('easy_init_cli version: $version');
+      return;
+    }
+    if (results.wasParsed('update')) {
+      await ShellUtils().update();
       return;
     }
     final command = EasyInitCli(arguments).findCommand();

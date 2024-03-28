@@ -4,6 +4,16 @@ import 'package:easy_init_cli/core/file_contents.dart';
 
 class Structure {
   static Map<String, Directory> cleanArchitectureStructure = {
+    CleanDirName.common: Directory(
+      replaceAsExpected(
+        path: "lib/common",
+      ),
+    ),
+    CleanDirName.commonWidgets: Directory(
+      replaceAsExpected(
+        path: "lib/common/widgets",
+      ),
+    ),
     CleanDirName.core: Directory(
       replaceAsExpected(
         path: "lib/core",
@@ -54,8 +64,23 @@ class Structure {
         path: "lib/core/dependancy_injection/modules",
       ),
     ),
+    CleanDirName.features: Directory(
+      replaceAsExpected(
+        path: "lib/features",
+      ),
+    ),
   };
   static List<FileModel> cleanArchFiles = [
+    FileModel(
+      cleanArchitectureStructure[CleanDirName.commonWidgets]!.path,
+      "space.dart",
+      spaceContent,
+    ),
+    FileModel(
+      cleanArchitectureStructure[CleanDirName.commonWidgets]!.path,
+      "responsive.dart",
+      spaceContent,
+    ),
     FileModel(
       cleanArchitectureStructure[CleanDirName.apiEndpoints]!.path,
       "api_endpoints.dart",
@@ -102,6 +127,11 @@ class Structure {
       colorsContent,
     ),
     FileModel(
+      cleanArchitectureStructure[CleanDirName.features]!.path,
+      ".gitkeep",
+      "",
+    ),
+    FileModel(
       'lib',
       "main.dart",
       mainContent,
@@ -143,6 +173,9 @@ class FileModel {
 }
 
 class CleanDirName {
+  static String common = "common";
+  static String commonWidgets = "widgets";
+  static String features = "features";
   static String core = "core";
   static String apiEndpoints = "apiEndpoints";
   static String baseUsecase = "base_usecase";
