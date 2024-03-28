@@ -1,5 +1,7 @@
 // import 'package:dcli/dcli.dart';
 
+import 'dart:async';
+
 import 'package:easy_init_cli/interfaces/logging.dart';
 import 'package:process_run/shell.dart';
 
@@ -22,7 +24,10 @@ class ShellUtils with Logging {
   }
 
   Future<void> runBuildRunner() async {
-    await run("dart run build_runner build");
+    await run("flutter pub get");
+    Timer(Duration(milliseconds: 1000), () async {
+      await run("dart run build_runner build");
+    });
   }
 
   Future<void> update() async {
