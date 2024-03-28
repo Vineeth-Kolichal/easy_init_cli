@@ -294,7 +294,7 @@ String logo = '''
   ##            ##       ##            ##      ##              ##   ##    ####   ##       ##
  ##########    ##       ##    #########      ##              ####  ##      ##  ####      ##
 
-                                                                    Made with 🩵 by Vineeth
-                                                                            Version :0.0.5
+                                                                 Made with 🩵  by Vineeth
+                                                                          Version :0.0.5
 
 ''';
