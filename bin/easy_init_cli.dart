@@ -3,7 +3,7 @@ import 'package:dcli/dcli.dart';
 import 'package:easy_init_cli/common/utils/shell_utils.dart';
 import 'package:easy_init_cli/core/generator.dart';
 
-const String version = '0.0.1';
+const String version = '0.0.2';
 
 ArgParser buildParser() {
   return ArgParser()
@@ -20,7 +20,7 @@ ArgParser buildParser() {
     )
     ..addFlag(
       'update',
-      negatable: true,
+      negatable: false,
       help: 'update easy init cli',
     )
     ..addFlag(
