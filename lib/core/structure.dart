@@ -1,6 +1,8 @@
 import 'dart:io';
 
+import 'package:easy_init_cli/commands/create_feature/create_feature.dart';
 import 'package:easy_init_cli/core/file_contents.dart';
+import 'package:recase/recase.dart';
 
 class Structure {
   static Map<String, Directory> cleanArchitectureStructure = {
@@ -69,6 +71,73 @@ class Structure {
         path: "lib/features",
       ),
     ),
+  };
+  static Map<String, Directory> cleanArchitectureFeatureStructure = {
+    CleanDirName.featureNm: Directory(
+      replaceAsExpected(
+        path: "lib/features/${CleanDirName.featureNm}",
+      ),
+    ),
+    CleanDirName.data: Directory(
+      replaceAsExpected(
+        path: "lib/features/${CleanDirName.featureNm}/data",
+      ),
+    ),
+    CleanDirName.dataSource: Directory(
+      replaceAsExpected(
+        path: "lib/features/${CleanDirName.featureNm}/data/data_sources",
+      ),
+    ),
+    CleanDirName.models: Directory(
+      replaceAsExpected(
+        path: "lib/features/${CleanDirName.featureNm}data/modes",
+      ),
+    ),
+    CleanDirName.repoImpl: Directory(
+      replaceAsExpected(
+        path: "lib/features/${CleanDirName.featureNm}/data/repositories_impl",
+      ),
+    ),
+    CleanDirName.domain: Directory(
+      replaceAsExpected(
+        path: "lib/features/${CleanDirName.featureNm}/domain",
+      ),
+    ),
+    CleanDirName.usecase: Directory(
+      replaceAsExpected(
+        path: "lib/features/${CleanDirName.featureNm}/domain/usecases",
+      ),
+    ),
+    CleanDirName.entities: Directory(
+      replaceAsExpected(
+        path: "lib/features/${CleanDirName.featureNm}/domain/entities",
+      ),
+    ),
+    CleanDirName.repositories: Directory(
+      replaceAsExpected(
+        path: "lib/features/${CleanDirName.featureNm}/domain/repositories",
+      ),
+    ),
+    CleanDirName.presentation: Directory(
+      replaceAsExpected(
+        path: "lib/features/${CleanDirName.featureNm}/presentation",
+      ),
+    ),
+    CleanDirName.blocs: Directory(
+      replaceAsExpected(
+        path: "lib/features/${CleanDirName.featureNm}/presentation/blocs",
+      ),
+    ),
+    CleanDirName.screens: Directory(
+      replaceAsExpected(
+        path: "lib/features/${CleanDirName.featureNm}/presentation/screens",
+      ),
+    ),
+    CleanDirName.widgets: Directory(
+      replaceAsExpected(
+        path: "lib/features/${CleanDirName.featureNm}/presentation/widgets",
+      ),
+    )
   };
   static List<FileModel> cleanArchFiles = [
     FileModel(
@@ -173,6 +242,7 @@ class FileModel {
 }
 
 class CleanDirName {
+  //configurations
   static String common = "common";
   static String commonWidgets = "widgets";
   static String features = "features";
@@ -186,4 +256,18 @@ class CleanDirName {
   static String theme = "theme";
   static String config = "config";
   static String modules = "modules";
+  //features
+  static String featureNm = CreateFeature.featureName.snakeCase;
+  static String data = "data";
+  static String dataSource = "data_sources";
+  static String models = "models";
+  static String repoImpl = "repositories_impl";
+  static String domain = "domain";
+  static String usecase = "usecases";
+  static String entities = "entities";
+  static String repositories = "repositories";
+  static String presentation = "presentation";
+  static String blocs = "blocs";
+  static String screens = "screens";
+  static String widgets = "widgets";
 }
