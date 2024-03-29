@@ -90,7 +90,7 @@ class Structure {
     ),
     CleanDirName.models: Directory(
       replaceAsExpected(
-        path: "lib/features/${CleanDirName.featureNm}data/modes",
+        path: "lib/features/${CleanDirName.featureNm}/data/models",
       ),
     ),
     CleanDirName.repoImpl: Directory(
