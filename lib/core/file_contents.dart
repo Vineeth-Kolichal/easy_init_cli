@@ -1,3 +1,6 @@
+import 'package:easy_init_cli/commands/create_feature/create_feature.dart';
+import 'package:recase/recase.dart';
+
 String logo = '''
 
 
@@ -143,12 +146,14 @@ class CustomException implements Exception {
 
 String routesContent = '''
 import 'package:flutter/material.dart';
+import '../../features/home/presentation/screens/home_screen.dart';
+
 
 class AppRoutes {
   Route onGenerateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
-      // case '/':
-      //   return MaterialPageRoute(builder: (ctx) => const SplashScreen());
+      case '/':
+        return MaterialPageRoute(builder: (ctx) => const HomeScreen());
       default:
         return _errorRoute();
     }
@@ -303,4 +308,62 @@ class Responsive extends StatelessWidget {
     );
   }
 }
+''';
+
+String dataSourceContent = '''
+abstract class ${CreateFeature.pascalCaseConverted}DataSource{}
+class ${CreateFeature.pascalCaseConverted}DataSourceImpl implements ${CreateFeature.pascalCaseConverted}DataSource{} 
+''';
+
+String repoImplContent = '''
+import '../../domain/repository/${CreateFeature.snakCaseConverted}_repository.dart';
+
+class ${CreateFeature.pascalCaseConverted}RepoImpl implements ${CreateFeature.pascalCaseConverted}Repository{
+
+}
+
+''';
+
+String repoContent = '''
+abstract class ${CreateFeature.pascalCaseConverted}Repository{
+
+}
+
+''';
+
+String screenContent = '''
+import 'package:flutter/material.dart';
+
+class ${CreateFeature.pascalCaseConverted}Screen extends StatelessWidget {
+  const ${CreateFeature.pascalCaseConverted}Screen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
+  }
+}
+
+''';
+
+String homeScreenContent = '''
+import 'package:flutter/material.dart';
+
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Easy Init CLI"),
+      ),
+      body: const Center(
+        child: Text("TDD clean architecture project"),
+      ),
+    );
+  }
+}
+
+
+
 ''';
