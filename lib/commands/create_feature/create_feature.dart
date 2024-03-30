@@ -10,24 +10,19 @@ import '../../functions/create.dart';
 
 class CreateFeature extends Command with Logging {
   static String featureName = "home";
-  static String pascalCaseConverted = '';
-  static String snakCaseConverted = '';
+
   @override
   String get commandName => "feature";
 
   @override
   Future<void> excecute() async {
     featureName = askQuestion("Feature name", "home");
-    pascalCaseConverted = featureName.pascalCase;
-    snakCaseConverted = snakCaseConverted;
     blueLog("Creating $featureName feature");
 
     List<Directory> directories =
         Structure.cleanArchitectureFeatureStructure.values.toList();
     createListDirectories(directories);
     createFiles(Structure.cleanArchFeatureFiles);
-    // await ShellUtils().addDependancies();
-    // await ShellUtils().runBuildRunner();
     greenLog("Successfully created $featureName feature");
   }
 }

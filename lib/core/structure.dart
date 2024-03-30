@@ -325,11 +325,6 @@ class Structure {
       ".gitkeep",
       "",
     ),
-    FileModel(
-      cleanArchitectureFeatureStructure[CleanDirName.homeBloc]!.path,
-      ".gitkeep",
-      "",
-    ),
   ];
 
   static String replaceAsExpected({required String path, String? replaceChar}) {
