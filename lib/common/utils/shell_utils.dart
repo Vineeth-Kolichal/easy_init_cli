@@ -24,9 +24,9 @@ class ShellUtils with Logging {
   }
 
   Future<void> runBuildRunner() async {
-    blueLog("Running build_runner");
     await run("flutter pub get");
     Timer(Duration(milliseconds: 1000), () async {
+      blueLog("Running build_runner");
       await run("dart run build_runner build");
     });
   }
