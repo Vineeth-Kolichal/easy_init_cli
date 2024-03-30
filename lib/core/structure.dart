@@ -138,12 +138,13 @@ class Structure {
         path: "lib/features/${CleanDirName.featureNm}/presentation/widgets",
       ),
     ),
-    CleanDirName.homeBloc: Directory(
-      replaceAsExpected(
-        path:
-            "lib/features/${CleanDirName.featureNm}/presentation/blocs/${CleanDirName.homeBloc}",
+    if (CleanDirName.featureNm == "home")
+      CleanDirName.homeBloc: Directory(
+        replaceAsExpected(
+          path:
+              "lib/features/${CleanDirName.featureNm}/presentation/blocs/${CleanDirName.homeBloc}",
+        ),
       ),
-    ),
   };
   static List<FileModel> cleanArchFiles = [
     FileModel(
