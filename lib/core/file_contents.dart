@@ -322,7 +322,7 @@ class ${CreateFeature.featureName.pascalCase}DataSourceImpl implements ${CreateF
 ''';
 
 String repoImplContent = '''
-import '../../domain/repository/${CreateFeature.featureName.snakeCase}_repository.dart';
+import '../../domain/repositories/${CreateFeature.featureName.snakeCase}_repository.dart';
 
 class ${CreateFeature.featureName.pascalCase}RepoImpl implements ${CreateFeature.featureName.pascalCase}Repository{
 
