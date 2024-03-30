@@ -20,7 +20,15 @@ class InitProject extends Command with Logging {
     print('');
     List<Directory> directories =
         Structure.cleanArchitectureStructure.values.toList();
-    createListDirectories(directories);
+    List<Directory> homeFeatureDirectories =
+        Structure.cleanArchitectureFeatureStructure.values.toList();
+
+    createListDirectories(
+      [
+        ...directories,
+        ...homeFeatureDirectories,
+      ],
+    );
     createFiles(Structure.cleanArchFiles);
     await ShellUtils().addDependancies();
     await ShellUtils().runBuildRunner();
