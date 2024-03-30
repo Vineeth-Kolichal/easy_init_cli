@@ -257,7 +257,7 @@ class CleanDirName {
   static String config = "config";
   static String modules = "modules";
   //features
-  static String featureNm = CreateFeature.snakCaseConverted;
+  static String featureNm = CreateFeature.featureName.snakeCase;
   static String data = "data";
   static String dataSource = "data_sources";
   static String models = "models";
