@@ -25,7 +25,7 @@ class CreateFeature extends Command with Logging {
     List<Directory> directories =
         Structure.cleanArchitectureFeatureStructure.values.toList();
     createListDirectories(directories);
-    //  createFiles(Structure.cleanArchFiles);
+    createFiles(Structure.cleanArchFeatureFiles);
     // await ShellUtils().addDependancies();
     // await ShellUtils().runBuildRunner();
     greenLog("Successfully created $featureName feature");

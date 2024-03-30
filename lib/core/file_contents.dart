@@ -233,7 +233,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'core/routes/app_routes.dart';
 import 'core/theme/theme.dart';
-import 'features/home/presentation/blocs/bloc/home_bloc.dart';
+import 'features/home/presentation/blocs/home_bloc/home_bloc.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key, required this.appRoutes});
@@ -354,7 +354,7 @@ String homeScreenContent = '''
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../blocs/bloc/home_bloc.dart';
+import '../blocs/home_bloc/home_bloc.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

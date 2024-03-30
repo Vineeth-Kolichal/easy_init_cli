@@ -137,7 +137,13 @@ class Structure {
       replaceAsExpected(
         path: "lib/features/${CleanDirName.featureNm}/presentation/widgets",
       ),
-    )
+    ),
+    CleanDirName.homeBloc: Directory(
+      replaceAsExpected(
+        path:
+            "lib/features/${CleanDirName.featureNm}/presentation/blocs/${CleanDirName.homeBloc}",
+      ),
+    ),
   };
   static List<FileModel> cleanArchFiles = [
     FileModel(
@@ -210,6 +216,120 @@ class Structure {
       "app.dart",
       appContent,
     ),
+    //
+    FileModel(
+      cleanArchitectureFeatureStructure[CleanDirName.screens]!.path,
+      "home_screen.dart",
+      homeScreenContent,
+    ),
+    FileModel(
+      cleanArchitectureFeatureStructure[CleanDirName.dataSource]!.path,
+      "${CleanDirName.featureNm}_datasource.dart",
+      dataSourceContent,
+    ),
+    FileModel(
+      cleanArchitectureFeatureStructure[CleanDirName.repoImpl]!.path,
+      "${CleanDirName.featureNm}_repo_impl.dart",
+      repoImplContent,
+    ),
+    FileModel(
+      cleanArchitectureFeatureStructure[CleanDirName.repositories]!.path,
+      "${CleanDirName.featureNm}_repository.dart",
+      repoContent,
+    ),
+    FileModel(
+      cleanArchitectureFeatureStructure[CleanDirName.models]!.path,
+      ".gitkeep",
+      "",
+    ),
+    FileModel(
+      cleanArchitectureFeatureStructure[CleanDirName.entities]!.path,
+      ".gitkeep",
+      "",
+    ),
+    FileModel(
+      cleanArchitectureFeatureStructure[CleanDirName.usecase]!.path,
+      ".gitkeep",
+      "",
+    ),
+    FileModel(
+      cleanArchitectureFeatureStructure[CleanDirName.widgets]!.path,
+      ".gitkeep",
+      "",
+    ),
+    FileModel(
+      cleanArchitectureFeatureStructure[CleanDirName.blocs]!.path,
+      ".gitkeep",
+      "",
+    ),
+    FileModel(
+      cleanArchitectureFeatureStructure[CleanDirName.homeBloc]!.path,
+      "home_bloc.dart",
+      homeBlocContent,
+    ),
+    FileModel(
+      cleanArchitectureFeatureStructure[CleanDirName.homeBloc]!.path,
+      "home_state.dart",
+      homeStateContent,
+    ),
+    FileModel(
+      cleanArchitectureFeatureStructure[CleanDirName.homeBloc]!.path,
+      "home_state.dart",
+      homeEventContent,
+    ),
+  ];
+
+  static List<FileModel> cleanArchFeatureFiles = [
+    FileModel(
+      cleanArchitectureFeatureStructure[CleanDirName.screens]!.path,
+      "${CleanDirName.featureNm}_screen.dart",
+      screenContent,
+    ),
+    FileModel(
+      cleanArchitectureFeatureStructure[CleanDirName.dataSource]!.path,
+      "${CleanDirName.featureNm}_datasource.dart",
+      dataSourceContent,
+    ),
+    FileModel(
+      cleanArchitectureFeatureStructure[CleanDirName.repoImpl]!.path,
+      "${CleanDirName.featureNm}_repo_impl.dart",
+      repoImplContent,
+    ),
+    FileModel(
+      cleanArchitectureFeatureStructure[CleanDirName.repositories]!.path,
+      "${CleanDirName.featureNm}_repository.dart",
+      repoContent,
+    ),
+    FileModel(
+      cleanArchitectureFeatureStructure[CleanDirName.models]!.path,
+      ".gitkeep",
+      "",
+    ),
+    FileModel(
+      cleanArchitectureFeatureStructure[CleanDirName.entities]!.path,
+      ".gitkeep",
+      "",
+    ),
+    FileModel(
+      cleanArchitectureFeatureStructure[CleanDirName.usecase]!.path,
+      ".gitkeep",
+      "",
+    ),
+    FileModel(
+      cleanArchitectureFeatureStructure[CleanDirName.widgets]!.path,
+      ".gitkeep",
+      "",
+    ),
+    FileModel(
+      cleanArchitectureFeatureStructure[CleanDirName.blocs]!.path,
+      ".gitkeep",
+      "",
+    ),
+    FileModel(
+      cleanArchitectureFeatureStructure[CleanDirName.homeBloc]!.path,
+      ".gitkeep",
+      "",
+    ),
   ];
 
   static String replaceAsExpected({required String path, String? replaceChar}) {
@@ -270,4 +390,5 @@ class CleanDirName {
   static String blocs = "blocs";
   static String screens = "screens";
   static String widgets = "widgets";
+  static String homeBloc = "home_bloc";
 }
