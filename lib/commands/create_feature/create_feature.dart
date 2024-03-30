@@ -9,7 +9,7 @@ import '../../core/structure.dart';
 import '../../functions/create.dart';
 
 class CreateFeature extends Command with Logging {
-  static String featureName = "";
+  static String featureName = "home";
   static String pascalCaseConverted = '';
   static String snakCaseConverted = '';
   @override

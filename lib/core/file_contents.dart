@@ -1,5 +1,4 @@
 import 'package:easy_init_cli/commands/create_feature/create_feature.dart';
-import 'package:recase/recase.dart';
 
 String logo = '''
 
@@ -234,6 +233,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'core/routes/app_routes.dart';
 import 'core/theme/theme.dart';
+import 'features/home/presentation/blocs/bloc/home_bloc.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key, required this.appRoutes});
@@ -241,7 +241,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: const [],
+      providers: [
+        BlocProvider(
+          create: (context) => HomeBloc(),
+        )
+      ],
       child: MaterialApp(
         title: "App title",
         themeMode: ThemeMode.light,
@@ -252,6 +256,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
 
 ''';
 
@@ -347,23 +352,94 @@ class ${CreateFeature.pascalCaseConverted}Screen extends StatelessWidget {
 
 String homeScreenContent = '''
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../blocs/bloc/home_bloc.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    ThemeData theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Easy Init CLI"),
+        title: const Text("Counter App- Easy Init CLI"),
       ),
-      body: const Center(
-        child: Text("TDD clean architecture project"),
+      body: Center(
+        child: BlocBuilder<HomeBloc, HomeState>(
+          builder: (context, state) {
+            return Text(
+              "\${state.count}",
+              style: theme.textTheme.headlineLarge,
+            );
+          },
+        ),
+      ),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          FloatingActionButton(
+            child: const Icon(Icons.add),
+            onPressed: () {
+              context.read<HomeBloc>().add(const Increment());
+            },
+          ),
+          FloatingActionButton(
+            child: const Icon(Icons.remove),
+            onPressed: () {
+              context.read<HomeBloc>().add(const Decrement());
+            },
+          ),
+        ],
       ),
     );
   }
 }
 
 
+
+
+''';
+
+const String homeBlocContent = '''
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'home_event.dart';
+part 'home_state.dart';
+part 'home_bloc.freezed.dart';
+
+class HomeBloc extends Bloc<HomeEvent, HomeState> {
+  HomeBloc() : super(HomeState.initial()) {
+    on<Increment>((event, emit) {
+      emit(state.copyWith(count: state.count + 1));
+    });
+    on<Decrement>((event, emit) {
+      emit(state.copyWith(count: state.count - 1));
+    });
+  }
+}
+
+
+''';
+const String homeEventContent = '''
+part of 'home_bloc.dart';
+
+@freezed
+class HomeEvent with _\$HomeEvent {
+  const factory HomeEvent.increment() = Increment;
+  const factory HomeEvent.decrement() = Decrement;
+}
+
+''';
+const String homeStateContent = '''
+part of 'home_bloc.dart';
+
+@freezed
+class HomeState with _\$HomeState {
+  const factory HomeState({required int count}) = _Initial;
+  factory HomeState.initial() => const HomeState(count: 0);
+}
 
 ''';
