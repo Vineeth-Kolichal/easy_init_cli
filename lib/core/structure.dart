@@ -274,7 +274,7 @@ class Structure {
     ),
     FileModel(
       cleanArchitectureFeatureStructure[CleanDirName.homeBloc]!.path,
-      "home_state.dart",
+      "home_event.dart",
       homeEventContent,
     ),
   ];

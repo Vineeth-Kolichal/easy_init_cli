@@ -1,4 +1,5 @@
 import 'package:easy_init_cli/commands/create_feature/create_feature.dart';
+import 'package:recase/recase.dart';
 
 String logo = '''
 
@@ -316,21 +317,21 @@ class Responsive extends StatelessWidget {
 ''';
 
 String dataSourceContent = '''
-abstract class ${CreateFeature.pascalCaseConverted}DataSource{}
-class ${CreateFeature.pascalCaseConverted}DataSourceImpl implements ${CreateFeature.pascalCaseConverted}DataSource{} 
+abstract class ${CreateFeature.featureName.pascalCase}DataSource{}
+class ${CreateFeature.featureName.pascalCase}DataSourceImpl implements ${CreateFeature.featureName.pascalCase}DataSource{} 
 ''';
 
 String repoImplContent = '''
 import '../../domain/repository/${CreateFeature.snakCaseConverted}_repository.dart';
 
-class ${CreateFeature.pascalCaseConverted}RepoImpl implements ${CreateFeature.pascalCaseConverted}Repository{
+class ${CreateFeature.featureName.pascalCase}RepoImpl implements ${CreateFeature.featureName.pascalCase}Repository{
 
 }
 
 ''';
 
 String repoContent = '''
-abstract class ${CreateFeature.pascalCaseConverted}Repository{
+abstract class ${CreateFeature.featureName.pascalCase}Repository{
 
 }
 
@@ -339,8 +340,8 @@ abstract class ${CreateFeature.pascalCaseConverted}Repository{
 String screenContent = '''
 import 'package:flutter/material.dart';
 
-class ${CreateFeature.pascalCaseConverted}Screen extends StatelessWidget {
-  const ${CreateFeature.pascalCaseConverted}Screen({super.key});
+class ${CreateFeature.featureName.pascalCase}Screen extends StatelessWidget {
+  const ${CreateFeature.featureName.pascalCase}Screen({super.key});
 
   @override
   Widget build(BuildContext context) {
