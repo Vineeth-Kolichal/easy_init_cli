@@ -15,9 +15,6 @@ class InitProject extends Command with Logging {
 
   @override
   Future<void> excecute() async {
-    final a = menu("Select architecture",
-        options: ["TDD Clean Architecture with BLoC"]);
-    print(a);
     blueLog("Initializing your project...");
     print("");
     blueLog(logo);
