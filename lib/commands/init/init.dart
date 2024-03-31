@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:dcli/dcli.dart';
 import 'package:easy_init_cli/common/utils/shell_utils.dart';
 import 'package:easy_init_cli/core/file_contents.dart';
 import 'package:easy_init_cli/core/structure.dart';
@@ -14,6 +15,9 @@ class InitProject extends Command with Logging {
 
   @override
   Future<void> excecute() async {
+    final a = menu("Select architecture",
+        options: ["TDD Clean Architecture with BLoC"]);
+    print(a);
     blueLog("Initializing your project...");
     print("");
     blueLog(logo);
