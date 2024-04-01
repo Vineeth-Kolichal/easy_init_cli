@@ -15,7 +15,7 @@ class InitProject extends Command with Logging {
   @override
   Future<void> excecute() async {
     var choice = UserInput.menu(options: [
-      "TDD Clean Architecture - BLoC (feature wise)",
+      "TDD Clean Architecture - BLoC - (feature wise)",
     ], promt: "Choose architecture");
     print("");
     blueLog("Initializing your project...");
@@ -24,7 +24,7 @@ class InitProject extends Command with Logging {
     // print('');
     switch (choice) {
       case 1:
-        await initTddClean();
+        await _initTddClean();
         break;
       default:
         print("Choice not found");
@@ -32,7 +32,7 @@ class InitProject extends Command with Logging {
     }
   }
 
-  Future<void> initTddClean() async {
+  Future<void> _initTddClean() async {
     List<Directory> directories =
         TddCleanStructure().directoryStructure.values.toList();
     List<Directory> homeFeatureDirectories =

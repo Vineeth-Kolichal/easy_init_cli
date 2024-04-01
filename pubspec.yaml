@@ -1,5 +1,5 @@
 name: easy_init_cli
-description: A CLI project to create flutter project and initialize project with boilerplate code
+description: A CLI tool to create flutter project and initialize project with boilerplate code
 version: 0.0.6
 repository: https://github.com/Vineeth-Kolichal/easy_init_cli
 

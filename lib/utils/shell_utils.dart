@@ -21,7 +21,7 @@ class ShellUtils with Logging {
     await run(
         "flutter pub add dartz flutter_bloc injectable freezed_annotation get_it dio");
     await run(
-        "flutter pub add --dev build_runner freezed injectable_generator");
+        "flutter pub add --dev build_runner freezed injectable_generator mocktail");
   }
 
   Future<void> runBuildRunner() async {
