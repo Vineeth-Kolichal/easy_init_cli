@@ -298,11 +298,13 @@ class TddCleanStructure extends Structure {
   //feature files
   @override
   List<FileModel> get featureFiles => [
-        FileModel(
-          featureStructure[CleanDirName.screens]!.path,
-          "${CleanDirName.featureNm}_screen.dart",
-          screenContent,
-        ),
+        if (CleanDirName.featureNm != "auth" ||
+            CleanDirName.featureNm != "authentication")
+          FileModel(
+            featureStructure[CleanDirName.screens]!.path,
+            "${CleanDirName.featureNm}_screen.dart",
+            screenContent,
+          ),
         FileModel(
           featureStructure[CleanDirName.dataSource]!.path,
           "${CleanDirName.featureNm}_datasource.dart",
@@ -348,21 +350,28 @@ class TddCleanStructure extends Structure {
           FileModel(
             featureStructure[CleanDirName.screens]!.path,
             "login_screen.dart",
-            "",
+            loginScreenContent,
           ),
         if (CleanDirName.featureNm == "auth" ||
             CleanDirName.featureNm == "authentication")
           FileModel(
             featureStructure[CleanDirName.screens]!.path,
             "signup_screen.dart",
-            "",
+            signupScreenContent,
           ),
         if (CleanDirName.featureNm == "auth" ||
             CleanDirName.featureNm == "authentication")
           FileModel(
             featureStructure[CleanDirName.screens]!.path,
             "forgot_password_screen.dart",
-            "",
+            forgotPasswordScreenContent,
+          ),
+        if (CleanDirName.featureNm == "auth" ||
+            CleanDirName.featureNm == "authentication")
+          FileModel(
+            featureStructure[CleanDirName.screens]!.path,
+            "otp_screen.dart",
+            otpScreenContent,
           ),
       ];
   TddCleanStructure._internal();
