@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:easy_init_cli/utils/user_input.dart';
 import 'package:easy_init_cli/utils/shell_utils.dart';
-import 'package:easy_init_cli/core/export_structure.dart';
+import 'package:easy_init_cli/core/structure/export_structure.dart';
 import 'package:easy_init_cli/functions/create.dart';
 import 'package:easy_init_cli/interfaces/command.dart';
 import 'package:easy_init_cli/interfaces/logging.dart';

@@ -4,7 +4,7 @@ import 'package:easy_init_cli/utils/user_input.dart';
 import 'package:easy_init_cli/interfaces/command.dart';
 import 'package:easy_init_cli/interfaces/logging.dart';
 
-import '../../core/export_structure.dart';
+import '../../core/structure/export_structure.dart';
 import '../../functions/create.dart';
 
 class CreateFeature extends Command with Logging {

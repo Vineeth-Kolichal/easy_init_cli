@@ -5,7 +5,7 @@ import 'dart:async';
 import 'package:easy_init_cli/interfaces/logging.dart';
 import 'package:process_run/shell.dart';
 
-import '../core/file_contents.dart';
+import '../core/structure/tdd_clean_structure/file_contents.dart';
 
 class ShellUtils with Logging {
   Future<void> flutterCreate(

@@ -2,11 +2,17 @@ import 'dart:io';
 
 import 'package:recase/recase.dart';
 
-import '../../commands/create_feature/create_feature.dart';
-import '../file_contents.dart';
+import '../../../commands/create_feature/create_feature.dart';
+import 'file_contents.dart';
 import '../structure.dart';
 
 class TddCleanStructure extends Structure {
+  static final TddCleanStructure _tddCleanStructure =
+      TddCleanStructure._internal();
+  factory TddCleanStructure() {
+    return _tddCleanStructure;
+  }
+  // common configuration file structure
   @override
   Map<String, Directory> get directoryStructure => {
         CleanDirName.common: Directory(
@@ -75,7 +81,7 @@ class TddCleanStructure extends Structure {
           ),
         ),
       };
-
+// Clean architecture feature directory structure
   @override
   Map<String, Directory> get featureStructure => {
         CleanDirName.featureNm: Directory(
@@ -152,6 +158,8 @@ class TddCleanStructure extends Structure {
             ),
           ),
       };
+
+  //files
   @override
   List<FileModel> get coreFiles => [
         FileModel(
@@ -286,6 +294,7 @@ class TddCleanStructure extends Structure {
           homeEventContent,
         ),
       ];
+  //feature files
   @override
   List<FileModel> get featureFiles => [
         FileModel(
@@ -334,6 +343,7 @@ class TddCleanStructure extends Structure {
           "",
         ),
       ];
+  TddCleanStructure._internal();
 }
 
 class CleanDirName {
