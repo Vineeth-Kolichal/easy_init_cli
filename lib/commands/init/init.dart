@@ -16,9 +16,10 @@ class InitProject extends Command with Logging {
 
   @override
   Future<void> excecute() async {
-    var choice = UserInput.menu(
-        options: ["TDD Clean Architecture"], promt: "Choose architecture");
-
+    var choice = UserInput.menu(options: [
+      "TDD Clean Architecture - BLoC (feature wise)",
+    ], promt: "Choose architecture");
+    print("");
     blueLog("Initializing your project...");
     print("");
     blueLog(logo);
