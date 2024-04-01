@@ -343,6 +343,27 @@ class TddCleanStructure extends Structure {
           ".gitkeep",
           "",
         ),
+        if (CleanDirName.featureNm == "auth" ||
+            CleanDirName.featureNm == "authentication")
+          FileModel(
+            featureStructure[CleanDirName.screens]!.path,
+            "login_screen.dart",
+            "",
+          ),
+        if (CleanDirName.featureNm == "auth" ||
+            CleanDirName.featureNm == "authentication")
+          FileModel(
+            featureStructure[CleanDirName.screens]!.path,
+            "signup_screen.dart",
+            "",
+          ),
+        if (CleanDirName.featureNm == "auth" ||
+            CleanDirName.featureNm == "authentication")
+          FileModel(
+            featureStructure[CleanDirName.screens]!.path,
+            "forgot_password_screen.dart",
+            "",
+          ),
       ];
   TddCleanStructure._internal();
 }
