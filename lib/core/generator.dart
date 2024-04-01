@@ -37,9 +37,4 @@ class ErrorCommand extends Command with Logging {
   Future<void> excecute() async {
     redLog(error);
   }
-  // @override
-  // Future<void> execute() async {
-  //   LogService.error(error);
-  //   LogService.info('run `get help` to help', false, false);
-  // }
 }

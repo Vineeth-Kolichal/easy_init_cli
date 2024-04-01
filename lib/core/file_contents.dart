@@ -219,6 +219,7 @@ import 'app.dart';
 import 'core/routes/app_routes.dart';
 
 Future<void> main(List<String> args) async {
+  await configureInjection();
   WidgetsFlutterBinding.ensureInitialized();
   runApp(
     MyApp(
