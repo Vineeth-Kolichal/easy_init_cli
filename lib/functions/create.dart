@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:easy_init_cli/core/export_structure.dart';
+import '../core/structure.dart';
 
 void createListDirectories(List<Directory> directories) {
   for (var dir in directories) {
