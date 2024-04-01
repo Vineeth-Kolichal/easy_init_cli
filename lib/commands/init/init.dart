@@ -1,11 +1,9 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:dcli/dcli.dart';
-import 'package:easy_init_cli/common/utils/ask_question.dart';
-import 'package:easy_init_cli/common/utils/shell_utils.dart';
-import 'package:easy_init_cli/core/file_contents.dart';
-import 'package:easy_init_cli/core/structure.dart';
+import 'package:easy_init_cli/utils/user_input.dart';
+import 'package:easy_init_cli/utils/shell_utils.dart';
+import 'package:easy_init_cli/core/export_structure.dart';
 import 'package:easy_init_cli/functions/create.dart';
 import 'package:easy_init_cli/interfaces/command.dart';
 import 'package:easy_init_cli/interfaces/logging.dart';
@@ -22,8 +20,8 @@ class InitProject extends Command with Logging {
     print("");
     blueLog("Initializing your project...");
     print("");
-    blueLog(logo);
-    print('');
+    // blueLog(logo);
+    // print('');
     switch (choice) {
       case 1:
         await initTddClean();
@@ -36,9 +34,9 @@ class InitProject extends Command with Logging {
 
   Future<void> initTddClean() async {
     List<Directory> directories =
-        Structure.cleanArchitectureStructure.values.toList();
+        TddCleanStructure().directoryStructure.values.toList();
     List<Directory> homeFeatureDirectories =
-        Structure.cleanArchitectureFeatureStructure.values.toList();
+        TddCleanStructure().featureStructure.values.toList();
 
     createListDirectories(
       [
@@ -46,7 +44,7 @@ class InitProject extends Command with Logging {
         ...homeFeatureDirectories,
       ],
     );
-    createFiles(Structure.cleanArchFiles);
+    createFiles(TddCleanStructure().coreFiles);
     await ShellUtils().addDependancies();
     await ShellUtils().runBuildRunner();
     greenLog("Project initialized with TDD Clean architecture");

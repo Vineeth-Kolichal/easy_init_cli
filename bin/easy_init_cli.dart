@@ -1,6 +1,6 @@
 import 'package:args/args.dart';
 import 'package:dcli/dcli.dart';
-import 'package:easy_init_cli/common/utils/shell_utils.dart';
+import 'package:easy_init_cli/utils/shell_utils.dart';
 import 'package:easy_init_cli/core/file_contents.dart';
 import 'package:easy_init_cli/core/generator.dart';
 

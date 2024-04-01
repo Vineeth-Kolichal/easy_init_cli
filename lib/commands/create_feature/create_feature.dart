@@ -1,11 +1,10 @@
 import 'dart:io';
 
-import 'package:easy_init_cli/common/utils/ask_question.dart';
+import 'package:easy_init_cli/utils/user_input.dart';
 import 'package:easy_init_cli/interfaces/command.dart';
 import 'package:easy_init_cli/interfaces/logging.dart';
-import 'package:recase/recase.dart';
 
-import '../../core/structure.dart';
+import '../../core/export_structure.dart';
 import '../../functions/create.dart';
 
 class CreateFeature extends Command with Logging {
@@ -16,13 +15,13 @@ class CreateFeature extends Command with Logging {
 
   @override
   Future<void> excecute() async {
-    featureName = askQuestion("Feature name", "home");
+    featureName = UserInput.askQuestion("Feature name", "home");
     blueLog("Creating $featureName feature");
 
     List<Directory> directories =
-        Structure.cleanArchitectureFeatureStructure.values.toList();
+        TddCleanStructure().featureStructure.values.toList();
     createListDirectories(directories);
-    createFiles(Structure.cleanArchFeatureFiles);
+    createFiles(TddCleanStructure().featureFiles);
     greenLog("Successfully created $featureName feature");
   }
 }
