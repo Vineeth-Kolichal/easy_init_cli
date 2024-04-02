@@ -1,5 +1,5 @@
 
-![logo](aassets/easy_init.png)
+![logo](assets/easy_init.png)
 
 # Exploring the CLI
 ---
