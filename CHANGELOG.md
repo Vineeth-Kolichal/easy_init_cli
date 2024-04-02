@@ -1,11 +1,14 @@
+## 1.0.4
+  bug fix
+
 ## 1.0.3
- - 'easy update' command added
+  'easy update' command added
 
 ## 1.0.2
- bug fix
+  bug fix
 
 ## 1.0.1
- bug fix
+  bug fix
 
 ## 1.0.0
  Initial release.
