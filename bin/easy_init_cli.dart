@@ -61,8 +61,6 @@ void main(List<String> arguments) async {
     }
     final command = EasyInitCli(arguments).findCommand();
     command.excecute();
-
-    //print('Positional arguments: ${results.rest}');
   } on FormatException catch (e) {
     // Print usage information if an invalid argument was provided.
     print(e.message);

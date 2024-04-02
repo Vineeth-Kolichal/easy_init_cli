@@ -298,7 +298,7 @@ class TddCleanStructure extends Structure {
   //feature files
   @override
   List<FileModel> get featureFiles => [
-        if (CleanDirName.featureNm != "auth" ||
+        if (CleanDirName.featureNm != "auth" &&
             CleanDirName.featureNm != "authentication")
           FileModel(
             featureStructure[CleanDirName.screens]!.path,
