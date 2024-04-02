@@ -1,6 +1,7 @@
 import 'package:easy_init_cli/commands/create_feature/create_feature.dart';
 import 'package:easy_init_cli/commands/create_project/create_project.dart';
 import 'package:easy_init_cli/commands/init/init.dart';
+import 'package:easy_init_cli/commands/update/update.dart';
 import 'package:easy_init_cli/interfaces/command.dart';
 
 List<Command> commands = [
@@ -11,7 +12,8 @@ List<Command> commands = [
       CreateFeature(),
     ],
   ),
-  InitProject()
+  InitProject(),
+  Update()
 ];
 
 class CommandParent extends Command {
