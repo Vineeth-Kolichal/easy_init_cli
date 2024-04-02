@@ -14,8 +14,8 @@ dart pub global activate easy_init_cli
 ```shell
 easy create project
 ```
-Use this command to create new flutter project. This command will prompt you to provide a project name and organization domain 
-example: ( project name : todo app, organization domain : com.example )
+Use this command to create new flutter project. This command will prompt you to provide a project name and organization domain. 
+ (example- project name : todo app, organization domain : com.example )
 ### Initialize project
 ```shell
 easy init
@@ -27,5 +27,5 @@ Use this command to initialize your project with a well-structured architectural
 easy create feature
 ```
 Use this command to create new Clean architecture feature. this command will promt you to provide a feature name.
-example :(feature name : authentication)
+(example- feature name : authentication)
 
