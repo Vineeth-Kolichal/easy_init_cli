@@ -19,3 +19,8 @@ dev_dependencies:
   
 executables:
   easy: easy_init_cli
+
+platforms:
+  linux:
+  macos:
+  windows:
