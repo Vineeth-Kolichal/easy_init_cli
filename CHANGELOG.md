@@ -1,3 +1,6 @@
+## 1.0.3
+ - 'easy update' command added
+
 ## 1.0.2
  bug fix
 
