@@ -3,7 +3,7 @@
 
 
 # Exploring the CLI
----
+
 Easy Init CLI is a command-line tool that streamlines the creation of Flutter projects. It initializes the project with boilerplate code following a well-structured, Test-Driven Development (TDD) Clean Architecture approach. Future versions will incorporate additional architectural patterns.
 ### Installation
 You can install the package from the command line:
