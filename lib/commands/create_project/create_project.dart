@@ -16,7 +16,7 @@ class CreateProject extends Command {
     bool isExist = await isProjectExist(name.snakeCase);
     if (isExist) {
       redLog(
-          "Project with name '${name.snakeCase}' is already exist, retry with different name");
+          "Project with name '${name.snakeCase}' is already exist in the current directory, retry with different name or change direcotry");
     } else {
       final org =
           UserInput.askQuestion("Your organization domain", "com.example");
