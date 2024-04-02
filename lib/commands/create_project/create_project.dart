@@ -11,7 +11,8 @@ class CreateProject extends Command {
   @override
   Future<void> excecute() async {
     final name = UserInput.askQuestion("Your project name", "todo app");
-    final org = UserInput.askQuestion("Your organization name", "com.example");
+    final org =
+        UserInput.askQuestion("Your organization domain", "com.example");
     await ShellUtils().flutterCreate(projectName: name.snakeCase, org: org);
   }
 }
