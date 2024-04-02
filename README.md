@@ -18,6 +18,11 @@ Use this command to create new flutter project. This command will prompt you to 
  (example- project name : todo app, organization domain : com.example )
 ### Initialize project
 ```shell
+#replace project_name with your project's name
+cd project_name
+```
+Use the cd command in the terminal to navigate to the project's root directory.
+```shell
 easy init
 ```
 Use this command to initialize your project with a well-structured architectural pattern (Currently, only TDD Clean Architecture (feature wise) is available.). All required dependencies and dev dependencies will added automatically. The generated files can be customized to suit your specific needs.
