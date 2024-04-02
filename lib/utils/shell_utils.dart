@@ -41,8 +41,7 @@ class ShellUtils with Logging {
     print("");
     blueLog(logo);
     print('');
-    await run(
-        "dart pub global activate --source git https://github.com/Vineeth-Kolichal/easy_init_cli");
+    await run("dart pub global activate easy_init_cli");
     greenLog("Updated successfully");
   }
 }
