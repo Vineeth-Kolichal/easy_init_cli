@@ -8,7 +8,8 @@ class EasyInitCli {
     _instance = this;
   }
   static EasyInitCli? _instance;
-  EasyInitCli? get instance => _instance;
+  static EasyInitCli? get instance => _instance;
+  static List<String> get args => instance!._arguments;
 
   Command findCommand() => _findCommand(0, commands);
   Command _findCommand(int currentIndex, List<Command> commands) {

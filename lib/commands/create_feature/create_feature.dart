@@ -2,12 +2,11 @@ import 'dart:io';
 
 import 'package:easy_init_cli/utils/user_input.dart';
 import 'package:easy_init_cli/interfaces/command.dart';
-import 'package:easy_init_cli/interfaces/logging.dart';
 
 import '../../core/structure/export_structure.dart';
 import '../../functions/create.dart';
 
-class CreateFeature extends Command with Logging {
+class CreateFeature extends Command {
   static String featureName = "home";
 
   @override
@@ -15,7 +14,12 @@ class CreateFeature extends Command with Logging {
 
   @override
   Future<void> excecute() async {
-    featureName = UserInput.askQuestion("Feature name", "home");
+    if (name != '') {
+      featureName = name;
+    } else {
+      featureName = UserInput.askQuestion("Feature name", "home");
+    }
+
     blueLog("Creating $featureName feature");
 
     List<Directory> directories =
