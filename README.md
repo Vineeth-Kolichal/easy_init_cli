@@ -1,5 +1,6 @@
 
-![logo](assets/easy_init.png)
+![easy_init](https://github.com/Vineeth-Kolichal/easy_init_cli/assets/92266542/1e82177d-f4f0-4b51-bbf2-856616ed2a1f)
+
 
 # Exploring the CLI
 ---
