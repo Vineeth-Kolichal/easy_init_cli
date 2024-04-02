@@ -133,18 +133,18 @@ packages:
     dependency: "direct main"
     description:
       name: dcli
-      sha256: "010b62c576e8f73a893bdfcb3825d8849864f894dfe4f09756de374e23acbc70"
+      sha256: eb797595afab6aec4ce7a98635dc2cfc0d79b2e8059c624be52052ed8f68ff7c
       url: "https://pub.dev"
     source: hosted
-    version: "3.3.6"
+    version: "3.4.0"
   dcli_core:
     dependency: transitive
     description:
       name: dcli_core
-      sha256: "5b999944ce5c589a49dcab30fbdda6b2b15dc886b3915403958294678b96fb43"
+      sha256: "5736e57897a2aa062afa05f8cda7a69c7473d65b2fa4e200576c25f357f4a5e8"
       url: "https://pub.dev"
     source: hosted
-    version: "3.3.6"
+    version: "3.4.0"
   equatable:
     dependency: transitive
     description:
@@ -181,10 +181,10 @@ packages:
     dependency: transitive
     description:
       name: frontend_server_client
-      sha256: "408e3ca148b31c20282ad6f37ebfa6f4bdc8fede5b74bc2f08d9d92b55db3612"
+      sha256: f64a0333a82f30b0cca061bc3d143813a486dc086b574bfb233b7c1372427694
       url: "https://pub.dev"
     source: hosted
-    version: "3.2.0"
+    version: "4.0.0"
   functional_data:
     dependency: transitive
     description:
@@ -389,10 +389,10 @@ packages:
     dependency: transitive
     description:
       name: pubspec_manager
-      sha256: "44df429f8991a13b72f2f84d1bbc6c96e12e965b66d43d5711a6070deee9875f"
+      sha256: b2674161f3f69ed07bc164dc4172afc190d56f060a293a8eb6fa691e5ddf9b5c
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.0-beta.1"
+    version: "1.0.0"
   recase:
     dependency: "direct main"
     description:
