@@ -8,8 +8,11 @@ mixin ArgsMixin {
       if (args[0] == 'create') {
         var arg = args[1];
         var split = arg.split(":");
-        var nm = split.last;
-        return nm;
+        var type = split.first;
+        var name = split.last;
+        if (type != name) {
+          return name;
+        }
       }
     }
     return '';
