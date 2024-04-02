@@ -19,13 +19,22 @@ class CreateFeature extends Command {
     } else {
       featureName = UserInput.askQuestion("Feature name", "home");
     }
+    var isExist = await isFeatureExist(featureName);
+    if (isExist) {
+      redLog(
+          "Feature with name '$featureName' already exist, retry with different name");
+    } else {
+      blueLog("Creating $featureName feature");
+      List<Directory> directories =
+          TddCleanStructure().featureStructure.values.toList();
+      createListDirectories(directories);
+      createFiles(TddCleanStructure().featureFiles);
+      greenLog("Successfully created $featureName feature");
+    }
+  }
 
-    blueLog("Creating $featureName feature");
-
-    List<Directory> directories =
-        TddCleanStructure().featureStructure.values.toList();
-    createListDirectories(directories);
-    createFiles(TddCleanStructure().featureFiles);
-    greenLog("Successfully created $featureName feature");
+  Future<bool> isFeatureExist(featureName) async {
+    var path = Directory.current.path;
+    return await Directory("$path/lib/features/$featureName").exists();
   }
 }

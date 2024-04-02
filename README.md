@@ -32,13 +32,16 @@ Use this command to initialize your project with a well-structured architectural
 easy create feature
 ```
 Use this command to create new Clean architecture feature. this command will promt you to provide a feature name.\
-OR \
+
+OR 
 
 ```shell
 easy create feature:feature_name
 
 ```
 The ```screens``` folder will contain authentication-related screen files if the feature name is either 'auth' or 'authentication'
+
+
 
 
 
