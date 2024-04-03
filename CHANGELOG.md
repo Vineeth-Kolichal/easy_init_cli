@@ -1,3 +1,6 @@
+## 1.0.5
+  bug fix and change in license
+
 ## 1.0.4
   bug fix
 
