@@ -4,7 +4,7 @@ import 'package:easy_init_cli/utils/shell_utils.dart';
 import 'package:easy_init_cli/core/structure/tdd_clean_structure/file_contents.dart';
 import 'package:easy_init_cli/core/generator.dart';
 
-const String version = '1.0.4';
+const String version = '1.0.5';
 
 ArgParser buildParser() {
   return ArgParser()
@@ -23,11 +23,6 @@ ArgParser buildParser() {
       'update',
       negatable: false,
       help: 'update easy init cli',
-    )
-    ..addFlag(
-      'init',
-      negatable: false,
-      help: 'Initialize flutter project with TDD clean architecture',
     );
 }
 
