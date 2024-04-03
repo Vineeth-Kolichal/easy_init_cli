@@ -32,7 +32,7 @@ Use this command to initialize your project with a well-structured architectural
 ```shell
 easy create feature
 ```
-Use this command to create new Clean architecture feature. this command will promt you to provide a feature name.\
+Use this command to create new Clean architecture feature. this command will promt you to provide a feature name.
 
 OR 
 
