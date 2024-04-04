@@ -319,15 +319,30 @@ class Responsive extends StatelessWidget {
 ''';
 
 String dataSourceContent = '''
+import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
+
+
 abstract class ${CreateFeature.featureName.pascalCase}DataSource{}
-class ${CreateFeature.featureName.pascalCase}DataSourceImpl implements ${CreateFeature.featureName.pascalCase}DataSource{} 
+
+@LazySingleton(as:${CreateFeature.featureName.pascalCase}DataSource)
+@injectable
+class ${CreateFeature.featureName.pascalCase}DataSourceImpl implements ${CreateFeature.featureName.pascalCase}DataSource{
+  final Dio dio;
+  ${CreateFeature.featureName.pascalCase}DataSourceImpl(this.dio);
+} 
 ''';
 
 String repoImplContent = '''
+import 'package:injectable/injectable.dart';
 import '../../domain/repositories/${CreateFeature.featureName.snakeCase}_repository.dart';
+import '../data_sources/${CreateFeature.featureName.snakeCase}_datasource.dart';
 
+@LazySingleton(as: ${CreateFeature.featureName.pascalCase}Repository)
+@injectable
 class ${CreateFeature.featureName.pascalCase}RepoImpl implements ${CreateFeature.featureName.pascalCase}Repository{
-
+  ${CreateFeature.featureName.pascalCase}DataSource ${CreateFeature.featureName.camelCase}DataSource;
+  ${CreateFeature.featureName.pascalCase}RepoImpl(this.${CreateFeature.featureName.camelCase}DataSource);
 }
 
 ''';
