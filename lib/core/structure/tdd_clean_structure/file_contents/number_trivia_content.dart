@@ -241,7 +241,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../common/widgets/space.dart'; // Importing custom widget for spacing
 import '../../../../core/theme/colors.dart'; // Importing custom theme colors
-import '../blocs/number_triva_bloc/number_trivia_bloc.dart'; // Importing the NumberTriviaBloc
+import '../blocs/number_trivia_bloc/number_trivia_bloc.dart'; // Importing the NumberTriviaBloc
 
 /// to validate form [_formKey] is used
 final _formKey = GlobalKey<FormState>(); // GlobalKey to manage the form state

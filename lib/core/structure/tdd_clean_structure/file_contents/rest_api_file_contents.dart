@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'core/dependancy_injection/config/configure_injection.dart'; // Importing dependency injection configuration
 import 'core/routes/app_routes.dart'; // Importing app routes
 import 'core/theme/theme.dart'; // Importing app theme
-import 'features/number_trivia/presentation/blocs/number_triva_bloc/number_trivia_bloc.dart'; // Importing NumberTriviaBloc
+import 'features/number_trivia/presentation/blocs/number_trivia_bloc/number_trivia_bloc.dart'; // Importing NumberTriviaBloc
 
 class MyApp extends StatelessWidget {
   const MyApp(
