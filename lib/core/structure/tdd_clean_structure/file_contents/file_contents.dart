@@ -1,6 +1,9 @@
 import 'package:easy_init_cli/commands/create_feature/create_feature.dart';
 import 'package:recase/recase.dart';
 
+export "./rest_api_file_contents.dart";
+export "./number_trivia_content.dart";
+
 String logo = '''
 
 
