@@ -153,7 +153,7 @@ class TddCleanStructure extends Structure {
           ),
         ),
         if (CleanDirName.featureNm == "number_trivia")
-          CleanDirName.homeBloc: Directory(
+          CleanDirName.numberTriviaBloc: Directory(
             replaceAsExpected(
               path:
                   "lib/features/${CleanDirName.featureNm}/presentation/blocs/${CleanDirName.numberTriviaBloc}",
@@ -280,21 +280,21 @@ class TddCleanStructure extends Structure {
           ".gitkeep",
           "",
         ),
-        // FileModel(
-        //   featureStructure[CleanDirName.numberTriviaBloc]!.path,
-        //   "number_trivia_bloc.dart",
-        //   triviaBloc,
-        // ),
-        // FileModel(
-        //   featureStructure[CleanDirName.numberTriviaBloc]!.path,
-        //   "number_trivia_state.dart",
-        //   triviaState,
-        // ),
-        // FileModel(
-        //   featureStructure[CleanDirName.numberTriviaBloc]!.path,
-        //   "number_trivia_event.dart",
-        //   triviaEvent,
-        // ),
+        FileModel(
+          featureStructure[CleanDirName.numberTriviaBloc]!.path,
+          "number_trivia_bloc.dart",
+          triviaBloc,
+        ),
+        FileModel(
+          featureStructure[CleanDirName.numberTriviaBloc]!.path,
+          "number_trivia_state.dart",
+          triviaState,
+        ),
+        FileModel(
+          featureStructure[CleanDirName.numberTriviaBloc]!.path,
+          "number_trivia_event.dart",
+          triviaEvent,
+        ),
       ];
 
   //feature files
