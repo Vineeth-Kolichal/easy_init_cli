@@ -268,7 +268,7 @@ class TddCleanStructure extends Structure {
         FileModel(
           featureStructure[CleanDirName.usecase]!.path,
           "get_number_trivia_usecase.dart",
-          triviaEntityContent,
+          triviaUsecase,
         ),
         FileModel(
           featureStructure[CleanDirName.widgets]!.path,
