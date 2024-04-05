@@ -152,7 +152,7 @@ class TddCleanStructure extends Structure {
             path: "lib/features/${CleanDirName.featureNm}/presentation/widgets",
           ),
         ),
-        if (CleanDirName.featureNm == "number trivia")
+        if (CleanDirName.featureNm == "number_trivia")
           CleanDirName.homeBloc: Directory(
             replaceAsExpected(
               path:
@@ -296,6 +296,7 @@ class TddCleanStructure extends Structure {
           triviaEvent,
         ),
       ];
+
   //feature files
   @override
   List<FileModel> get featureFiles => [
