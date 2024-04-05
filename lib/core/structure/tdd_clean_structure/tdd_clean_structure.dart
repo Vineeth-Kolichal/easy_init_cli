@@ -235,66 +235,66 @@ class TddCleanStructure extends Structure {
           appContentRest,
         ),
         //
-        // FileModel(
-        //   featureStructure[CleanDirName.screens]!.path,
-        //   "${CleanDirName.featureNm}_screen.dart",
-        //   triviaScreen,
-        // ),
-        // FileModel(
-        //   featureStructure[CleanDirName.dataSource]!.path,
-        //   "${CleanDirName.featureNm}_datasource.dart",
-        //   triviaDataSourceContent,
-        // ),
-        // FileModel(
-        //   featureStructure[CleanDirName.repoImpl]!.path,
-        //   "${CleanDirName.featureNm}_repo_impl.dart",
-        //   triviaRepoImplContent,
-        // ),
-        // FileModel(
-        //   featureStructure[CleanDirName.repositories]!.path,
-        //   "${CleanDirName.featureNm}_repository.dart",
-        //   triviaRepoContent,
-        // ),
-        // FileModel(
-        //   featureStructure[CleanDirName.models]!.path,
-        //   "trivia_model.dart",
-        //   triviaModelContent,
-        // ),
-        // FileModel(
-        //   featureStructure[CleanDirName.entities]!.path,
-        //   "trivia_entity.dart",
-        //   triviaEntityContent,
-        // ),
-        // FileModel(
-        //   featureStructure[CleanDirName.usecase]!.path,
-        //   "get_number_trivia_usecase.dart",
-        //   triviaEntityContent,
-        // ),
-        // FileModel(
-        //   featureStructure[CleanDirName.widgets]!.path,
-        //   ".gitkeep",
-        //   "",
-        // ),
-        // FileModel(
-        //   featureStructure[CleanDirName.blocs]!.path,
-        //   ".gitkeep",
-        //   "",
-        // ),
         FileModel(
-          featureStructure[CleanDirName.numberTriviaBloc]!.path,
-          "number_trivia_bloc.dart",
-          triviaBloc,
+          featureStructure[CleanDirName.screens]!.path,
+          "${CleanDirName.featureNm}_screen.dart",
+          triviaScreen,
         ),
         FileModel(
-          featureStructure[CleanDirName.numberTriviaBloc]!.path,
-          "number_trivia_state.dart",
-          triviaState,
+          featureStructure[CleanDirName.dataSource]!.path,
+          "${CleanDirName.featureNm}_datasource.dart",
+          triviaDataSourceContent,
         ),
         FileModel(
-          featureStructure[CleanDirName.numberTriviaBloc]!.path,
-          "number_trivia_event.dart",
-          triviaEvent,
+          featureStructure[CleanDirName.repoImpl]!.path,
+          "${CleanDirName.featureNm}_repo_impl.dart",
+          triviaRepoImplContent,
         ),
+        FileModel(
+          featureStructure[CleanDirName.repositories]!.path,
+          "${CleanDirName.featureNm}_repository.dart",
+          triviaRepoContent,
+        ),
+        FileModel(
+          featureStructure[CleanDirName.models]!.path,
+          "trivia_model.dart",
+          triviaModelContent,
+        ),
+        FileModel(
+          featureStructure[CleanDirName.entities]!.path,
+          "trivia_entity.dart",
+          triviaEntityContent,
+        ),
+        FileModel(
+          featureStructure[CleanDirName.usecase]!.path,
+          "get_number_trivia_usecase.dart",
+          triviaEntityContent,
+        ),
+        FileModel(
+          featureStructure[CleanDirName.widgets]!.path,
+          ".gitkeep",
+          "",
+        ),
+        FileModel(
+          featureStructure[CleanDirName.blocs]!.path,
+          ".gitkeep",
+          "",
+        ),
+        // FileModel(
+        //   featureStructure[CleanDirName.numberTriviaBloc]!.path,
+        //   "number_trivia_bloc.dart",
+        //   triviaBloc,
+        // ),
+        // FileModel(
+        //   featureStructure[CleanDirName.numberTriviaBloc]!.path,
+        //   "number_trivia_state.dart",
+        //   triviaState,
+        // ),
+        // FileModel(
+        //   featureStructure[CleanDirName.numberTriviaBloc]!.path,
+        //   "number_trivia_event.dart",
+        //   triviaEvent,
+        // ),
       ];
 
   //feature files
