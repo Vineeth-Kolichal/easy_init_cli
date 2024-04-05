@@ -31,7 +31,7 @@ class ShellUtils with Logging {
     await run("flutter pub get");
     Timer(Duration(milliseconds: 1000), () async {
       blueLog("Running build_runner");
-      await run("dart run build_runner build");
+      await run("dart run build_runner build --delete-conflicting-outputs");
     });
   }
 

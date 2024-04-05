@@ -1,3 +1,8 @@
+## 1.0.6
+  Change in sample code
+  - Number trivia app code is added as sample code
+  - Bug fixes
+
 ## 1.0.5
   bug fix and change in license
 

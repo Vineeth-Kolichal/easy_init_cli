@@ -4,7 +4,7 @@ import 'package:easy_init_cli/easy_init_logo.dart';
 import 'package:easy_init_cli/utils/shell_utils.dart';
 import 'package:easy_init_cli/core/generator.dart';
 
-const String version = '1.0.5';
+const String version = '1.0.6';
 
 ArgParser buildParser() {
   return ArgParser()
