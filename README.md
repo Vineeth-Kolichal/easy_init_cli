@@ -18,7 +18,7 @@ easy create project
 Use this command to create new flutter project. This command will prompt you to provide a project name and organization domain. 
  (example- project name : todo app, organization domain : com.example )
 ### Initialize project
-```shell
+```sh
 #replace project_name with your project's name
 cd project_name
 ```
