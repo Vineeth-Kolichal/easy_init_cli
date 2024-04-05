@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:recase/recase.dart';
 
 import '../../../commands/create_feature/create_feature.dart';
-import 'file_contents.dart';
+import 'file_contents/file_contents.dart';
 import '../structure.dart';
 
 class TddCleanStructure extends Structure {
@@ -152,11 +152,11 @@ class TddCleanStructure extends Structure {
             path: "lib/features/${CleanDirName.featureNm}/presentation/widgets",
           ),
         ),
-        if (CleanDirName.featureNm == "home")
+        if (CleanDirName.featureNm == "number trivia")
           CleanDirName.homeBloc: Directory(
             replaceAsExpected(
               path:
-                  "lib/features/${CleanDirName.featureNm}/presentation/blocs/${CleanDirName.homeBloc}",
+                  "lib/features/${CleanDirName.featureNm}/presentation/blocs/${CleanDirName.numberTriviaBloc}",
             ),
           ),
       };
@@ -207,7 +207,7 @@ class TddCleanStructure extends Structure {
         FileModel(
           directoryStructure[CleanDirName.routes]!.path,
           "app_routes.dart",
-          routesContent,
+          routeContentRest,
         ),
         FileModel(
           directoryStructure[CleanDirName.theme]!.path,
@@ -232,43 +232,43 @@ class TddCleanStructure extends Structure {
         FileModel(
           'lib',
           "app.dart",
-          appContent,
+          appContentRest,
         ),
         //
         FileModel(
           featureStructure[CleanDirName.screens]!.path,
-          "home_screen.dart",
-          homeScreenContent,
+          "${CleanDirName.featureNm}_screen.dart",
+          triviaScreen,
         ),
         FileModel(
           featureStructure[CleanDirName.dataSource]!.path,
           "${CleanDirName.featureNm}_datasource.dart",
-          dataSourceContent,
+          triviaDataSourceContent,
         ),
         FileModel(
           featureStructure[CleanDirName.repoImpl]!.path,
           "${CleanDirName.featureNm}_repo_impl.dart",
-          repoImplContent,
+          triviaRepoImplContent,
         ),
         FileModel(
           featureStructure[CleanDirName.repositories]!.path,
           "${CleanDirName.featureNm}_repository.dart",
-          repoContent,
+          triviaRepoContent,
         ),
         FileModel(
           featureStructure[CleanDirName.models]!.path,
-          ".gitkeep",
-          "",
+          "trivia_model.dart",
+          triviaModelContent,
         ),
         FileModel(
           featureStructure[CleanDirName.entities]!.path,
-          ".gitkeep",
-          "",
+          "trivia_entity.dart",
+          triviaEntityContent,
         ),
         FileModel(
           featureStructure[CleanDirName.usecase]!.path,
-          ".gitkeep",
-          "",
+          "get_number_trivia_usecase.dart",
+          triviaEntityContent,
         ),
         FileModel(
           featureStructure[CleanDirName.widgets]!.path,
@@ -281,19 +281,19 @@ class TddCleanStructure extends Structure {
           "",
         ),
         FileModel(
-          featureStructure[CleanDirName.homeBloc]!.path,
-          "home_bloc.dart",
-          homeBlocContent,
+          featureStructure[CleanDirName.numberTriviaBloc]!.path,
+          "number_trivia_bloc.dart",
+          triviaBloc,
         ),
         FileModel(
-          featureStructure[CleanDirName.homeBloc]!.path,
-          "home_state.dart",
-          homeStateContent,
+          featureStructure[CleanDirName.numberTriviaBloc]!.path,
+          "number_trivia_state.dart",
+          triviaState,
         ),
         FileModel(
-          featureStructure[CleanDirName.homeBloc]!.path,
-          "home_event.dart",
-          homeEventContent,
+          featureStructure[CleanDirName.numberTriviaBloc]!.path,
+          "number_trivia_event.dart",
+          triviaEvent,
         ),
       ];
   //feature files
@@ -408,4 +408,5 @@ class CleanDirName {
   static String screens = "screens";
   static String widgets = "widgets";
   static String homeBloc = "home_bloc";
+  static String numberTriviaBloc = "number_trivia_bloc";
 }

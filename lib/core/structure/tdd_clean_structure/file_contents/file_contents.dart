@@ -26,8 +26,10 @@ String logo = '''
 
 String apiEndpointContent = '''
 class ApiEndpoints {
-  static String baseUrl = "";
+  /// change the [baseUrl] value as per your api
+  static String baseUrl = "http://numbersapi.com/";
 }
+
 ''';
 
 String usecaseContent = '''
