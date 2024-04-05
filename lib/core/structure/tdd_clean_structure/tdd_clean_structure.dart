@@ -280,21 +280,21 @@ class TddCleanStructure extends Structure {
         //   ".gitkeep",
         //   "",
         // ),
-        // FileModel(
-        //   featureStructure[CleanDirName.numberTriviaBloc]!.path,
-        //   "number_trivia_bloc.dart",
-        //   triviaBloc,
-        // ),
-        // FileModel(
-        //   featureStructure[CleanDirName.numberTriviaBloc]!.path,
-        //   "number_trivia_state.dart",
-        //   triviaState,
-        // ),
-        // FileModel(
-        //   featureStructure[CleanDirName.numberTriviaBloc]!.path,
-        //   "number_trivia_event.dart",
-        //   triviaEvent,
-        // ),
+        FileModel(
+          featureStructure[CleanDirName.numberTriviaBloc]!.path,
+          "number_trivia_bloc.dart",
+          triviaBloc,
+        ),
+        FileModel(
+          featureStructure[CleanDirName.numberTriviaBloc]!.path,
+          "number_trivia_state.dart",
+          triviaState,
+        ),
+        FileModel(
+          featureStructure[CleanDirName.numberTriviaBloc]!.path,
+          "number_trivia_event.dart",
+          triviaEvent,
+        ),
       ];
 
   //feature files

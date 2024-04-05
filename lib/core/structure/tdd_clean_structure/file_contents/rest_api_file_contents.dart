@@ -19,8 +19,7 @@ class MyApp extends StatelessWidget {
       // Providing multiple blocs at the root of the widget tree
       providers: [
         BlocProvider(
-          create: (context) => getIt<
-              NumberTriviaBloc>(), // Creating and providing NumberTriviaBloc using dependency injection
+          create: (context) => getIt<NumberTriviaBloc>(), // Creating and providing NumberTriviaBloc using dependency injection
         )
       ],
       child: MaterialApp(
