@@ -7,7 +7,7 @@ import 'file_contents/file_contents.dart';
 import '../structure.dart';
 
 class TddCleanStructure extends Structure {
-  // bool isFirebase;
+  bool? withRestAPI;
   //making singleton
   static final TddCleanStructure _tddCleanStructure =
       TddCleanStructure._internal();

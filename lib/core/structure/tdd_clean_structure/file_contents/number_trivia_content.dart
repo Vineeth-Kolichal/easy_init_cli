@@ -11,9 +11,8 @@ abstract class NumberTriviaDataSource {
   Future<TriviaModel> getConcreteTrivia(
       NumberParam params); // Method for getting concrete trivia
 }
-
-@LazySingleton(
-    as: NumberTriviaDataSource) // Registering NumberTriviaDataSource as a lazy singleton for dependency injection
+// Registering NumberTriviaDataSource as a lazy singleton for dependency injection
+@LazySingleton(as: NumberTriviaDataSource) 
 @injectable
 class NumberTriviaDataSourceImpl implements NumberTriviaDataSource {
   final Dio dio; // Dio instance for making HTTP requests
@@ -230,7 +229,7 @@ class NumberTriviaState with _\$NumberTriviaState {
     String? error,
     TriviaEntity? tirvia,
   }) = _Initial;
-  factory NumberTriviaState.initial() => NumberTriviaState(isLoading: false);
+  factory NumberTriviaState.initial() =>const NumberTriviaState(isLoading: false);
 }
 
 ''';
