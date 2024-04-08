@@ -168,8 +168,9 @@ class TddCleanStructure extends Structure {
   List<FileModel> get coreFiles => [
         FileModel(
           Directory.current.path,
-          ".easy_init",
-          "",
+          "easy_init",
+          '''Project initialized using easy_init_cli.
+           If you wanted to change the architecture pattern; remove all folders and files in the lib folder and remove this file also''',
         ),
         FileModel(
           directoryStructure[CleanDirName.commonWidgets]!.path,

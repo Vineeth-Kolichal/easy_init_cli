@@ -14,7 +14,7 @@ class InitProject extends Command {
 
   @override
   Future<void> excecute() async {
-    final file = File('.easy_init');
+    final file = File('easy_init');
     final isExist = file.existsSync();
     if (isExist) {
       yellowLog(
