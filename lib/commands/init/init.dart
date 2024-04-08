@@ -14,6 +14,16 @@ class InitProject extends Command {
 
   @override
   Future<void> excecute() async {
+    final file = File('.easy_init');
+    final isExist = file.existsSync();
+    if (isExist) {
+      yellowLog(
+          "[WARNING] Project is already initialized with an architecture pattern");
+      return;
+    } else {
+      print(isExist);
+    }
+
     var choice = UserInput.menu(options: [
       "TDD+Clean Architecture - BLoC - REST API - Feature wise",
       "MVC - GetX - REST API - Layer wise"

@@ -167,6 +167,11 @@ class TddCleanStructure extends Structure {
   @override
   List<FileModel> get coreFiles => [
         FileModel(
+          Directory.current.path,
+          ".easy_init",
+          "",
+        ),
+        FileModel(
           directoryStructure[CleanDirName.commonWidgets]!.path,
           "space.dart",
           spaceContent,
