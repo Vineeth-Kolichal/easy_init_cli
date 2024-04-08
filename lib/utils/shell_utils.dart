@@ -1,6 +1,7 @@
 // import 'package:dcli/dcli.dart';
 
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:easy_init_cli/easy_init_logo.dart';
 import 'package:easy_init_cli/interfaces/logging.dart';
@@ -20,11 +21,10 @@ class ShellUtils with Logging {
     blueLog("   \$ easy init");
   }
 
-  Future<void> addDependancies() async {
-    await run(
-        "flutter pub add dartz flutter_bloc injectable freezed_annotation get_it dio intl");
-    await run(
-        "flutter pub add --dev build_runner freezed injectable_generator mocktail");
+  Future<void> addDependancies(
+      {required String dependancies, required String devDependancies}) async {
+    await run("flutter pub add $dependancies");
+    await run("flutter pub add --dev $devDependancies");
   }
 
   Future<void> runBuildRunner() async {
