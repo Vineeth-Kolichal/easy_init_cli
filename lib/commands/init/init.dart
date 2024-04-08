@@ -71,6 +71,7 @@ class InitProject extends Command {
     );
     //Running build runner to generate files,
     if (runBuildRunner) {
+      await ShellUtils().pubGet();
       await ShellUtils().runBuildRunner();
     }
 
