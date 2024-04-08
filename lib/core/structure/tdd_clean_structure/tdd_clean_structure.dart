@@ -7,6 +7,8 @@ import 'file_contents/file_contents.dart';
 import '../structure.dart';
 
 class TddCleanStructure extends Structure {
+  @override
+  String get architectureName => "TDD+Clean";
   bool? withRestAPI;
   //making singleton
   static final TddCleanStructure _tddCleanStructure =

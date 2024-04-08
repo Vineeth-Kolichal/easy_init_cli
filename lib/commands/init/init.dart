@@ -17,7 +17,7 @@ class InitProject extends Command {
     var choice = UserInput.menu(options: [
       "TDD+Clean Architecture - BLoC - REST API - Feature wise",
       "MVC - GetX - REST API - Layer wise"
-    ], promt: "Choose architecture");
+    ], promt: "Choose architecture pattern");
     print("");
     blueLog("Initializing your project...");
     print("");
@@ -25,14 +25,19 @@ class InitProject extends Command {
     // print('');
     switch (choice) {
       case 1:
-        await _initTddClean();
+        await _initArchitecture(
+          structure: TddCleanStructure(),
+          dependencies:
+              "dartz flutter_bloc injectable freezed_annotation get_it dio intl",
+          devDependencies: "build_runner freezed injectable_generator mocktail",
+        );
         break;
       case 2:
         await _initArchitecture(
           structure: MvcGetXStructure(),
-          dependancies: "dartz get dio intl",
-          devDependancies: "build_runner mocktail",
-          archName: "MVC",
+          dependencies: "dartz get dio intl",
+          devDependencies: "build_runner mocktail",
+          runBuildRunner: false,
         );
         break;
       default:
@@ -41,36 +46,11 @@ class InitProject extends Command {
     }
   }
 
-  Future<void> _initTddClean() async {
-    List<Directory> directories =
-        TddCleanStructure().directoryStructure.values.toList();
-    List<Directory> tmpFeatureDirectories =
-        TddCleanStructure().featureStructure.values.toList();
-    // Creating folder structure
-    createListDirectories(
-      [
-        ...directories,
-        ...tmpFeatureDirectories,
-      ],
-    );
-    //Creating files
-    createFiles(TddCleanStructure().coreFiles);
-    // adding required dependancies
-    await ShellUtils().addDependancies(
-      dependancies:
-          "dartz flutter_bloc injectable freezed_annotation get_it dio intl",
-      devDependancies: "build_runner freezed injectable_generator mocktail",
-    );
-    //Running build runner to generate files
-    await ShellUtils().runBuildRunner();
-    greenLog("Project initialized with TDD+Clean architecture");
-  }
-
   Future<void> _initArchitecture({
     required Structure structure,
-    required String dependancies,
-    required String devDependancies,
-    required String archName,
+    required String dependencies,
+    required String devDependencies,
+    bool runBuildRunner = true,
   }) async {
     List<Directory> directories = structure.directoryStructure.values.toList();
     List<Directory> sampleFeatureDirectories =
@@ -83,14 +63,19 @@ class InitProject extends Command {
       ],
     );
     //Creating files
-    createFiles(MvcGetXStructure().coreFiles);
+    createFiles(structure.coreFiles);
     //Adding dependancies and dev dependancies
-    await ShellUtils().addDependancies(
-      dependancies: dependancies,
-      devDependancies: devDependancies,
+    await ShellUtils().addDependencies(
+      dependencies: dependencies,
+      devDependencies: devDependencies,
     );
-    //Running build runner to generate files
-    await ShellUtils().runBuildRunner();
-    greenLog("Project initialized with $archName architecture");
+    //Running build runner to generate files,
+    if (runBuildRunner) {
+      await ShellUtils().runBuildRunner();
+    }
+
+    greenLog(
+      "Project initialized with ${structure.architectureName} architecture",
+    );
   }
 }

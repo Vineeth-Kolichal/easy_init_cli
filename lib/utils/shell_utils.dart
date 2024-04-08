@@ -1,7 +1,4 @@
-// import 'package:dcli/dcli.dart';
-
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:easy_init_cli/easy_init_logo.dart';
 import 'package:easy_init_cli/interfaces/logging.dart';
@@ -21,10 +18,10 @@ class ShellUtils with Logging {
     blueLog("   \$ easy init");
   }
 
-  Future<void> addDependancies(
-      {required String dependancies, required String devDependancies}) async {
-    await run("flutter pub add $dependancies");
-    await run("flutter pub add --dev $devDependancies");
+  Future<void> addDependencies(
+      {required String dependencies, required String devDependencies}) async {
+    await run("flutter pub add $dependencies");
+    await run("flutter pub add --dev $devDependencies");
   }
 
   Future<void> runBuildRunner() async {
