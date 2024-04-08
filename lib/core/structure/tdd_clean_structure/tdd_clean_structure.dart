@@ -170,7 +170,10 @@ class TddCleanStructure extends Structure {
           Directory.current.path,
           "easy_init",
           '''Project initialized using easy_init_cli.
-           If you wanted to change the architecture pattern; remove all folders and files in the lib folder and remove this file also''',
+If you wanted to change architecture pattern;
+ > Remove all folders and files from lib folder.
+ > Remove 'easy_init' file form root folder. 
+ > Run 'easy init' command again''',
         ),
         FileModel(
           directoryStructure[CleanDirName.commonWidgets]!.path,

@@ -404,3 +404,9 @@ class OtpScreen extends StatelessWidget {
   }
 }
 ''';
+
+const String initWarning = '''Project initialized using easy_init_cli.
+If you wanted to change architecture pattern;
+ > Remove all folders and files from lib folder.
+ > Remove 'easy_init' file form root folder. 
+ > Run 'easy init' command again''';
