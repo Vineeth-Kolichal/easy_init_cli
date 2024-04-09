@@ -15,48 +15,52 @@ class InitProject extends Command {
 
   @override
   Future<void> excecute() async {
-    final tdd = File('easy_init_tdd_clean');
-    final mvc = File('easy_init_mvc');
-    final tddExist = tdd.existsSync();
-    final mvcExist = mvc.existsSync();
+    final lib = Directory('lib');
+    if (lib.existsSync()) {
+      final tdd = File('easy_init_tdd_clean');
+      final mvc = File('easy_init_mvc');
+      final tddExist = tdd.existsSync();
+      final mvcExist = mvc.existsSync();
 
-    if (tddExist) {
-      showWarning("tdd clean");
-      return;
-    } else if (mvcExist) {
-      showWarning("mvc");
-      return;
-    }
+      if (tddExist) {
+        showWarning("tdd clean");
+        return;
+      } else if (mvcExist) {
+        showWarning("mvc");
+        return;
+      }
 
-    var choice = UserInput.menu(options: [
-      "TDD+Clean Architecture - BLoC - REST API - Feature wise",
-      "MVC - GetX - REST API - Layer wise"
-    ], promt: "Choose architecture pattern");
-    print("");
-    blueLog("Initializing your project...");
-    print("");
-    // blueLog(logo);
-    // print('');
-    switch (choice) {
-      case 1:
-        await _initArchitecture(
-          structure: TddCleanStructure(),
-          dependencies:
-              "dartz flutter_bloc injectable freezed_annotation get_it dio intl",
-          devDependencies: "build_runner freezed injectable_generator mocktail",
-        );
-        break;
-      case 2:
-        await _initArchitecture(
-          structure: MvcGetXStructure(),
-          dependencies: "dartz get dio intl",
-          devDependencies: "build_runner mocktail",
-          runBuildRunner: false,
-        );
-        break;
-      default:
-        print("Choice not found");
-        break;
+      var choice = UserInput.menu(options: [
+        "TDD+Clean Architecture - BLoC - REST API - Feature wise",
+        "MVC - GetX - REST API - Layer wise"
+      ], promt: "Choose architecture pattern");
+      print("");
+      blueLog("Initializing your project...");
+      print("");
+      switch (choice) {
+        case 1:
+          await _initArchitecture(
+            structure: TddCleanStructure(),
+            dependencies:
+                "dartz flutter_bloc injectable freezed_annotation get_it dio intl",
+            devDependencies:
+                "build_runner freezed injectable_generator mocktail",
+          );
+          break;
+        case 2:
+          await _initArchitecture(
+            structure: MvcGetXStructure(),
+            dependencies: "dartz get dio intl",
+            devDependencies: "build_runner mocktail",
+            runBuildRunner: false,
+          );
+          break;
+        default:
+          print("Choice not found");
+          break;
+      }
+    } else {
+      redLog("[ERROR] lib folder not found");
     }
   }
 
