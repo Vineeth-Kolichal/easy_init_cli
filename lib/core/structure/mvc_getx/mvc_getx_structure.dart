@@ -49,9 +49,9 @@ class MvcGetXStructure extends Structure {
             path: 'lib/application/utils/theme',
           ),
         ),
-        MvcDirNames.client: Directory(
+        MvcDirNames.network: Directory(
           replaceAsExpected(
-            path: 'lib/application/utils/network_client',
+            path: 'lib/application/utils/network',
           ),
         ),
         MvcDirNames.routes: Directory(
@@ -118,6 +118,11 @@ class MvcGetXStructure extends Structure {
           themeContent,
         ),
         FileModel(
+          directoryStructure[MvcDirNames.network]!.path,
+          "network_exceptions.dart",
+          networkExceptionContent,
+        ),
+        FileModel(
           directoryStructure[MvcDirNames.routes]!.path,
           ".gitkeep",
           '',
@@ -143,7 +148,7 @@ class MvcDirNames {
   static String bindings = "bindings";
   static String services = "services";
   static String utils = "utils";
-  static String client = "network_client";
+  static String network = "network";
   static String theme = "theme";
   static String routes = "routes";
   static String screens = "screens";
