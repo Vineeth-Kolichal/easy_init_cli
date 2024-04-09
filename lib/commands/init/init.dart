@@ -14,18 +14,27 @@ class InitProject extends Command {
 
   @override
   Future<void> excecute() async {
-    final file = File('easy_init');
-    final isExist = file.existsSync();
-    if (isExist) {
+    final tdd = File('easy_init_tdd');
+    final mvc = File('easy_init_mvc');
+    final tddExist = tdd.existsSync();
+    final mvcExist = mvc.existsSync();
+
+    if (tddExist) {
       yellowLog(
-          "[WARNING] Project is already initialized with an architecture pattern");
+          "[WARNING] Project is already initialized with TDD+ Clean architecture pattern");
       print('''If you wanted to change architecture pattern;
  > Remove all folders and files from lib folder.
- > Remove 'easy_init' file form root folder. 
+ > Remove 'easy_init_tdd' file form root folder. 
  > Run 'easy init' command again''');
       return;
-    } else {
-      print(isExist);
+    } else if (mvcExist) {
+      yellowLog(
+          "[WARNING] Project is already initialized with MVC architecture pattern");
+      print('''If you wanted to change architecture pattern;
+ > Remove all folders and files from lib folder.
+ > Remove 'easy_init_mvc' file form root folder. 
+ > Run 'easy init' command again''');
+      return;
     }
 
     var choice = UserInput.menu(options: [
