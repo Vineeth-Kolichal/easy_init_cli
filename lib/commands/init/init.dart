@@ -7,6 +7,7 @@ import 'package:easy_init_cli/utils/shell_utils.dart';
 import 'package:easy_init_cli/core/structure/export_structure.dart';
 import 'package:easy_init_cli/functions/create.dart';
 import 'package:easy_init_cli/interfaces/command.dart';
+import 'package:recase/recase.dart';
 
 class InitProject extends Command {
   @override
@@ -14,26 +15,16 @@ class InitProject extends Command {
 
   @override
   Future<void> excecute() async {
-    final tdd = File('easy_init_tdd');
+    final tdd = File('easy_init_tdd_clean');
     final mvc = File('easy_init_mvc');
     final tddExist = tdd.existsSync();
     final mvcExist = mvc.existsSync();
 
     if (tddExist) {
-      yellowLog(
-          "[WARNING] Project is already initialized with TDD+ Clean architecture pattern");
-      print('''If you wanted to change architecture pattern;
- > Remove all folders and files from lib folder.
- > Remove 'easy_init_tdd' file form root folder. 
- > Run 'easy init' command again''');
+      showWarning("tdd clean");
       return;
     } else if (mvcExist) {
-      yellowLog(
-          "[WARNING] Project is already initialized with MVC architecture pattern");
-      print('''If you wanted to change architecture pattern;
- > Remove all folders and files from lib folder.
- > Remove 'easy_init_mvc' file form root folder. 
- > Run 'easy init' command again''');
+      showWarning("mvc");
       return;
     }
 
@@ -101,5 +92,14 @@ class InitProject extends Command {
     greenLog(
       "Project initialized with ${structure.architectureName} architecture",
     );
+  }
+
+  void showWarning(String archName) {
+    yellowLog(
+        "[WARNING] Project is already initialized with ${archName.toUpperCase()} architecture pattern");
+    print('''If you wanted to change architecture pattern;
+ > Remove all folders and files from lib folder.
+ > Remove 'easy_init_${archName.snakeCase}' file form root folder. 
+ > Run 'easy init' command again''');
   }
 }

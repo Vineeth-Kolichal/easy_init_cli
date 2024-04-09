@@ -168,7 +168,7 @@ class TddCleanStructure extends Structure {
   List<FileModel> get coreFiles => [
         FileModel(
           Directory.current.path,
-          "easy_init_tdd",
+          "easy_init_tdd_clean",
           initWarning,
         ),
         FileModel(

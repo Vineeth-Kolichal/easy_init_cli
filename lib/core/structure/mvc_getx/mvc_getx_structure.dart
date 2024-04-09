@@ -1,8 +1,7 @@
 import 'dart:io';
 
 import 'package:easy_init_cli/core/structure/structure.dart';
-
-import '../tdd_clean_structure/file_contents/file_contents.dart';
+import 'file_contents/mvc_file_contents.dart';
 
 class MvcGetXStructure extends Structure {
   @override
@@ -28,6 +27,11 @@ class MvcGetXStructure extends Structure {
         MvcDirNames.controllers: Directory(
           replaceAsExpected(
             path: 'lib/application/controllers',
+          ),
+        ),
+        MvcDirNames.bindings: Directory(
+          replaceAsExpected(
+            path: 'lib/application/bindings',
           ),
         ),
         MvcDirNames.utils: Directory(
@@ -100,11 +104,21 @@ class MvcGetXStructure extends Structure {
         ),
         FileModel(
           directoryStructure[MvcDirNames.theme]!.path,
+          "colors.dart",
+          colorsContent,
+        ),
+        FileModel(
+          directoryStructure[MvcDirNames.theme]!.path,
+          "theme.dart",
+          themeContent,
+        ),
+        FileModel(
+          directoryStructure[MvcDirNames.routes]!.path,
           ".gitkeep",
           '',
         ),
         FileModel(
-          directoryStructure[MvcDirNames.routes]!.path,
+          directoryStructure[MvcDirNames.bindings]!.path,
           ".gitkeep",
           '',
         ),
@@ -121,6 +135,7 @@ class MvcDirNames {
   static String model = "models";
   static String views = "views";
   static String controllers = "controllers";
+  static String bindings = "bindings";
   static String services = "services";
   static String utils = "utils";
   static String theme = "theme";
