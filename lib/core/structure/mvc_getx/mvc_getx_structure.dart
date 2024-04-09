@@ -49,6 +49,11 @@ class MvcGetXStructure extends Structure {
             path: 'lib/application/utils/theme',
           ),
         ),
+        MvcDirNames.client: Directory(
+          replaceAsExpected(
+            path: 'lib/application/utils/network_client',
+          ),
+        ),
         MvcDirNames.routes: Directory(
           replaceAsExpected(
             path: 'lib/application/utils/routes',
@@ -138,6 +143,7 @@ class MvcDirNames {
   static String bindings = "bindings";
   static String services = "services";
   static String utils = "utils";
+  static String client = "network_client";
   static String theme = "theme";
   static String routes = "routes";
   static String screens = "screens";
