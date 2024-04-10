@@ -175,7 +175,7 @@ class NumberTriviaBloc extends Bloc<NumberTriviaEvent, NumberTriviaState> {
       emit(state.copyWith(
           isLoading: true,
           error: null,
-          tirvia: null)); // Emitting loading state
+          trivia: null)); // Emitting loading state
       final result = await useCase(
         NumberParam(
           int.parse(
@@ -188,7 +188,7 @@ class NumberTriviaBloc extends Bloc<NumberTriviaEvent, NumberTriviaState> {
         numberController.clear(); // Clearing text input
         return state.copyWith(
             isLoading: false,
-            tirvia: null,
+            trivia: null,
             error: fail.error); // Emitting failure state
       }, (trivia) {
         // Handling success result
@@ -196,7 +196,7 @@ class NumberTriviaBloc extends Bloc<NumberTriviaEvent, NumberTriviaState> {
         return state.copyWith(
             isLoading: false,
             error: null,
-            tirvia: trivia); // Emitting success state
+            trivia: trivia); // Emitting success state
       });
       emit(newState); // Emitting the new state
     });
@@ -227,7 +227,7 @@ class NumberTriviaState with _\$NumberTriviaState {
   const factory NumberTriviaState({
     required bool isLoading,
     String? error,
-    TriviaEntity? tirvia,
+    TriviaEntity? trivia,
   }) = _Initial;
   factory NumberTriviaState.initial() =>const NumberTriviaState(isLoading: false);
 }
@@ -339,9 +339,9 @@ class NumberTriviaScreen extends StatelessWidget {
                         );
                       }
                       return Text(
-                        state.tirvia == null
+                        state.trivia == null
                             ? "Enter a number and click Get Triva button" // Placeholder message
-                            : "\${state.tirvia?.text}", // Displaying trivia text
+                            : "\${state.trivia?.text}", // Displaying trivia text
                         textAlign: TextAlign.center,
                       );
                     },

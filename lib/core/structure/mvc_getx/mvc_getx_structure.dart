@@ -49,9 +49,14 @@ class MvcGetXStructure extends Structure {
             path: 'lib/application/utils/theme',
           ),
         ),
+        MvcDirNames.api: Directory(
+          replaceAsExpected(
+            path: 'lib/application/utils/api_endpoints',
+          ),
+        ),
         MvcDirNames.network: Directory(
           replaceAsExpected(
-            path: 'lib/application/utils/network',
+            path: 'lib/application/utils/network_exceptions',
           ),
         ),
         MvcDirNames.routes: Directory(
@@ -74,18 +79,18 @@ class MvcGetXStructure extends Structure {
   List<FileModel> get coreFiles => [
         FileModel(
           Directory.current.path,
-          "easy_init_mvc",
+          "easy_init_mvc_grl",
           initWarning,
         ),
         FileModel(
           'lib',
           "main.dart",
-          '',
+          mvcMainContent,
         ),
         FileModel(
           directoryStructure[MvcDirNames.application]!.path,
           "app.dart",
-          '',
+          mvcAppContent,
         ),
         FileModel(
           directoryStructure[MvcDirNames.controllers]!.path,
@@ -104,8 +109,13 @@ class MvcGetXStructure extends Structure {
         ),
         FileModel(
           directoryStructure[MvcDirNames.widgets]!.path,
-          ".gitkeep",
-          '',
+          "space.dart",
+          spaceContent,
+        ),
+        FileModel(
+          directoryStructure[MvcDirNames.widgets]!.path,
+          "responsive.dart",
+          responsiveContent,
         ),
         FileModel(
           directoryStructure[MvcDirNames.theme]!.path,
@@ -118,6 +128,11 @@ class MvcGetXStructure extends Structure {
           themeContent,
         ),
         FileModel(
+          directoryStructure[MvcDirNames.api]!.path,
+          "api_endpoints.dart",
+          apiEndpointContent,
+        ),
+        FileModel(
           directoryStructure[MvcDirNames.network]!.path,
           "network_exceptions.dart",
           networkExceptionContent,
@@ -125,7 +140,7 @@ class MvcGetXStructure extends Structure {
         FileModel(
           directoryStructure[MvcDirNames.routes]!.path,
           ".gitkeep",
-          '',
+          mvcRouteContent,
         ),
         FileModel(
           directoryStructure[MvcDirNames.bindings]!.path,
@@ -150,7 +165,9 @@ class MvcDirNames {
   static String utils = "utils";
   static String network = "network";
   static String theme = "theme";
+  static String api = "api_endpoints";
   static String routes = "routes";
   static String screens = "screens";
   static String widgets = "widgets";
+//
 }

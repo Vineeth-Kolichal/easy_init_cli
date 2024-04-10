@@ -63,14 +63,6 @@ class AppRoutes {
 }
 ''';
 
-String apiEndpointContent = '''
-class ApiEndpoints {
-  /// change the [baseUrl] value as per your api
-  static String baseUrl = "http://numbersapi.com/";
-}
-
-''';
-
 String dioModuleContent = '''
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
