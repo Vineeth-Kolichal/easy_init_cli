@@ -36,7 +36,8 @@ class CreateFeature extends Command {
           _createFeature(
               structure: TddCleanStructure(), featureName: featureName);
         } else if (arch == "mvc-grl") {
-          yellowLog("[WARNING] mvc feature creation under development");
+          _createFeature(
+              structure: MvcGetXStructure(), featureName: featureName);
         }
       } else {
         redLog("[ERROR] feature creation failed");
@@ -58,8 +59,7 @@ class CreateFeature extends Command {
     if (arch == "tdd-brf") {
       return await Directory("$path/lib/features/$featureName").exists();
     } else if (arch == "mvc-grl") {
-      return (await Directory(
-                  "$path/lib/application/views/screens/$featureName")
+      return (await Directory("$path/lib/application/views/$featureName")
               .exists() ||
           await Directory("$path/lib/application/controllers/$featureName")
               .exists());

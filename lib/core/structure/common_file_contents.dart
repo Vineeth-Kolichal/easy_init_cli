@@ -171,13 +171,13 @@ if you delete this file then some commands won't work properly
 
 If you wanted to change architecture pattern;
  > Remove all folders and files from lib folder.
- > Remove this file form root folder. 
+ > Remove this file from root folder. 
  > Run 'easy init' command again''';
 
 String apiEndpointContent = '''
 class ApiEndpoints {
   /// change the [baseUrl] value as per your api
-  static String baseUrl = "http://numbersapi.com/";
+  static String baseUrl = "http://numbersapi.com";
 }
 
 ''';

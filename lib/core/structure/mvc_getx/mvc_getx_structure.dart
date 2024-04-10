@@ -1,6 +1,9 @@
 import 'dart:io';
 
+import 'package:easy_init_cli/core/structure/mvc_getx/file_contents/mvc_trivia_content.dart';
 import 'package:easy_init_cli/core/structure/structure.dart';
+import 'package:recase/recase.dart';
+import '../../../commands/create_feature/create_feature.dart';
 import 'file_contents/mvc_file_contents.dart';
 
 class MvcGetXStructure extends Structure {
@@ -27,11 +30,6 @@ class MvcGetXStructure extends Structure {
         MvcDirNames.controllers: Directory(
           replaceAsExpected(
             path: 'lib/application/controllers',
-          ),
-        ),
-        MvcDirNames.bindings: Directory(
-          replaceAsExpected(
-            path: 'lib/application/bindings',
           ),
         ),
         MvcDirNames.utils: Directory(
@@ -64,14 +62,57 @@ class MvcGetXStructure extends Structure {
             path: 'lib/application/utils/routes',
           ),
         ),
+        MvcDirNames.common: Directory(
+          replaceAsExpected(
+            path: 'lib/application/common',
+          ),
+        ),
+        MvcDirNames.commonW: Directory(
+          replaceAsExpected(
+            path: 'lib/application/common/widgets',
+          ),
+        ),
+        MvcDirNames.commonC: Directory(
+          replaceAsExpected(
+            path: 'lib/application/common/controllers',
+          ),
+        ),
+        MvcDirNames.commonM: Directory(
+          replaceAsExpected(
+            path: 'lib/application/common/models',
+          ),
+        ),
+      };
+  @override
+  Map<String, Directory> get featureStructure => {
+        MvcDirNames.views: Directory(
+          replaceAsExpected(
+            path: 'lib/application/views/${MvcDirNames.featureNm}',
+          ),
+        ),
         MvcDirNames.screens: Directory(
           replaceAsExpected(
-            path: 'lib/application/views/screens',
+            path: 'lib/application/views/${MvcDirNames.featureNm}/screens',
           ),
         ),
         MvcDirNames.widgets: Directory(
           replaceAsExpected(
-            path: 'lib/application/views/widgets',
+            path: 'lib/application/views/${MvcDirNames.featureNm}/widgets',
+          ),
+        ),
+        MvcDirNames.controllers: Directory(
+          replaceAsExpected(
+            path: 'lib/application/controllers/${MvcDirNames.featureNm}',
+          ),
+        ),
+        MvcDirNames.model: Directory(
+          replaceAsExpected(
+            path: 'lib/application/models/${MvcDirNames.featureNm}',
+          ),
+        ),
+        MvcDirNames.services: Directory(
+          replaceAsExpected(
+            path: 'lib/application/services/${MvcDirNames.featureNm}',
           ),
         ),
       };
@@ -103,17 +144,12 @@ class MvcGetXStructure extends Structure {
           '',
         ),
         FileModel(
-          directoryStructure[MvcDirNames.screens]!.path,
-          ".gitkeep",
-          '',
-        ),
-        FileModel(
-          directoryStructure[MvcDirNames.widgets]!.path,
+          directoryStructure[MvcDirNames.commonW]!.path,
           "space.dart",
           spaceContent,
         ),
         FileModel(
-          directoryStructure[MvcDirNames.widgets]!.path,
+          directoryStructure[MvcDirNames.commonW]!.path,
           "responsive.dart",
           responsiveContent,
         ),
@@ -139,18 +175,35 @@ class MvcGetXStructure extends Structure {
         ),
         FileModel(
           directoryStructure[MvcDirNames.routes]!.path,
-          ".gitkeep",
+          "routes.dart",
           mvcRouteContent,
-        ),
-        FileModel(
-          directoryStructure[MvcDirNames.bindings]!.path,
-          ".gitkeep",
-          '',
         ),
         FileModel(
           directoryStructure[MvcDirNames.services]!.path,
           ".gitkeep",
           '',
+        ),
+
+        //Trivia feature files
+        FileModel(
+          featureStructure[MvcDirNames.controllers]!.path,
+          "${MvcDirNames.featureNm}_controller.dart",
+          triviaControllerCnt,
+        ),
+        FileModel(
+          featureStructure[MvcDirNames.model]!.path,
+          "${MvcDirNames.featureNm}_model.dart",
+          triviaModelCnt,
+        ),
+        FileModel(
+          featureStructure[MvcDirNames.services]!.path,
+          "${MvcDirNames.featureNm}_service.dart",
+          triviaServicesCnt,
+        ),
+        FileModel(
+          featureStructure[MvcDirNames.screens]!.path,
+          "${MvcDirNames.featureNm}_screen.dart",
+          triviaScreenCnt,
         ),
       ];
 }
@@ -160,7 +213,6 @@ class MvcDirNames {
   static String model = "models";
   static String views = "views";
   static String controllers = "controllers";
-  static String bindings = "bindings";
   static String services = "services";
   static String utils = "utils";
   static String network = "network";
@@ -169,5 +221,10 @@ class MvcDirNames {
   static String routes = "routes";
   static String screens = "screens";
   static String widgets = "widgets";
+  static String common = "common";
+  static String commonW = "commonW";
+  static String commonM = "commonM";
+  static String commonC = "commonC";
+  static String featureNm = CreateFeature.featureName.snakeCase;
 //
 }

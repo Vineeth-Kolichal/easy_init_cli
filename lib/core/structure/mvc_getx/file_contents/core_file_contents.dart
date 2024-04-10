@@ -36,8 +36,8 @@ class MyApp extends StatelessWidget {
 String mvcRouteContent = '''
 import 'package:get/get.dart';
 
-import '../../controllers/trivia_controllers/trivia_controller.dart';
-import '../../views/screens/number_trivia_screen.dart';
+import '../../controllers/number_trivia/number_trivia_controller.dart';
+import '../../views/number_trivia/screens/number_trivia_screen.dart';
 
 class AppRoutes {
   static List<GetPage> getPages = [
@@ -52,6 +52,7 @@ class AppRoutes {
     ),
   ];
 }
+
 ''';
 // String mvcMainContent = '''''';
 // String mvcMainContent = '''''';

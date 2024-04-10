@@ -100,7 +100,7 @@ class InitProject extends Command {
         "[WARNING] Project is already initialized with ${archName.toUpperCase()} architecture pattern");
     print('''If you wanted to change architecture pattern;
  > Remove all folders and files from lib folder.
- > Remove 'easy_init_${archName.snakeCase}_$suffix' file form root folder. 
+ > Remove 'easy_init_${archName.snakeCase}_$suffix' file from root folder. 
  > Run 'easy init' command again''');
   }
 }

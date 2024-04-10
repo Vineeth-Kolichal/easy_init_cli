@@ -22,7 +22,3 @@ String? findCurrentArchitecture() {
     return null;
   }
 }
-
-class Architectures {
-  static String tddBrf = 'tdd-brf';
-}
