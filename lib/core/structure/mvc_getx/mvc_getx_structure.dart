@@ -205,6 +205,39 @@ class MvcGetXStructure extends Structure {
           "${MvcDirNames.featureNm}_screen.dart",
           triviaScreenCnt,
         ),
+        FileModel(
+          featureStructure[MvcDirNames.widgets]!.path,
+          ".gitkeep",
+          triviaScreenCnt,
+        ),
+      ];
+  @override
+  List<FileModel> get featureFiles => [
+        FileModel(
+          featureStructure[MvcDirNames.controllers]!.path,
+          "${MvcDirNames.featureNm}_controller.dart",
+          "",
+        ),
+        FileModel(
+          featureStructure[MvcDirNames.model]!.path,
+          ".gitkeep",
+          "",
+        ),
+        FileModel(
+          featureStructure[MvcDirNames.services]!.path,
+          "${MvcDirNames.featureNm}_service.dart",
+          "",
+        ),
+        FileModel(
+          featureStructure[MvcDirNames.screens]!.path,
+          "${MvcDirNames.featureNm}_screen.dart",
+          "",
+        ),
+        FileModel(
+          featureStructure[MvcDirNames.widgets]!.path,
+          ".gitkeep",
+          "",
+        ),
       ];
 }
 
