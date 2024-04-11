@@ -54,10 +54,10 @@ The folder structure of MVC Architecture looks like this:
 ###### Note
 
 ```txt
-- All required dependencies and dev dependencies will added automatically, you can add or remove dependencies as per your need.
 - As an initial step, the code for a number trivia feature will be implemented in both architectures.
   This will serve as a learning tool to understand the call flow within the chosen architectural pattern.
 - The number trivia feature can then be removed when development on the core project functionalities commences.
+- All required dependencies and dev dependencies will added automatically, you can add or remove dependencies as per your need.
 - The generated files can be customized to suit your specific needs.
 ```
 
