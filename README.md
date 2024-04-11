@@ -28,18 +28,21 @@ Use the cd command in the terminal to navigate to the project's root directory.
 easy init
 ```
 Use this command to initialize your project with a well-structured architectural pattern. This command will prompt you to select the architecture. 
+![Screenshot from 2024-04-11 15-37-44](https://github.com/Vineeth-Kolichal/easy_init_cli/assets/92266542/b4fd61a6-5c54-4af6-8b48-e22b136f315f)
 
 Currently two architecture pattern is available in ```easy_init_cli```
 
 1. #### TDD + Clean Architecture
-folder structure of TDD + Clean Architecture is look like:
+The folder structure of TDD + Clean Architecture looks like this:
+![Screenshot from 2024-04-11 15-31-36](https://github.com/Vineeth-Kolichal/easy_init_cli/assets/92266542/ac1cc2ea-69ad-4b2d-87dd-2796507e451d)
 
 To learn more about TDD + Clean architecture refer [Reso Coder](https://resocoder.com/flutter-clean-architecture-tdd/)'s website
 
 
 
 2. #### MVC
-folder structure of MVC Achitecture is look like:
+The folder structure of MVC Architecture looks like this:
+![Screenshot from 2024-04-11 15-28-09](https://github.com/Vineeth-Kolichal/easy_init_cli/assets/92266542/1c1b9bdf-7cf5-46cf-9668-0cf64ace629f)
 
 
 
