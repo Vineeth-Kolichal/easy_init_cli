@@ -28,6 +28,7 @@ Use the cd command in the terminal to navigate to the project's root directory.
 easy init
 ```
 Use this command to initialize your project with a well-structured architectural pattern. This command will prompt you to select the architecture. 
+
 ![Screenshot from 2024-04-11 15-37-44](https://github.com/Vineeth-Kolichal/easy_init_cli/assets/92266542/b4fd61a6-5c54-4af6-8b48-e22b136f315f)
 
 Currently two architecture pattern is available in ```easy_init_cli```
