@@ -1,3 +1,9 @@
+## 1.0.7
+  What's new in 1.0.7
+  - MVC architecture also added
+  - Error handling added in some sections
+  - Bug fixes
+
 ## 1.0.6
   Change in sample code
   - Number trivia app code is added as sample code
