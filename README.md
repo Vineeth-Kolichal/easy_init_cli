@@ -51,7 +51,12 @@ The folder structure of MVC Architecture looks like this:
 
 
 
-```All required dependencies and dev dependencies will added automatically. The generated files can be customized to suit your specific needs.```
+###### Note
+
+```txt
+- All required dependencies and dev dependencies will added automatically.
+- The generated files can be customized to suit your specific needs.
+```
 
 ### Create feature
 ```shell
