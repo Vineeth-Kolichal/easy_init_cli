@@ -34,6 +34,8 @@ Currently two architecture pattern is available in ```easy_init_cli```
 
 1. #### TDD + Clean Architecture
 The folder structure of TDD + Clean Architecture looks like this:
+
+
 ![Screenshot from 2024-04-11 15-31-36](https://github.com/Vineeth-Kolichal/easy_init_cli/assets/92266542/ac1cc2ea-69ad-4b2d-87dd-2796507e451d)
 
 To learn more about TDD + Clean architecture refer [Reso Coder](https://resocoder.com/flutter-clean-architecture-tdd/)'s website
@@ -42,6 +44,8 @@ To learn more about TDD + Clean architecture refer [Reso Coder](https://resocode
 
 2. #### MVC
 The folder structure of MVC Architecture looks like this:
+
+
 ![Screenshot from 2024-04-11 15-28-09](https://github.com/Vineeth-Kolichal/easy_init_cli/assets/92266542/1c1b9bdf-7cf5-46cf-9668-0cf64ace629f)
 
 
