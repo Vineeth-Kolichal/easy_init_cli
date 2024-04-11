@@ -4,7 +4,8 @@
 
 # Exploring the CLI
 
-Easy Init CLI is a command-line tool that streamlines the creation of Flutter projects. It initializes the project with boilerplate code following a well-structured, TDD + Clean Architecture approach(To learn more about TDD + Clean architecture refer [Reso Coder](https://resocoder.com/flutter-clean-architecture-tdd/)'s website). Future versions will incorporate additional architectural patterns.
+Easy Init CLI is a command-line tool that streamlines the creation of Flutter projects. It initializes the project with boilerplate code following a well-structured and maintainable architecture pattern.
+
 ### Installation
 You can install the package from the command line:
 ```shell
@@ -26,7 +27,24 @@ Use the cd command in the terminal to navigate to the project's root directory.
 ```shell
 easy init
 ```
-Use this command to initialize your project with a well-structured architectural pattern (Currently, only TDD Clean Architecture (feature wise) is available.). All required dependencies and dev dependencies will added automatically. The generated files can be customized to suit your specific needs.
+Use this command to initialize your project with a well-structured architectural pattern. This command will prompt you to select the architecture. 
+
+Currently two architecture pattern is available in ```easy_init_cli```
+
+1. #### TDD + Clean Architecture
+folder structure of TDD + Clean Architecture is look like:
+
+To learn more about TDD + Clean architecture refer [Reso Coder](https://resocoder.com/flutter-clean-architecture-tdd/)'s website
+
+
+
+2. #### MVC
+folder structure of MVC Achitecture is look like:
+
+
+
+
+```All required dependencies and dev dependencies will added automatically. The generated files can be customized to suit your specific needs.```
 
 ### Create feature
 ```shell

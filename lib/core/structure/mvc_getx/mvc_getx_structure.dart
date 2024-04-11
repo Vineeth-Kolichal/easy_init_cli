@@ -183,6 +183,21 @@ class MvcGetXStructure extends Structure {
           ".gitkeep",
           '',
         ),
+        FileModel(
+          directoryStructure[MvcDirNames.commonC]!.path,
+          ".gitkeep",
+          '',
+        ),
+        FileModel(
+          directoryStructure[MvcDirNames.commonW]!.path,
+          ".gitkeep",
+          '',
+        ),
+        FileModel(
+          directoryStructure[MvcDirNames.commonM]!.path,
+          ".gitkeep",
+          '',
+        ),
 
         //Trivia feature files
         FileModel(
@@ -216,7 +231,7 @@ class MvcGetXStructure extends Structure {
         FileModel(
           featureStructure[MvcDirNames.controllers]!.path,
           "${MvcDirNames.featureNm}_controller.dart",
-          "",
+          mvcCntrlContent,
         ),
         FileModel(
           featureStructure[MvcDirNames.model]!.path,
@@ -226,12 +241,12 @@ class MvcGetXStructure extends Structure {
         FileModel(
           featureStructure[MvcDirNames.services]!.path,
           "${MvcDirNames.featureNm}_service.dart",
-          "",
+          mvcServiceContent,
         ),
         FileModel(
           featureStructure[MvcDirNames.screens]!.path,
           "${MvcDirNames.featureNm}_screen.dart",
-          "",
+          mvcScreenContent,
         ),
         FileModel(
           featureStructure[MvcDirNames.widgets]!.path,
