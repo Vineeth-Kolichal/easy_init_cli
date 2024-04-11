@@ -26,7 +26,7 @@ class UserInput {
     } else {
       var s = int.parse(ans);
       if (s == 0 || s > options.length) {
-        print(red("Invalid selection!"));
+        print(red("[ERROR] Invalid selection!"));
         return menu(promt: promt, options: options);
       } else {
         return s;

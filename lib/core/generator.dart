@@ -17,7 +17,7 @@ class EasyInitCli {
 
     var command = commands.firstWhere(
       (command) => command.commandName == currentArgument,
-      orElse: () => ErrorCommand("Command not found"),
+      orElse: () => ErrorCommand("[ERROR] Command not found"),
     );
 
     if (command.children.isNotEmpty) {

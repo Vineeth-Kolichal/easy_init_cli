@@ -1,6 +1,7 @@
 import 'dart:io';
 
 class Structure {
+  String architectureName = "";
   Map<String, Directory> directoryStructure = {};
   Map<String, Directory> featureStructure = {};
   List<FileModel> coreFiles = [];

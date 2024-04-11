@@ -63,45 +63,6 @@ class AppRoutes {
 
 ''';
 
-String themeContent = '''
-import 'package:flutter/material.dart';
-
-class AppTheme {
-  static ThemeData lightTheme = ThemeData(
-    brightness: Brightness.light,
-    useMaterial3: true,
-    textTheme: getTextTheme(isDark: false),
-  );
-
-  static ThemeData darkTheme = ThemeData(
-    brightness: Brightness.dark,
-    useMaterial3: true,
-    textTheme: getTextTheme(isDark: true),
-  );
-}
-
-TextTheme getTextTheme({required bool isDark}) {
-  TextTheme lightTextTheme = const TextTheme();
-  TextTheme darkTextTheme = const TextTheme();
-
-  if (isDark) {
-    return darkTextTheme;
-  } else {
-    return lightTextTheme;
-  }
-}
-
-''';
-String colorsContent = '''
-import 'package:flutter/material.dart';
-
-class AppColors {
-  static const blackColor = Colors.black;
-  static const whiteColor = Colors.white;
-}
-
-''';
-
 String mainContent = '''
 import 'dart:async';
 
@@ -152,61 +113,6 @@ class MyApp extends StatelessWidget {
 }
 
 
-''';
-
-String spaceContent = '''
-import 'package:flutter/material.dart';
-
-class Space {
-  static SizedBox x(double width) => SizedBox(
-        width: width,
-      );
-  static SizedBox y(double height) => SizedBox(
-        height: height,
-      );
-}
-''';
-
-String responsiveContent = '''
-import 'package:flutter/material.dart';
-
-class Responsive extends StatelessWidget {
-  const Responsive(
-      {super.key, required this.desktop, this.tablet, required this.mobile});
-  final Widget desktop;
-  final Widget? tablet;
-  final Widget mobile;
-
-  static bool isMobile(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    return width < 500;
-  }
-
-  static bool isTabltet(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    return width > 500 && width < 1024;
-  }
-
-  static bool isDestop(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    return width >= 1024;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        if (constraints.maxWidth >= 1024) {
-          return desktop;
-        } else if (constraints.maxWidth > 500 && constraints.maxWidth < 1024) {
-          return tablet == null ? mobile : tablet!;
-        } else {
-          return mobile;
-        }
-      },
-    );
-  }
-}
 ''';
 
 String dataSourceContent = '''
@@ -351,56 +257,4 @@ class HomeState with _\$HomeState {
   factory HomeState.initial() => const HomeState(count: 0);
 }
 
-''';
-
-String loginScreenContent = '''
-import 'package:flutter/material.dart';
-
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold();
-  }
-}
-''';
-
-String signupScreenContent = '''
-import 'package:flutter/material.dart';
-
-class SignupScreen extends StatelessWidget {
-  const SignupScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold();
-  }
-}
-''';
-
-String forgotPasswordScreenContent = '''
-import 'package:flutter/material.dart';
-
-class ForgotPasswordScreen extends StatelessWidget {
-  const ForgotPasswordScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold();
-  }
-}
-''';
-
-String otpScreenContent = '''
-import 'package:flutter/material.dart';
-
-class OtpScreen extends StatelessWidget {
-  const OtpScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold();
-  }
-}
 ''';
