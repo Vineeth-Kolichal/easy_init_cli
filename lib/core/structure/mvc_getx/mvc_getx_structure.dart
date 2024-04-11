@@ -253,6 +253,34 @@ class MvcGetXStructure extends Structure {
           ".gitkeep",
           "",
         ),
+        if (MvcDirNames.featureNm == "auth" ||
+            MvcDirNames.featureNm == "authentication")
+          FileModel(
+            featureStructure[MvcDirNames.screens]!.path,
+            "login_screen.dart",
+            loginScreenContent,
+          ),
+        if (MvcDirNames.featureNm == "auth" ||
+            MvcDirNames.featureNm == "authentication")
+          FileModel(
+            featureStructure[MvcDirNames.screens]!.path,
+            "signup_screen.dart",
+            signupScreenContent,
+          ),
+        if (MvcDirNames.featureNm == "auth" ||
+            MvcDirNames.featureNm == "authentication")
+          FileModel(
+            featureStructure[MvcDirNames.screens]!.path,
+            "forgot_password_screen.dart",
+            forgotPasswordScreenContent,
+          ),
+        if (MvcDirNames.featureNm == "auth" ||
+            MvcDirNames.featureNm == "authentication")
+          FileModel(
+            featureStructure[MvcDirNames.screens]!.path,
+            "otp_screen.dart",
+            otpScreenContent,
+          ),
       ];
 }
 
