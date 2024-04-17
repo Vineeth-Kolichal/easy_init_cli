@@ -116,8 +116,9 @@ class MyApp extends StatelessWidget {
 ''';
 
 String dataSourceContent = '''
-import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+
+import '../../../../core/network_exceptions/network_client.dart';
 
 
 abstract class ${CreateFeature.featureName.pascalCase}DataSource{}
@@ -125,8 +126,8 @@ abstract class ${CreateFeature.featureName.pascalCase}DataSource{}
 @LazySingleton(as:${CreateFeature.featureName.pascalCase}DataSource)
 @injectable
 class ${CreateFeature.featureName.pascalCase}DataSourceImpl implements ${CreateFeature.featureName.pascalCase}DataSource{
-  final Dio dio;
-  ${CreateFeature.featureName.pascalCase}DataSourceImpl(this.dio);
+  final NetworkClient client;
+  ${CreateFeature.featureName.pascalCase}DataSourceImpl(this.client);
 } 
 ''';
 

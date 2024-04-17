@@ -54,9 +54,9 @@ class TddCleanStructure extends Structure {
             path: "lib/core/failures",
           ),
         ),
-        CleanDirName.networkExceptions: Directory(
+        CleanDirName.network: Directory(
           replaceAsExpected(
-            path: "lib/core/network_exceptions",
+            path: "lib/core/network",
           ),
         ),
         CleanDirName.routes: Directory(
@@ -207,9 +207,14 @@ class TddCleanStructure extends Structure {
           failuresContent,
         ),
         FileModel(
-          directoryStructure[CleanDirName.networkExceptions]!.path,
+          directoryStructure[CleanDirName.network]!.path,
           "network_exceptions.dart",
           networkExceptionContent,
+        ),
+        FileModel(
+          directoryStructure[CleanDirName.network]!.path,
+          "network_client.dart",
+          networkClientContent,
         ),
         FileModel(
           directoryStructure[CleanDirName.routes]!.path,
@@ -396,7 +401,7 @@ class CleanDirName {
   static String baseUsecase = "base_usecase";
   static String dependancyInjection = "dependancy_injection";
   static String failures = "failures";
-  static String networkExceptions = "network_exceptions";
+  static String network = "network";
   static String routes = "routes";
   static String theme = "theme";
   static String config = "config";
