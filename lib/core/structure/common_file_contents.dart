@@ -241,8 +241,8 @@ import 'network_exceptions.dart';
 
 /// If you have to pass token with api requests then use,[getWithToken],[postWithToken],
 /// [putWithToken],[patchWithToken],[deleteWithToken], methods, if you are not using any token then
-/// you can use [getWithoutToken] and [postWithoutToken] methods. You can implement Put,Patch,delete
-/// without token  methods as per your needs
+/// you can use [getWithoutToken] and [postWithoutToken] methods. 
+/// You can implement Put,Patch,delete without token  methods as per your needs.
 /// You can modify this code as per your needs.
 
 @lazySingleton
