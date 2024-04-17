@@ -254,7 +254,7 @@ class NetworkClient {
   ///If you are storing token in SharedPreferences or any other storage,
   ///then write code for retrieving token and assign to [token]
   String? token;
-  //Get request with token
+  //GET request with token
   Future<dynamic> getWithToken(
       {required String path, dynamic data, dynamic queryParameters}) async {
     _dio.options.headers = {
@@ -270,7 +270,7 @@ class NetworkClient {
     }
   }
 
-  //Post request with token
+  //POST request with token
   Future<dynamic> postWithToken({required String path, dynamic data}) async {
     _dio.options.headers = {
       "Content-Type": "application/json",
@@ -286,7 +286,7 @@ class NetworkClient {
     }
   }
 
-  //Put request with token
+  //PUT request with token
   Future<dynamic> putWithToken({required String path, dynamic data}) async {
     _dio.options.headers = {
       "Content-Type": "application/json",
@@ -302,7 +302,7 @@ class NetworkClient {
     }
   }
 
-  //Patch request with token
+  //PATCH request with token
   Future<dynamic> patchWithToken({required String path, dynamic data}) async {
     _dio.options.headers = {
       "Content-Type": "application/json",
@@ -318,7 +318,7 @@ class NetworkClient {
     }
   }
 
-  //Delete request with token
+  //DELETE request with token
   Future<dynamic> deleteWithToken({required String path, dynamic data}) async {
     _dio.options.headers = {
       "Content-Type": "application/json",
@@ -334,7 +334,7 @@ class NetworkClient {
     }
   }
 
-  //Get request without token
+  //GET request without token
   Future<dynamic> getWithoutToken(
       {required String path, dynamic data, dynamic queryParameters}) async {
     _dio.options.headers = {
@@ -351,7 +351,7 @@ class NetworkClient {
     }
   }
 
-  //Post request without token
+  //POST request without token
   Future<dynamic> postWithoutToken({required String path, dynamic data}) async {
     _dio.options.headers = {
       "Content-Type": "application/json",
