@@ -1,7 +1,7 @@
 const triviaDataSourceContent = '''
 import 'package:injectable/injectable.dart';
 
-import '../../../../core/network_exceptions/network_client.dart';
+import '../../../../core/network/network_client.dart';
 import '../../domain/usecases/get_number_trivia_usecase.dart';
 import '../models/trivia_model.dart';
 
@@ -72,7 +72,7 @@ const triviaRepoImplContent = '''
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import '../../../../core/failures/failures.dart';
-import '../../../../core/network_exceptions/network_exceptions.dart';
+import '../../../../core/network/network_exceptions.dart';
 import '../../domain/entities/trivia_entity.dart';
 import '../../domain/repositories/number_trivia_repository.dart';
 import '../../domain/usecases/get_number_trivia_usecase.dart';

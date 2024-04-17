@@ -200,7 +200,7 @@ class TriviaServices {
           await dio.get('\${ApiEndpoints.baseUrl}/\$number/trivia?json');
       return TriviaModel.fromJson(response.data);
     } on DioException catch (e) {
-      throw CustomException.fromDioError(e);
+      throw CustomException.fromDioException(e);
     }
   }
 }
