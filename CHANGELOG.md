@@ -1,3 +1,9 @@
+## 1.0.8
+  What's new in 1.0.8
+  - readme modified
+  - network handling file added in tdd+clean architecture
+  - Bug fixes
+
 ## 1.0.7
   What's new in 1.0.7
   - MVC architecture also added

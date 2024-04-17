@@ -76,6 +76,18 @@ easy create feature:feature_name
 ```
 The ```screens``` folder will contain authentication-related screen files if the feature name is either 'auth' or 'authentication'
 
+### Run build-runner
+```sh
+easy build
+```
+Use this command to run build runner easly.
+
+### Update easy_init_cli
+```sh
+easy update
+```
+To update easy_init_cli to latest version run this command
+
 
 
 
