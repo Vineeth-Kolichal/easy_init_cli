@@ -118,7 +118,7 @@ class MyApp extends StatelessWidget {
 String dataSourceContent = '''
 import 'package:injectable/injectable.dart';
 
-import '../../../../core/network_exceptions/network_client.dart';
+import '../../../../core/network/network_client.dart';
 
 
 abstract class ${CreateFeature.featureName.pascalCase}DataSource{}

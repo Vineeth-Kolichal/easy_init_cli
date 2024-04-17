@@ -1,3 +1,6 @@
+## 1.0.9
+  - Bug fixes
+
 ## 1.0.8
   What's new in 1.0.8
   - readme modified
