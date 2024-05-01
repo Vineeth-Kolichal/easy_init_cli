@@ -178,6 +178,11 @@ class TddCleanStructure extends Structure {
         ),
         FileModel(
           directoryStructure[CleanDirName.commonWidgets]!.path,
+          "loading.dart",
+          loadingContent,
+        ),
+        FileModel(
+          directoryStructure[CleanDirName.commonWidgets]!.path,
           "responsive.dart",
           responsiveContent,
         ),

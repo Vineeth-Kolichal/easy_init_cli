@@ -150,6 +150,11 @@ class MvcGetXStructure extends Structure {
         ),
         FileModel(
           directoryStructure[MvcDirNames.commonW]!.path,
+          "loading.dart",
+          loadingContent,
+        ),
+        FileModel(
+          directoryStructure[MvcDirNames.commonW]!.path,
           "responsive.dart",
           responsiveContent,
         ),
