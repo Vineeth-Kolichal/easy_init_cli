@@ -9,7 +9,7 @@ environment:
 # Add regular dependencies here.
 dependencies:
   args: ^2.4.2
-  dcli: ^3.3.6
+  dcli: ^4.0.0
   process_run: ^0.14.2
   recase: ^4.1.0
 
