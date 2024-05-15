@@ -1,5 +1,9 @@
 ## 1.1.0
   - Bug fixes
+  - dcli updated
+  
+## 1.1.0
+  - Bug fixes
   - Screen loading widget is added in common widgets folder
 ## 1.0.9
   - Bug fixes
