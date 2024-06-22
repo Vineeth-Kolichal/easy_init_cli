@@ -1,3 +1,6 @@
+## 1.1.2
+  - Network exception handling file updated
+
 ## 1.1.1
   - Bug fixes
   - dcli updated
