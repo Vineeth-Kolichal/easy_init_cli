@@ -178,53 +178,60 @@ String networkExceptionContent = '''
 import 'package:dio/dio.dart';
 
 class CustomException implements Exception {
+  dynamic message;
+  int? statusCode;
   CustomException.otherException(String msg) {
     message = msg;
   }
-  CustomException.fromDioException(DioException dioError) {
+  CustomException.fromDioException(DioException dioException) {
     if (message == null) {
-      switch (dioError.type) {
-        case DioException.requestCancelled:
+      switch (dioException.type) {
+        case DioExceptionType.cancel:
           message = "Request to API server was cancelled";
+          statusCode = dioException.response?.statusCode;
           break;
-        case DioException.connectionTimeout:
-          message = "Connection timeout with API server";
+        case DioExceptionType.connectionTimeout:
+          message = "Connection timeout with API server!";
+          statusCode = dioException.response?.statusCode;
           break;
-        case DioException.connectionError:
-          message =
-              "Connection to API server failed due to internet connection";
+        case DioExceptionType.connectionError:
+          message = "Connection to API server failed!";
+          statusCode = dioException.response?.statusCode;
           break;
-        case DioException.receiveTimeout:
+        case DioExceptionType.receiveTimeout:
           message = "Receive timeout in connection with API server";
+          statusCode = dioException.response?.statusCode;
           break;
-        case DioException.badResponse:
-          message = _handleError(dioError.response!.statusCode);
+        case DioExceptionType.badResponse:
+          message = _handleBadResponse(dioException);
+          statusCode = dioException.response?.statusCode;
           break;
-        case DioException.sendTimeout:
+        case DioExceptionType.sendTimeout:
           message = "Send timeout in connection with API server";
+          statusCode = dioException.response?.statusCode;
           break;
         default:
-          message = _handleDefaultError(dioError);
+          message = _handleBadResponse(dioException);
+          statusCode = dioException.response?.statusCode;
           break;
       }
     }
   }
 
-  dynamic message;
-
-  String? _handleDefaultError(DioException error) {
+  String? _handleBadResponse(DioException exception) {
     try {
-      final response = error.response?.data as Map?;
-      if (response != null) {
+      final response = exception.response?.data as Map?;
+      if (response != null && response['message'] != null) {
         return "\${response["message"]}";
+      } else {
+        return _handleError(exception.response!.statusCode);
       }
-      return error.message;
     } catch (_) {
-      return error.message;
+      return _handleError(exception.response?.statusCode);
     }
   }
 
-  Object _handleError(statusCode) {
+  String _handleError(statusCode) {
     switch (statusCode) {
       case 400:
         return 'Bad request';
@@ -242,6 +249,7 @@ class CustomException implements Exception {
   @override
   String toString() => message.toString();
 }
+
 
 ''';
 
