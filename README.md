@@ -41,6 +41,10 @@ The folder structure of TDD + Clean Architecture looks like this:
 
 To learn more about TDD + Clean architecture refer [Reso Coder](https://resocoder.com/flutter-clean-architecture-tdd/)'s website
 
+```txt
+- MVC architecture pattern creation is temporarly disabled for updations.
+
+```
 
 
 <!-- 2. #### MVC

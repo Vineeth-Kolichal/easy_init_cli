@@ -986,8 +986,9 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class FcmHelper {
-  //TODO:!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  ///  init notification:
+  //TODO:complete notification setup
+  ///
+  ///### init notification:
   /// call initNotifications() method to initialize notifications
   /// ```
   /// Example:
@@ -1120,9 +1121,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 @lazySingleton
 class SharedPrefsHelper {
   ///TODO: modify the code as per the need
-  ///<<<<<<<<<<<<<<<<TODO>>>>>>>>>>>>>>>>>>>>>>
-  /// //init notification
+  ///
+  /// ### initialize SharedPreferences
+  /// ------------------------
   /// call initialize() method to initialize SharedPreferences instance
+  /// 
   /// ```
   /// Example:
   /// Future<void> main()async{
