@@ -49,6 +49,11 @@ class TddCleanStructure extends Structure {
             path: "lib/core/dependancy_injection",
           ),
         ),
+        CleanDirName.extentions: Directory(
+          replaceAsExpected(
+            path: "lib/core/extentions",
+          ),
+        ),
         CleanDirName.failures: Directory(
           replaceAsExpected(
             path: "lib/core/failures",
@@ -67,6 +72,11 @@ class TddCleanStructure extends Structure {
         CleanDirName.theme: Directory(
           replaceAsExpected(
             path: "lib/core/theme",
+          ),
+        ),
+        CleanDirName.typography: Directory(
+          replaceAsExpected(
+            path: "lib/core/typography",
           ),
         ),
         CleanDirName.config: Directory(
@@ -206,6 +216,27 @@ class TddCleanStructure extends Structure {
           "dio_module.dart",
           dioModuleContent,
         ),
+        FileModel(
+          directoryStructure[CleanDirName.extentions]!.path,
+          "app_navigation_ext.dart",
+          navigationExtContent,
+        ),
+        FileModel(
+          directoryStructure[CleanDirName.extentions]!.path,
+          "date_ext.dart",
+          dateExtContent,
+        ),
+        FileModel(
+          directoryStructure[CleanDirName.extentions]!.path,
+          "string_ext.dart",
+          stringExtContent,
+        ),
+        FileModel(
+          directoryStructure[CleanDirName.extentions]!.path,
+          "theme_ext.dart",
+          themeExtContent,
+        ),
+
         FileModel(
           directoryStructure[CleanDirName.failures]!.path,
           "failures.dart",
@@ -405,10 +436,12 @@ class CleanDirName {
   static String apiEndpoints = "apiEndpoints";
   static String baseUsecase = "base_usecase";
   static String dependancyInjection = "dependancy_injection";
+  static String extentions = "extentions";
   static String failures = "failures";
   static String network = "network";
   static String routes = "routes";
   static String theme = "theme";
+  static String typography = "theme";
   static String config = "config";
   static String modules = "modules";
   //features

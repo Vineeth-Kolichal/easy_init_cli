@@ -459,3 +459,217 @@ class NetworkClient {
 }
 
 ''';
+
+const navigationExtContent = '''
+import 'package:flutter/material.dart';
+
+
+extension AppNavigationExt on BuildContext {
+
+  void push(Widget nextScreen) {
+    Navigator.of(this).push(MaterialPageRoute(
+      builder: (context) => nextScreen,
+    ));
+  }
+
+  void pushReplacement(Widget nextScreen) {
+    Navigator.of(this).pushReplacement(MaterialPageRoute(
+      builder: (context) => nextScreen,
+    ));
+  }
+
+  void pushAndRemoveUntil(Widget nextScreen) {
+    Navigator.of(this).pushAndRemoveUntil(
+      MaterialPageRoute(
+        builder: (context) => nextScreen,
+      ),
+      (route) => false,
+    );
+  }
+
+  void popScreen() {
+    Navigator.of(this).pop();
+  }
+}
+
+
+''';
+
+const dateExtContent = '''
+import 'package:intl/intl.dart';
+
+extension DateExt on DateTime {
+  ///[hhMMa] will format DateTime to String in 'hh:mm:a'
+  ///
+  ///----------
+  ///```
+  /// //example
+  ///final time=DateTime.now().hhMMa;
+  ///print(time);//10:20 am
+  ///```
+  String get hhMMa => DateFormat('hh:mm a').format(this);
+
+  ///[dMMMyOrTY] will convert DateTime to String in '12 May 2024' format
+  ///or 'Today' or 'Yesterday' based on the date
+  ///
+  ///----------
+  ///```
+  /// //example
+  ///final converted=DateTime.now().dMMMyOrTY;
+  ///print(converted);//Today
+  ///```
+  String get dMMMyOrTY {
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+    final compDt = DateTime(year, month, day);
+    final difference = today.difference(compDt).inDays;
+
+    if (difference == 0) {
+      return 'Today';
+    } else if (difference == 1) {
+      return 'Yesterday';
+    } else {
+      return DateFormat('d MMM, y').format(this);
+    }
+  }
+
+  ///[yyyyMmDdWithDash] will convert DateTime to String in "2024-05-05" format
+  ///
+  ///----------
+  ///```
+  /// //example
+  ///final dateString=DateTime.now().yyyyMmDdWithDash;
+  ///print(dateString);//2024-08-05
+  ///```
+  String get yyyyMmDdWithDash => DateFormat('yyyy-MM-dd').format(this);
+
+  ///[yyyMmDdWithSlash] will convert DateTime to String in "2024/05/05" format
+  ///
+  ///----------
+  ///```
+  /// //example
+  ///final dateString=DateTime.now().yyyyMmDdWithSlash;
+  ///print(dateString);//2024/08/05
+  ///```
+  String get yyyMmDdWithSlash => DateFormat('yyyy/MM/dd').format(this);
+
+  ///[formatAsDdMMMyyy] will convert DateTime to String in "10 Apr, 2024" format
+  ///
+  ///----------
+  ///```
+  /// //example
+  ///final dateString=DateTime.now().formatAsDdMMMyyy;
+  ///print(dateString);// 10 Apr, 2024
+  ///```
+  String get formatAsDdMMMyyy => DateFormat('d MMM, yyyy').format(this);
+}
+
+''';
+
+const stringExtContent = '''
+
+extension StringExt on String {
+  /// [capitalize] will make first letter capital of a string
+  /// ```
+  ///  //example
+  /// final str="hello world"
+  /// final strConverted=str.capitalize
+  /// print(strConverted);//Hello world
+  /// ```
+  String get capitalize =>
+      isNotEmpty ? "\${this[0].toUpperCase()}\${substring(1)}" : "";
+}
+''';
+
+const themeExtContent = '''
+import 'package:flutter/material.dart';
+
+/// [TextThemeExt] - A custom extension on `BuildContext` to access
+/// TextStyle easily with build context
+extension TextThemeExt on BuildContext {
+  TextTheme textTheme() => Theme.of(this).textTheme;
+
+  TextStyle displayLarge(
+          {Color? textColor, double? fontSize, FontWeight? fontWeight}) =>
+      Theme.of(this).textTheme.displayLarge!.copyWith(
+          color: textColor, fontSize: fontSize, fontWeight: fontWeight);
+
+  TextStyle displayMedium(
+          {Color? textColor, double? fontSize, FontWeight? fontWeight}) =>
+      Theme.of(this).textTheme.displayMedium!.copyWith(
+          color: textColor, fontSize: fontSize, fontWeight: fontWeight);
+
+  TextStyle displaySmall(
+          {Color? textColor, double? fontSize, FontWeight? fontWeight}) =>
+      Theme.of(this).textTheme.displaySmall!.copyWith(
+          color: textColor, fontSize: fontSize, fontWeight: fontWeight);
+
+  TextStyle headlineLarge(
+          {Color? textColor, double? fontSize, FontWeight? fontWeight}) =>
+      Theme.of(this).textTheme.headlineLarge!.copyWith(
+          color: textColor, fontSize: fontSize, fontWeight: fontWeight);
+
+  TextStyle headlineMedium(
+          {Color? textColor, double? fontSize, FontWeight? fontWeight}) =>
+      Theme.of(this).textTheme.headlineMedium!.copyWith(
+          color: textColor, fontSize: fontSize, fontWeight: fontWeight);
+
+  TextStyle headlineSmall(
+          {Color? textColor, double? fontSize, FontWeight? fontWeight}) =>
+      Theme.of(this).textTheme.headlineSmall!.copyWith(
+          color: textColor, fontSize: fontSize, fontWeight: fontWeight);
+
+  TextStyle titleLarge(
+          {Color? textColor, double? fontSize, FontWeight? fontWeight}) =>
+      Theme.of(this).textTheme.titleLarge!.copyWith(
+          color: textColor, fontSize: fontSize, fontWeight: fontWeight);
+
+  TextStyle titleMedium(
+          {Color? textColor, double? fontSize, FontWeight? fontWeight}) =>
+      Theme.of(this).textTheme.titleMedium!.copyWith(
+          color: textColor, fontSize: fontSize, fontWeight: fontWeight);
+
+  TextStyle titleSmall(
+          {Color? textColor, double? fontSize, FontWeight? fontWeight}) =>
+      Theme.of(this).textTheme.titleSmall!.copyWith(
+          color: textColor, fontSize: fontSize, fontWeight: fontWeight);
+
+  TextStyle bodyLarge(
+          {Color? textColor, double? fontSize, FontWeight? fontWeight}) =>
+      Theme.of(this).textTheme.bodyLarge!.copyWith(
+          color: textColor, fontSize: fontSize, fontWeight: fontWeight);
+
+  TextStyle bodyMedium(
+          {Color? textColor, double? fontSize, FontWeight? fontWeight}) =>
+      Theme.of(this).textTheme.bodyMedium!.copyWith(
+          color: textColor, fontSize: fontSize, fontWeight: fontWeight);
+
+  TextStyle bodySmall(
+          {Color? textColor, double? fontSize, FontWeight? fontWeight}) =>
+      Theme.of(this).textTheme.bodySmall!.copyWith(
+          color: textColor, fontSize: fontSize, fontWeight: fontWeight);
+
+  TextStyle labelSmall(
+          {Color? textColor, double? fontSize, FontWeight? fontWeight}) =>
+      Theme.of(this).textTheme.labelSmall!.copyWith(
+          color: textColor, fontSize: fontSize, fontWeight: fontWeight);
+
+  TextStyle labelMedium(
+          {Color? textColor, double? fontSize, FontWeight? fontWeight}) =>
+      Theme.of(this).textTheme.labelMedium!.copyWith(
+          color: textColor, fontSize: fontSize, fontWeight: fontWeight);
+          
+  TextStyle labelLarge(
+          {Color? textColor, double? fontSize, FontWeight? fontWeight}) =>
+      Theme.of(this).textTheme.labelLarge!.copyWith(
+          color: textColor, fontSize: fontSize, fontWeight: fontWeight);
+}
+
+extension ThemeContext on BuildContext {
+  ThemeData get theme => Theme.of(this);
+  bool get isDarkTheme => Theme.of(this).brightness == Brightness.dark;
+  double get screenWidth => MediaQuery.sizeOf(this).width;
+  double get screenHeight => MediaQuery.sizeOf(this).height;
+}
+
+''';
