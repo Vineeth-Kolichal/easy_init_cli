@@ -22,7 +22,7 @@ class InitProject extends Command {
       if (arch == null) {
         var choice = UserInput.menu(options: [
           "TDD+Clean Architecture - BLoC - REST API - Feature wise",
-          "MVC - GetX - REST API - Layer wise"
+          // "MVC - GetX - REST API - Layer wise"
         ], promt: "Choose architecture pattern (example:1)");
         print("");
         blueLog("Initializing your project...");
@@ -37,14 +37,14 @@ class InitProject extends Command {
                   "build_runner freezed injectable_generator mocktail",
             );
             break;
-          case 2:
-            await _initArchitecture(
-              structure: MvcGetXStructure(),
-              dependencies: "dartz get dio intl",
-              devDependencies: "build_runner mocktail",
-              runBuildRunner: false,
-            );
-            break;
+          // case 2:
+          //   await _initArchitecture(
+          //     structure: MvcGetXStructure(),
+          //     dependencies: "dartz get dio intl",
+          //     devDependencies: "build_runner mocktail",
+          //     runBuildRunner: false,
+          //   );
+          //   break;
           default:
             print("Choice not found");
             break;

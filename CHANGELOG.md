@@ -1,3 +1,7 @@
+## 1.2.0
+  - Updations in clean architecture structure
+  - MVC architecture temporarly disabled for updations
+  - Bug fixes
 ## 1.1.2
   - Network exception handling file updated
 
