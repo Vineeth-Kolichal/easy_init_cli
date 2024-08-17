@@ -978,3 +978,196 @@ export 'theme_ext.dart';
 export './app_navigation_ext.dart';
 export './number_ext.dart';
 ''';
+
+const fcmHelperContent = '''
+import 'dart:convert';
+
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
+class FcmHelper {
+  ///<<<<<<<<<<<<<<<<TODO>>>>>>>>>>>>>>>>>>>>>>
+  /// //init notification
+  /// call initNotifications() method to initialize notifications
+  /// ```
+  /// Example:
+  /// Future<void> main()async{
+  ///   await initNotifications();
+  ///   runApp(MyApp());
+  /// }
+  /// ```
+  /// 
+  ///  Warning:
+  /// ----------------
+  ///  > This code is just basic setup, you may need to add more 
+  ///    functionalities as per your requirement.
+  ///  > FCM needs some setups in platform specific folders. You should do that
+  ///    before using this code.
+  ///  > The project should be connected with a firebase project and Cloud messaging
+  ///    should be enabled in firebase.
+  /// 
+
+  static FcmHelper instance = FcmHelper._internal();
+  factory FcmHelper() {
+    return instance;
+  }
+
+  final firebaseMessaging = FirebaseMessaging.instance;
+  final locaNotification = FlutterLocalNotificationsPlugin();
+
+  Future<void> initNotifications() async {
+    await firebaseMessaging.requestPermission();
+    await _initFcm();
+    await _initLocalNotifications();
+  }
+
+  Future<void> _initLocalNotifications() async {
+    //Android settings
+    const AndroidInitializationSettings androidInitializationSettings =
+        AndroidInitializationSettings(
+            '@mipmap/ic_launcher'); //TODO: change notification icon
+    //IOS settings
+    final DarwinInitializationSettings darwinInitializationSettings =
+        DarwinInitializationSettings(
+      onDidReceiveLocalNotification: (id, title, body, payload) {},
+    );
+    //Initialization of local notification settings
+    final InitializationSettings initializationSettings =
+        InitializationSettings(
+      android: androidInitializationSettings,
+      iOS: darwinInitializationSettings,
+    );
+
+    locaNotification.initialize(
+      initializationSettings,
+      onDidReceiveNotificationResponse: (details) {
+        final message = RemoteMessage.fromMap(jsonDecode(details.payload!));
+        _handleMessage(message);
+      },
+    );
+  }
+
+  Future<void> _initFcm() async {
+    //Sets the presentation options for Apple notifications when received in the foreground.
+    await FirebaseMessaging.instance
+        .setForegroundNotificationPresentationOptions(
+      alert: true,
+      badge: true,
+      sound: true,
+    );
+    //Showing notification when app in forground
+    FirebaseMessaging.onMessage.listen(_showForgroundNotification);
+
+    //Handle notification when app is opened from terminated state
+    FirebaseMessaging.instance.getInitialMessage().then(_handleMessage);
+
+    //Stream of event when open app from background
+    FirebaseMessaging.onMessageOpenedApp.listen(_handleMessage);
+  }
+
+  ///To get FCM token for the firebase push notifications
+  Future<String?> getFcmToken() async {
+    final token = await firebaseMessaging.getToken();
+    return token;
+  }
+
+  ///Handle messages
+  void _handleMessage(RemoteMessage? message) {
+    if (message != null) {
+      //TODO: write code for handle message - Navigate to specific screen if needed
+    }
+  }
+
+  ///handle forground message with local notifications
+  Future<void> _showForgroundNotification(RemoteMessage message) async {
+    const AndroidNotificationDetails androidNotificationDetails =
+        AndroidNotificationDetails(
+      'channel id',
+      'channel name',
+      channelDescription: 'channel description',
+      importance: Importance.max,
+      priority: Priority.high,
+      ticker: 'ticker',
+    );
+
+    const DarwinNotificationDetails darwinNotificationDetails =
+        DarwinNotificationDetails();
+
+    const NotificationDetails notificationDetails = NotificationDetails(
+      android: androidNotificationDetails,
+      iOS: darwinNotificationDetails,
+    );
+
+    locaNotification.show(
+      message.hashCode,
+      '\${message.notification?.title}',
+      '\${message.notification?.body}',
+      notificationDetails,
+      payload: jsonEncode(message.toMap()),
+    );
+  }
+
+  FcmHelper._internal();
+}
+''';
+
+const sharedPrefsHelper = '''
+import 'dart:async';
+
+import 'package:injectable/injectable.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+@lazySingleton
+class SharedPrefsHelper {
+  ///TODO: modify the code as per the need
+  ///<<<<<<<<<<<<<<<<TODO>>>>>>>>>>>>>>>>>>>>>>
+  /// //init notification
+  /// call initialize() method to initialize SharedPreferences instance
+  /// ```
+  /// Example:
+  /// Future<void> main()async{
+  ///   await SharedPrefsHelper.instance.initialize();
+  ///   runApp(MyApp());
+  /// }
+  /// ```
+  /// 
+  
+
+  late SharedPreferences sharedPreferences;
+  static SharedPrefsHelper instance = SharedPrefsHelper._internal();
+
+  factory SharedPrefsHelper() {
+    return instance;
+  }
+
+  Future<void> initialize() async {
+    sharedPreferences = await SharedPreferences.getInstance();
+  }
+
+  Future<bool> setAccessToken(String token) async {
+    return await sharedPreferences.setString(StorageKeys.accessToken, token);
+  }
+
+  String? getAccessToken() {
+    return sharedPreferences.getString(StorageKeys.accessToken);
+  }
+
+  bool isTokenAvailable() {
+    final access = getAccessToken();
+
+    return (access != null);
+  }
+
+  Future<void> clearAll() async {
+    await sharedPreferences.clear();
+  }
+
+  SharedPrefsHelper._internal();
+}
+
+class StorageKeys {
+  static const accessToken = "accessToken";
+}
+
+
+''';
