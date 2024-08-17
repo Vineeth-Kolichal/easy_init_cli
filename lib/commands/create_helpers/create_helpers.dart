@@ -15,7 +15,6 @@ class CreateHelpers extends Command {
 
   @override
   Future<void> excecute() async {
-    redLog("excecute working");
     final lib = Directory('lib');
     if (lib.existsSync()) {
       final arch = findCurrentArchitecture();
