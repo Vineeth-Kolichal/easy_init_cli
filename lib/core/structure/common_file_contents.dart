@@ -987,7 +987,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class FcmHelper {
   //TODO:!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  /// //init notification
+  ///  init notification:
   /// call initNotifications() method to initialize notifications
   /// ```
   /// Example:
@@ -999,11 +999,11 @@ class FcmHelper {
   /// 
   ///  Warning:
   /// ----------------
-  ///  > This code is just basic setup, you may need to add more 
+  ///  - This code is just basic setup, you may need to add more 
   ///    functionalities as per your requirement.
-  ///  > FCM needs some setups in platform specific folders. You should do that
+  ///  - FCM needs some setups in platform specific folders. You should do that
   ///    before using this code.
-  ///  > The project should be connected with a firebase project and Cloud messaging
+  ///  - The project should be connected with a firebase project and Cloud messaging
   ///    should be enabled in firebase.
   /// 
 
