@@ -29,6 +29,11 @@ class TddCleanStructure extends Structure {
             path: "lib/common/widgets",
           ),
         ),
+        CleanDirName.commonHelpers: Directory(
+          replaceAsExpected(
+            path: "lib/common/helpers",
+          ),
+        ),
         CleanDirName.core: Directory(
           replaceAsExpected(
             path: "lib/core",
@@ -49,9 +54,9 @@ class TddCleanStructure extends Structure {
             path: "lib/core/dependancy_injection",
           ),
         ),
-        CleanDirName.extentions: Directory(
+        CleanDirName.extensions: Directory(
           replaceAsExpected(
-            path: "lib/core/extentions",
+            path: "lib/core/extensions",
           ),
         ),
         CleanDirName.failures: Directory(
@@ -76,7 +81,7 @@ class TddCleanStructure extends Structure {
         ),
         CleanDirName.typography: Directory(
           replaceAsExpected(
-            path: "lib/core/typography",
+            path: "lib/core/theme/typography",
           ),
         ),
         CleanDirName.config: Directory(
@@ -183,11 +188,6 @@ class TddCleanStructure extends Structure {
         ),
         FileModel(
           directoryStructure[CleanDirName.commonWidgets]!.path,
-          "space.dart",
-          spaceContent,
-        ),
-        FileModel(
-          directoryStructure[CleanDirName.commonWidgets]!.path,
           "loading.dart",
           loadingContent,
         ),
@@ -195,6 +195,11 @@ class TddCleanStructure extends Structure {
           directoryStructure[CleanDirName.commonWidgets]!.path,
           "responsive.dart",
           responsiveContent,
+        ),
+        FileModel(
+          directoryStructure[CleanDirName.commonHelpers]!.path,
+          ".gitkeep",
+          '',
         ),
         FileModel(
           directoryStructure[CleanDirName.apiEndpoints]!.path,
@@ -217,26 +222,35 @@ class TddCleanStructure extends Structure {
           dioModuleContent,
         ),
         FileModel(
-          directoryStructure[CleanDirName.extentions]!.path,
+          directoryStructure[CleanDirName.extensions]!.path,
           "app_navigation_ext.dart",
           navigationExtContent,
         ),
         FileModel(
-          directoryStructure[CleanDirName.extentions]!.path,
+          directoryStructure[CleanDirName.extensions]!.path,
           "date_ext.dart",
           dateExtContent,
         ),
         FileModel(
-          directoryStructure[CleanDirName.extentions]!.path,
+          directoryStructure[CleanDirName.extensions]!.path,
           "string_ext.dart",
           stringExtContent,
         ),
         FileModel(
-          directoryStructure[CleanDirName.extentions]!.path,
+          directoryStructure[CleanDirName.extensions]!.path,
           "theme_ext.dart",
           themeExtContent,
         ),
-
+        FileModel(
+          directoryStructure[CleanDirName.extensions]!.path,
+          "number_ext.dart",
+          numberExtContent,
+        ),
+        FileModel(
+          directoryStructure[CleanDirName.extensions]!.path,
+          "extensions.dart",
+          extensionsContent,
+        ),
         FileModel(
           directoryStructure[CleanDirName.failures]!.path,
           "failures.dart",
@@ -260,12 +274,32 @@ class TddCleanStructure extends Structure {
         FileModel(
           directoryStructure[CleanDirName.theme]!.path,
           "theme.dart",
-          themeContent,
+          theme,
         ),
         FileModel(
           directoryStructure[CleanDirName.theme]!.path,
-          "colors.dart",
+          "app_colors.dart",
           colorsContent,
+        ),
+        FileModel(
+          directoryStructure[CleanDirName.theme]!.path,
+          "app_theme.dart",
+          themeContent,
+        ),
+        FileModel(
+          directoryStructure[CleanDirName.typography]!.path,
+          "typography.dart",
+          typography,
+        ),
+        FileModel(
+          directoryStructure[CleanDirName.typography]!.path,
+          "app_font_weight.dart",
+          appFontWeight,
+        ),
+        FileModel(
+          directoryStructure[CleanDirName.typography]!.path,
+          "ui_text_style.dart",
+          textStyles,
         ),
         FileModel(
           directoryStructure[CleanDirName.features]!.path,
@@ -431,17 +465,18 @@ class CleanDirName {
   //configurations
   static String common = "common";
   static String commonWidgets = "widgets";
+  static String commonHelpers = "helpers";
   static String features = "features";
   static String core = "core";
   static String apiEndpoints = "apiEndpoints";
   static String baseUsecase = "base_usecase";
   static String dependancyInjection = "dependancy_injection";
-  static String extentions = "extentions";
+  static String extensions = "extensions";
   static String failures = "failures";
   static String network = "network";
   static String routes = "routes";
   static String theme = "theme";
-  static String typography = "theme";
+  static String typography = "typography";
   static String config = "config";
   static String modules = "modules";
   //features

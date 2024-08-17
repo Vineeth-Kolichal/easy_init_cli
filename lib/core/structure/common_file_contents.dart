@@ -1,40 +1,227 @@
 String themeContent = '''
 import 'package:flutter/material.dart';
 
+import 'theme.dart';
+
 class AppTheme {
   static ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
     useMaterial3: true,
-    textTheme: getTextTheme(isDark: false),
+    //Text theme
+    textTheme: uiTextTheme.apply(
+      bodyColor: AppColors.black,
+      displayColor: AppColors.black,
+      decorationColor: AppColors.black,
+    ),
   );
 
   static ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
     useMaterial3: true,
-    textTheme: getTextTheme(isDark: true),
+    //Text theme
+    textTheme: uiTextTheme.apply(
+      bodyColor: AppColors.white,
+      displayColor: AppColors.white,
+      decorationColor: AppColors.white,
+    ),
+  );
+
+  //Text theme
+  static final uiTextTheme = TextTheme(
+    displayLarge: UITextStyle.headline1,
+    displayMedium: UITextStyle.headline2,
+    displaySmall: UITextStyle.headline3,
+    headlineMedium: UITextStyle.headline4,
+    headlineSmall: UITextStyle.headline5,
+    titleLarge: UITextStyle.headline6,
+    titleMedium: UITextStyle.subtitle1,
+    titleSmall: UITextStyle.subtitle2,
+    bodyLarge: UITextStyle.bodyText1,
+    bodyMedium: UITextStyle.bodyText2,
+    labelLarge: UITextStyle.button,
+    bodySmall: UITextStyle.caption,
+    labelSmall: UITextStyle.overline,
   );
 }
 
-TextTheme getTextTheme({required bool isDark}) {
-  TextTheme lightTextTheme = const TextTheme();
-  TextTheme darkTextTheme = const TextTheme();
-
-  if (isDark) {
-    return darkTextTheme;
-  } else {
-    return lightTextTheme;
-  }
-}
 
 ''';
 String colorsContent = '''
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const blackColor = Colors.black;
-  static const whiteColor = Colors.white;
+  static const black = Colors.black;
+  static const white = Colors.white;
 }
 
+
+''';
+const appFontWeight = '''
+import 'package:flutter/widgets.dart';
+
+/// Namespace for Default App Font Weights
+abstract class AppFontWeight {
+  static const FontWeight black = FontWeight.w900;
+
+  static const FontWeight extraBold = FontWeight.w800;
+
+  static const FontWeight bold = FontWeight.w700;
+
+  static const FontWeight semiBold = FontWeight.w600;
+
+  static const FontWeight medium = FontWeight.w500;
+
+  static const FontWeight regular = FontWeight.w400;
+
+  static const FontWeight light = FontWeight.w300;
+
+  static const FontWeight extraLight = FontWeight.w200;
+
+  static const FontWeight thin = FontWeight.w100;
+}
+
+''';
+
+const textStyles = '''
+import 'package:flutter/material.dart';
+
+import 'app_font_weight.dart';
+
+/// UI Text Style Definitions
+abstract class UITextStyle {
+  static const _baseTextStyle = TextStyle(
+    fontWeight: AppFontWeight.regular,
+    // fontFamily: 'Poppins',
+    decoration: TextDecoration.none,
+    textBaseline: TextBaseline.alphabetic,
+  );
+
+  /// Display 2 Text Style
+  static final TextStyle display2 = _baseTextStyle.copyWith(
+    fontSize: 57,
+    fontWeight: AppFontWeight.bold,
+    height: 1.12,
+    letterSpacing: -0.25,
+  );
+
+  /// Display 3 Text Style
+  static final TextStyle display3 = _baseTextStyle.copyWith(
+    fontSize: 45,
+    fontWeight: AppFontWeight.bold,
+    height: 1.15,
+  );
+
+  /// Headline 1 Text Style
+  static final TextStyle headline1 = _baseTextStyle.copyWith(
+    fontSize: 36,
+    fontWeight: AppFontWeight.bold,
+    height: 1.22,
+  );
+
+  /// Headline 2 Text Style
+  static final TextStyle headline2 = _baseTextStyle.copyWith(
+    fontSize: 32,
+    fontWeight: AppFontWeight.bold,
+    height: 1.25,
+  );
+
+  /// Headline 3 Text Style
+  static final TextStyle headline3 = _baseTextStyle.copyWith(
+    fontSize: 28,
+    fontWeight: AppFontWeight.semiBold,
+    height: 1.28,
+  );
+
+  /// Headline 4 Text Style
+  static final TextStyle headline4 = _baseTextStyle.copyWith(
+    fontSize: 24,
+    fontWeight: AppFontWeight.semiBold,
+    height: 1.33,
+  );
+
+  /// Headline 5 Text Style
+  static final TextStyle headline5 = _baseTextStyle.copyWith(
+    fontSize: 22,
+    fontWeight: AppFontWeight.regular,
+    height: 1.27,
+  );
+
+  /// Headline 6 Text Style
+  static final TextStyle headline6 = _baseTextStyle.copyWith(
+    fontSize: 18,
+    fontWeight: AppFontWeight.semiBold,
+    height: 1.33,
+  );
+
+  /// Subtitle 1 Text Style
+  static final TextStyle subtitle1 = _baseTextStyle.copyWith(
+    fontSize: 16,
+    height: 1.5,
+    letterSpacing: 0.1,
+  );
+
+  /// Subtitle 2 Text Style
+  static final TextStyle subtitle2 = _baseTextStyle.copyWith(
+    fontSize: 14,
+    height: 1.42,
+    letterSpacing: 0.1,
+  );
+
+  /// Body Text 1 Text Style
+  static final TextStyle bodyText1 = _baseTextStyle.copyWith(
+    fontSize: 16,
+    height: 1.5,
+    letterSpacing: 0.5,
+  );
+
+  /// Body Text 2 Text Style (the default)
+  static final TextStyle bodyText2 = _baseTextStyle.copyWith(
+    fontSize: 14,
+    height: 1.42,
+    letterSpacing: 0.25,
+  );
+
+  /// Caption Text Style
+  static final TextStyle caption = _baseTextStyle.copyWith(
+    fontSize: 12,
+    height: 1.33,
+    letterSpacing: 0.4,
+  );
+
+  /// Button Text Style
+  static final TextStyle button = _baseTextStyle.copyWith(
+    fontSize: 16,
+    height: 1.42,
+    letterSpacing: 0.1,
+  );
+
+  /// Overline Text Style
+  static final TextStyle overline = _baseTextStyle.copyWith(
+    fontSize: 12,
+    height: 1.33,
+    letterSpacing: 0.5,
+  );
+
+  /// Label Small Text Style
+  static final TextStyle labelSmall = _baseTextStyle.copyWith(
+    fontSize: 11,
+    height: 1.45,
+    letterSpacing: 0.5,
+  );
+}
+
+''';
+
+const typography = '''
+export 'app_font_weight.dart';
+export 'ui_text_style.dart';
+
+''';
+
+const theme = '''
+export './app_colors.dart';
+export './typography/typography.dart';
+export './app_theme.dart';
 ''';
 
 String spaceContent = '''
@@ -56,8 +243,8 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../core/theme/colors.dart';
-import 'space.dart';
+import '../../core/extensions/extensions.dart';
+import '../../core/theme/app_colors.dart';
 
 ///Example:
 ///-------------------------
@@ -94,15 +281,15 @@ class Loading extends StatelessWidget {
         child,
         if (isLoading)
           Container(
-            color: AppColors.blackColor.withOpacity(0.3),
+            color: AppColors.black.withOpacity(0.3),
             child: Center(
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 height: 70,
                 decoration: BoxDecoration(
                   color: theme.brightness == Brightness.dark
-                      ? AppColors.blackColor
-                      : AppColors.whiteColor,
+                      ? AppColors.black
+                      : AppColors.white,
                   borderRadius: BorderRadius.circular(7),
                 ),
                 child: Row(
@@ -115,7 +302,7 @@ class Loading extends StatelessWidget {
                         : const CircularProgressIndicator(
                             strokeWidth: 2,
                           ),
-                    Space.x(15),
+                    15.horizontalSpace,
                     Text(
                       "Please Wait...",
                       style: theme.textTheme.labelLarge,
@@ -590,79 +777,109 @@ extension TextThemeExt on BuildContext {
   TextTheme textTheme() => Theme.of(this).textTheme;
 
   TextStyle displayLarge(
-          {Color? textColor, double? fontSize, FontWeight? fontWeight}) =>
-      Theme.of(this).textTheme.displayLarge!.copyWith(
-          color: textColor, fontSize: fontSize, fontWeight: fontWeight);
+          {Color? color, double? fontSize, FontWeight? fontWeight}) =>
+      Theme.of(this)
+          .textTheme
+          .displayLarge!
+          .copyWith(color: color, fontSize: fontSize, fontWeight: fontWeight);
 
   TextStyle displayMedium(
-          {Color? textColor, double? fontSize, FontWeight? fontWeight}) =>
-      Theme.of(this).textTheme.displayMedium!.copyWith(
-          color: textColor, fontSize: fontSize, fontWeight: fontWeight);
+          {Color? color, double? fontSize, FontWeight? fontWeight}) =>
+      Theme.of(this)
+          .textTheme
+          .displayMedium!
+          .copyWith(color: color, fontSize: fontSize, fontWeight: fontWeight);
 
   TextStyle displaySmall(
-          {Color? textColor, double? fontSize, FontWeight? fontWeight}) =>
-      Theme.of(this).textTheme.displaySmall!.copyWith(
-          color: textColor, fontSize: fontSize, fontWeight: fontWeight);
+          {Color? color, double? fontSize, FontWeight? fontWeight}) =>
+      Theme.of(this)
+          .textTheme
+          .displaySmall!
+          .copyWith(color: color, fontSize: fontSize, fontWeight: fontWeight);
 
   TextStyle headlineLarge(
-          {Color? textColor, double? fontSize, FontWeight? fontWeight}) =>
-      Theme.of(this).textTheme.headlineLarge!.copyWith(
-          color: textColor, fontSize: fontSize, fontWeight: fontWeight);
+          {Color? color, double? fontSize, FontWeight? fontWeight}) =>
+      Theme.of(this)
+          .textTheme
+          .headlineLarge!
+          .copyWith(color: color, fontSize: fontSize, fontWeight: fontWeight);
 
   TextStyle headlineMedium(
-          {Color? textColor, double? fontSize, FontWeight? fontWeight}) =>
-      Theme.of(this).textTheme.headlineMedium!.copyWith(
-          color: textColor, fontSize: fontSize, fontWeight: fontWeight);
+          {Color? color, double? fontSize, FontWeight? fontWeight}) =>
+      Theme.of(this)
+          .textTheme
+          .headlineMedium!
+          .copyWith(color: color, fontSize: fontSize, fontWeight: fontWeight);
 
   TextStyle headlineSmall(
-          {Color? textColor, double? fontSize, FontWeight? fontWeight}) =>
-      Theme.of(this).textTheme.headlineSmall!.copyWith(
-          color: textColor, fontSize: fontSize, fontWeight: fontWeight);
+          {Color? color, double? fontSize, FontWeight? fontWeight}) =>
+      Theme.of(this)
+          .textTheme
+          .headlineSmall!
+          .copyWith(color: color, fontSize: fontSize, fontWeight: fontWeight);
 
   TextStyle titleLarge(
-          {Color? textColor, double? fontSize, FontWeight? fontWeight}) =>
-      Theme.of(this).textTheme.titleLarge!.copyWith(
-          color: textColor, fontSize: fontSize, fontWeight: fontWeight);
+          {Color? color, double? fontSize, FontWeight? fontWeight}) =>
+      Theme.of(this)
+          .textTheme
+          .titleLarge!
+          .copyWith(color: color, fontSize: fontSize, fontWeight: fontWeight);
 
   TextStyle titleMedium(
-          {Color? textColor, double? fontSize, FontWeight? fontWeight}) =>
-      Theme.of(this).textTheme.titleMedium!.copyWith(
-          color: textColor, fontSize: fontSize, fontWeight: fontWeight);
+          {Color? color, double? fontSize, FontWeight? fontWeight}) =>
+      Theme.of(this)
+          .textTheme
+          .titleMedium!
+          .copyWith(color: color, fontSize: fontSize, fontWeight: fontWeight);
 
   TextStyle titleSmall(
-          {Color? textColor, double? fontSize, FontWeight? fontWeight}) =>
-      Theme.of(this).textTheme.titleSmall!.copyWith(
-          color: textColor, fontSize: fontSize, fontWeight: fontWeight);
+          {Color? color, double? fontSize, FontWeight? fontWeight}) =>
+      Theme.of(this)
+          .textTheme
+          .titleSmall!
+          .copyWith(color: color, fontSize: fontSize, fontWeight: fontWeight);
 
   TextStyle bodyLarge(
-          {Color? textColor, double? fontSize, FontWeight? fontWeight}) =>
-      Theme.of(this).textTheme.bodyLarge!.copyWith(
-          color: textColor, fontSize: fontSize, fontWeight: fontWeight);
+          {Color? color, double? fontSize, FontWeight? fontWeight}) =>
+      Theme.of(this)
+          .textTheme
+          .bodyLarge!
+          .copyWith(color: color, fontSize: fontSize, fontWeight: fontWeight);
 
   TextStyle bodyMedium(
-          {Color? textColor, double? fontSize, FontWeight? fontWeight}) =>
-      Theme.of(this).textTheme.bodyMedium!.copyWith(
-          color: textColor, fontSize: fontSize, fontWeight: fontWeight);
+          {Color? color, double? fontSize, FontWeight? fontWeight}) =>
+      Theme.of(this)
+          .textTheme
+          .bodyMedium!
+          .copyWith(color: color, fontSize: fontSize, fontWeight: fontWeight);
 
   TextStyle bodySmall(
-          {Color? textColor, double? fontSize, FontWeight? fontWeight}) =>
-      Theme.of(this).textTheme.bodySmall!.copyWith(
-          color: textColor, fontSize: fontSize, fontWeight: fontWeight);
+          {Color? color, double? fontSize, FontWeight? fontWeight}) =>
+      Theme.of(this)
+          .textTheme
+          .bodySmall!
+          .copyWith(color: color, fontSize: fontSize, fontWeight: fontWeight);
 
   TextStyle labelSmall(
-          {Color? textColor, double? fontSize, FontWeight? fontWeight}) =>
-      Theme.of(this).textTheme.labelSmall!.copyWith(
-          color: textColor, fontSize: fontSize, fontWeight: fontWeight);
+          {Color? color, double? fontSize, FontWeight? fontWeight}) =>
+      Theme.of(this)
+          .textTheme
+          .labelSmall!
+          .copyWith(color: color, fontSize: fontSize, fontWeight: fontWeight);
 
   TextStyle labelMedium(
-          {Color? textColor, double? fontSize, FontWeight? fontWeight}) =>
-      Theme.of(this).textTheme.labelMedium!.copyWith(
-          color: textColor, fontSize: fontSize, fontWeight: fontWeight);
-          
+          {Color? color, double? fontSize, FontWeight? fontWeight}) =>
+      Theme.of(this)
+          .textTheme
+          .labelMedium!
+          .copyWith(color: color, fontSize: fontSize, fontWeight: fontWeight);
+
   TextStyle labelLarge(
-          {Color? textColor, double? fontSize, FontWeight? fontWeight}) =>
-      Theme.of(this).textTheme.labelLarge!.copyWith(
-          color: textColor, fontSize: fontSize, fontWeight: fontWeight);
+          {Color? color, double? fontSize, FontWeight? fontWeight}) =>
+      Theme.of(this)
+          .textTheme
+          .labelLarge!
+          .copyWith(color: color, fontSize: fontSize, fontWeight: fontWeight);
 }
 
 extension ThemeContext on BuildContext {
@@ -672,4 +889,27 @@ extension ThemeContext on BuildContext {
   double get screenHeight => MediaQuery.sizeOf(this).height;
 }
 
+''';
+
+const numberExtContent = '''
+import 'package:flutter/material.dart';
+
+extension SpaceExt on num {
+  SizedBox get verticalSpace => SizedBox(
+        height: toDouble(),
+      );
+  SizedBox get horizontalSpace => SizedBox(
+        width: toDouble(),
+      );
+}
+
+
+''';
+
+const extensionsContent = '''
+export './date_ext.dart';
+export './string_ext.dart';
+export 'theme_ext.dart';
+export './app_navigation_ext.dart';
+export './number_ext.dart';
 ''';

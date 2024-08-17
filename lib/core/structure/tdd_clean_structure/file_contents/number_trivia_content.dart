@@ -241,9 +241,9 @@ const triviaScreen = '''
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/extensions/extensions.dart';
 import '../../../../common/widgets/loading.dart';
-import '../../../../common/widgets/space.dart'; // Importing custom widget for spacing
-import '../../../../core/theme/colors.dart'; // Importing custom theme colors
+import '../../../../core/theme/app_colors.dart'; // Importing custom theme colors
 import '../blocs/number_trivia_bloc/number_trivia_bloc.dart'; // Importing the NumberTriviaBloc
 
 /// to validate form [_formKey] is used
@@ -256,8 +256,8 @@ class NumberTriviaScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     /// The [theme] variable holds the current theme information.
     /// This allows you to implement a UI that adapts to light and dark themes.
-    ThemeData theme = Theme.of(context); // Getting current theme data
-    Size size = MediaQuery.of(context).size; // Getting screen size
+    // ThemeData theme = Theme.of(context); // Getting current theme data
+    // Size size = MediaQuery.of(context).size; // Getting screen size
     NumberTriviaBloc triviaBloc = context.read<
         NumberTriviaBloc>(); // Getting instance of NumberTriviaBloc using context
 
@@ -287,11 +287,11 @@ class NumberTriviaScreen extends StatelessWidget {
                     Expanded(
                       child: Center(
                         child: Container(
-                          width: size.width,
+                          width: context.screenWidth,
                           constraints: const BoxConstraints(minHeight: 40),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            color: theme.brightness == Brightness.dark
+                            color: context.isDarkTheme
                                 ? const Color.fromARGB(255, 22, 22, 22)
                                 : const Color.fromARGB(255, 244, 244,
                                     244), // Setting container background color
@@ -321,7 +321,7 @@ class NumberTriviaScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Space.y(10),
+                    10.verticalSpace,
                     TextFormField(
                       controller: triviaBloc
                           .numberController, // Binding the TextEditingController from bloc
@@ -343,13 +343,15 @@ class NumberTriviaScreen extends StatelessWidget {
                         return null;
                       },
                     ),
-                    Space.y(10), // Adding vertical space
+                    // Adding vertical space
+                    10.verticalSpace,
+
                     SizedBox(
-                      width: size.width,
+                      width: context.screenWidth,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors
-                              .blackColor, // Setting button background color
+                              .black, // Setting button background color
                         ),
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
@@ -359,14 +361,11 @@ class NumberTriviaScreen extends StatelessWidget {
                         },
                         child: Text(
                           "Get Trivia", // Button text
-                          style: theme.textTheme.labelLarge?.copyWith(
-                            color: AppColors
-                                .whiteColor, // Setting button text color
-                          ),
+                          style: context.labelLarge(color: AppColors.white),
                         ),
                       ),
                     ),
-                    Space.y(10), // Adding vertical space
+                    10.verticalSpace // Adding vertical space
                   ],
                 ),
               ),
