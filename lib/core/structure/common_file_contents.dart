@@ -887,6 +887,15 @@ extension ThemeContext on BuildContext {
   bool get isDarkTheme => Theme.of(this).brightness == Brightness.dark;
   double get screenWidth => MediaQuery.sizeOf(this).width;
   double get screenHeight => MediaQuery.sizeOf(this).height;
+   Color setTemeBasedColor(
+      {required Color darkThemeColor, required Color lightThemeColor}) {
+    bool isDarkTheme = Theme.of(this).brightness == Brightness.dark;
+    if (isDarkTheme) {
+      return darkThemeColor;
+    } else {
+      return lightThemeColor;
+    }
+  }
 }
 
 ''';
