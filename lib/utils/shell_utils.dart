@@ -19,9 +19,11 @@ class ShellUtils with Logging {
   }
 
   Future<void> addDependencies(
-      {required String dependencies, required String devDependencies}) async {
+      {required String dependencies, String? devDependencies}) async {
     await run("flutter pub add $dependencies");
-    await run("flutter pub add --dev $devDependencies");
+    if (devDependencies != null) {
+      await run("flutter pub add --dev $devDependencies");
+    }
   }
 
   Future<void> pubGet() async {

@@ -31,7 +31,7 @@ Use this command to initialize your project with a well-structured architectural
 
 ![Screenshot from 2024-04-11 15-37-44](https://github.com/Vineeth-Kolichal/easy_init_cli/assets/92266542/b4fd61a6-5c54-4af6-8b48-e22b136f315f)
 
-Currently two architecture pattern is available in ```easy_init_cli```
+Currently only one architecture pattern is available in ```easy_init_cli```
 
 1. #### TDD + Clean Architecture
 The folder structure of TDD + Clean Architecture looks like this:
@@ -43,11 +43,11 @@ To learn more about TDD + Clean architecture refer [Reso Coder](https://resocode
 
 
 
-2. #### MVC
+<!-- 2. #### MVC
 The folder structure of MVC Architecture looks like this:
 
 
-![Screenshot from 2024-04-11 15-28-09](https://github.com/Vineeth-Kolichal/easy_init_cli/assets/92266542/1c1b9bdf-7cf5-46cf-9668-0cf64ace629f)
+![Screenshot from 2024-04-11 15-28-09](https://github.com/Vineeth-Kolichal/easy_init_cli/assets/92266542/1c1b9bdf-7cf5-46cf-9668-0cf64ace629f) -->
 
 
 

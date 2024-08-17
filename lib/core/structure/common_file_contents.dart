@@ -8,22 +8,18 @@ class AppTheme {
     brightness: Brightness.light,
     useMaterial3: true,
     //Text theme
-    textTheme: uiTextTheme.apply(
-      bodyColor: AppColors.black,
-      displayColor: AppColors.black,
-      decorationColor: AppColors.black,
-    ),
+    textTheme: uiTextTheme,
+    //Color extension
+    extensions: const <ThemeExtension<dynamic>>[AppColors.light],
   );
 
   static ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
     useMaterial3: true,
     //Text theme
-    textTheme: uiTextTheme.apply(
-      bodyColor: AppColors.white,
-      displayColor: AppColors.white,
-      decorationColor: AppColors.white,
-    ),
+    textTheme: uiTextTheme,
+    //color extension
+    extensions: const <ThemeExtension<dynamic>>[AppColors.light],
   );
 
   //Text theme
@@ -44,16 +40,50 @@ class AppTheme {
   );
 }
 
-
 ''';
 String colorsContent = '''
 import 'package:flutter/material.dart';
 
-class AppColors {
-  static const black = Colors.black;
-  static const white = Colors.white;
-}
+@immutable
+class AppColors extends ThemeExtension<AppColors> {
+  final Color black = Colors.black;
+  final Color white = Colors.white;
+  final Color? primaryColor;
+  final Color? secondaryColor;
 
+  const AppColors({
+    this.primaryColor,
+    this.secondaryColor,
+  });
+
+  @override
+  ThemeExtension<AppColors> copyWith({
+    Color? primaryColor,
+    Color? secondaryColor,
+  }) {
+    return AppColors(
+      primaryColor: primaryColor ?? this.primaryColor,
+      secondaryColor: secondaryColor ?? this.secondaryColor,
+    );
+  }
+
+  @override
+  ThemeExtension<AppColors> lerp(
+      covariant ThemeExtension<AppColors>? other, double t) {
+    if (other is! AppColors) return this;
+    return AppColors(
+      primaryColor: Color.lerp(primaryColor, other.primaryColor, t),
+      secondaryColor: Color.lerp(secondaryColor, other.secondaryColor, t),
+    );
+  }
+
+  static const AppColors light = AppColors(
+    primaryColor: Colors.purple,
+  );
+  static const AppColors dark = AppColors(
+    primaryColor: Colors.green,
+  );
+}
 
 ''';
 const appFontWeight = '''
@@ -246,25 +276,26 @@ import 'package:flutter/material.dart';
 import '../../core/extensions/extensions.dart';
 import '../../core/theme/app_colors.dart';
 
-///Example:
-///-------------------------
-/// class HomeScreen extends StatelessWidget {
-///   const HomeScreen({super.key});
-///   @override
-///   Widget build(BuildContext context) {
-///     return Scaffold(
-///       appBar: AppBar(
-///         title: const Text("Home Screen"),
-///       ),
-///       body: const Loading(
-///         isLoading: true // your loding contidtion here
-///         child: MyUI(), //code for your screen UI,
-///       ),
-///     );
-///   }
-/// }
-
 class Loading extends StatelessWidget {
+  ///Example:
+  ///-------------------------
+  ///```
+  /// class HomeScreen extends StatelessWidget {
+  ///   const HomeScreen({super.key});
+  ///   @override
+  ///   Widget build(BuildContext context) {
+  ///     return Scaffold(
+  ///       appBar: AppBar(
+  ///         title: const Text("Home Screen"),
+  ///       ),
+  ///       body: const Loading(
+  ///         isLoading: true // your loding contidtion here
+  ///         child: MyUI(), //code for your screen UI,
+  ///       ),
+  ///     );
+  ///   }
+  /// }
+  /// ```
   const Loading({
     super.key,
     required this.child,
@@ -275,21 +306,23 @@ class Loading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ThemeData theme = Theme.of(context);
+    AppColors? appColors = context.appColors;
+
     return Stack(
       children: [
         child,
         if (isLoading)
           Container(
-            color: AppColors.black.withOpacity(0.3),
+            color: appColors?.black.withOpacity(0.3),
             child: Center(
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 height: 70,
                 decoration: BoxDecoration(
-                  color: theme.brightness == Brightness.dark
-                      ? AppColors.black
-                      : AppColors.white,
+                  color: context.setThemeBasedColor(
+                    darkThemeColor: appColors?.black,
+                    lightThemeColor: appColors?.white,
+                  ),
                   borderRadius: BorderRadius.circular(7),
                 ),
                 child: Row(
@@ -305,7 +338,7 @@ class Loading extends StatelessWidget {
                     15.horizontalSpace,
                     Text(
                       "Please Wait...",
-                      style: theme.textTheme.labelLarge,
+                      style: context.labelLarge(),
                     )
                   ],
                 ),
@@ -316,7 +349,6 @@ class Loading extends StatelessWidget {
     );
   }
 }
-
 
 ''';
 
@@ -771,6 +803,8 @@ extension StringExt on String {
 const themeExtContent = '''
 import 'package:flutter/material.dart';
 
+import '../theme/app_colors.dart';
+
 /// [TextThemeExt] - A custom extension on `BuildContext` to access
 /// TextStyle easily with build context
 extension TextThemeExt on BuildContext {
@@ -882,13 +916,32 @@ extension TextThemeExt on BuildContext {
           .copyWith(color: color, fontSize: fontSize, fontWeight: fontWeight);
 }
 
+
 extension ThemeContext on BuildContext {
   ThemeData get theme => Theme.of(this);
   bool get isDarkTheme => Theme.of(this).brightness == Brightness.dark;
   double get screenWidth => MediaQuery.sizeOf(this).width;
   double get screenHeight => MediaQuery.sizeOf(this).height;
-   Color setTemeBasedColor(
-      {required Color darkThemeColor, required Color lightThemeColor}) {
+
+  ///
+  ///[setThemeBasedColor] accepts two colors as parameters [darkThemeColor]
+  ///and [lightThemeColor], if current app theme is Dark then [darkThemeColor]
+  ///will return else [lightThemeColor] will return.
+  ///```
+  /// //Example
+  /// ----------
+  /// Container(
+  ///   height:100,
+  ///   width:100,
+  ///   color:context.setThemeBasedColor(
+  ///     darkThemeColor:Colors.white,
+  ///     lightThemeColor:Colors.black,
+  ///    ),
+  ///   ),
+  ///  // The color of container will be black if theme is Dark else white.
+  /// ```
+  Color? setThemeBasedColor(
+      {required Color? darkThemeColor, required Color? lightThemeColor}) {
     bool isDarkTheme = Theme.of(this).brightness == Brightness.dark;
     if (isDarkTheme) {
       return darkThemeColor;
@@ -896,7 +949,10 @@ extension ThemeContext on BuildContext {
       return lightThemeColor;
     }
   }
+
+  AppColors? get appColors => Theme.of(this).extension<AppColors>();
 }
+
 
 ''';
 

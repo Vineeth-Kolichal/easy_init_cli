@@ -254,13 +254,9 @@ class NumberTriviaScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    /// The [theme] variable holds the current theme information.
-    /// This allows you to implement a UI that adapts to light and dark themes.
-    // ThemeData theme = Theme.of(context); // Getting current theme data
-    // Size size = MediaQuery.of(context).size; // Getting screen size
-    NumberTriviaBloc triviaBloc = context.read<
-        NumberTriviaBloc>(); // Getting instance of NumberTriviaBloc using context
-
+    /// Getting instance of NumberTriviaBloc using context
+    NumberTriviaBloc triviaBloc = context.read<NumberTriviaBloc>();
+    AppColors? appColors = context.appColors;
     return Scaffold(
       appBar: AppBar(
         title: const Text("Number Trivia by Easy Init"), // AppBar title
@@ -291,10 +287,12 @@ class NumberTriviaScreen extends StatelessWidget {
                           constraints: const BoxConstraints(minHeight: 40),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            color: context.isDarkTheme
-                                ? const Color.fromARGB(255, 22, 22, 22)
-                                : const Color.fromARGB(255, 244, 244,
-                                    244), // Setting container background color
+                            color: context.setThemeBasedColor(
+                              darkThemeColor:
+                                  const Color.fromARGB(255, 22, 22, 22),
+                              lightThemeColor:
+                                  const Color.fromARGB(255, 244, 244, 244),
+                            ), // Setting container background color
                           ),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -328,6 +326,7 @@ class NumberTriviaScreen extends StatelessWidget {
                       keyboardType:
                           TextInputType.number, // Allowing only number input
                       decoration: InputDecoration(
+                        hintText: "Enter a number",
                         contentPadding: const EdgeInsetsDirectional.symmetric(
                           horizontal: 15,
                           vertical: 5,
@@ -347,11 +346,15 @@ class NumberTriviaScreen extends StatelessWidget {
                     10.verticalSpace,
 
                     SizedBox(
+                      height: 44,
                       width: context.screenWidth,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors
-                              .black, // Setting button background color
+                          // Setting button background color
+                          backgroundColor: context.setThemeBasedColor(
+                            darkThemeColor: appColors?.white,
+                            lightThemeColor: appColors?.black,
+                          ),
                         ),
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
@@ -361,7 +364,12 @@ class NumberTriviaScreen extends StatelessWidget {
                         },
                         child: Text(
                           "Get Trivia", // Button text
-                          style: context.labelLarge(color: AppColors.white),
+                          style: context.labelLarge(
+                            color: context.setThemeBasedColor(
+                              darkThemeColor: appColors?.black,
+                              lightThemeColor: appColors?.white,
+                            ),
+                          ),
                         ),
                       ),
                     ),
