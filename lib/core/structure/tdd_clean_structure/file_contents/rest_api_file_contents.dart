@@ -2,37 +2,42 @@ String appContentRest = '''
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'core/dependancy_injection/config/configure_injection.dart'; // Importing dependency injection configuration
-import 'core/routes/app_routes.dart'; // Importing app routes
-import 'core/theme/theme.dart'; // Importing app theme
-import 'features/number_trivia/presentation/blocs/number_trivia_bloc/number_trivia_bloc.dart'; // Importing NumberTriviaBloc
+import 'core/dependancy_injection/config/configure_injection.dart';
+import 'core/routes/app_routes.dart';
+import 'core/theme/theme.dart';
+import 'features/number_trivia/presentation/blocs/number_trivia_bloc/number_trivia_bloc.dart';
 
 class MyApp extends StatelessWidget {
-  const MyApp(
-      {super.key,
-      required this.appRoutes}); // Constructor with required appRoutes parameter
-  final AppRoutes appRoutes; // AppRoutes object
+  const MyApp({
+    super.key,
+    required this.appRoutes,
+  });
+  final AppRoutes appRoutes; 
 
   @override
   Widget build(BuildContext context) {
+    //Text styles
+    TextTheme appTextTheme = AppTextStyles.getTextTheme();
+    //Theme
+    AppTheme theme = AppTheme(appTextTheme);
     return MultiBlocProvider(
       // Providing multiple blocs at the root of the widget tree
       providers: [
         BlocProvider(
-          create: (context) => getIt<NumberTriviaBloc>(), // Creating and providing NumberTriviaBloc using dependency injection
+          create: (context) => getIt<
+              NumberTriviaBloc>(), // Creating and providing NumberTriviaBloc using dependency injection
         )
       ],
       child: MaterialApp(
         title: "App title", // App title
         themeMode: ThemeMode.system, // theme is based on system setting
-        theme: AppTheme.lightTheme, // Setting light theme
-        darkTheme: AppTheme.darkTheme, // Setting dark theme
+        theme: theme.light(), // Setting light theme
+        darkTheme: theme.dark(), // Setting dark theme
         onGenerateRoute: appRoutes.onGenerateRoute, // Handling route generation
       ),
     );
   }
 }
-
 
 ''';
 

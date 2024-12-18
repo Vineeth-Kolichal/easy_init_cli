@@ -115,7 +115,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: "App title", // App title
-        themeMode: ThemeMode.dark, // theme is based on system setting
+        themeMode: ThemeMode.system, // theme is based on system setting
         theme: theme.light(), // Setting light theme
         darkTheme: theme.dark(), // Setting dark theme
         onGenerateRoute: appRoutes.onGenerateRoute, // Handling route generation
