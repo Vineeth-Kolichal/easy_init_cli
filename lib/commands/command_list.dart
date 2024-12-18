@@ -5,7 +5,7 @@ import 'package:easy_init_cli/commands/run_build_runner/run_build_runner.dart';
 import 'package:easy_init_cli/commands/update/update.dart';
 import 'package:easy_init_cli/interfaces/command.dart';
 
-import 'create_helpers/create_helpers.dart';
+import 'create_services/create_services.dart';
 
 List<Command> commands = [
   CommandParent(
@@ -13,7 +13,7 @@ List<Command> commands = [
     [
       CreateProject(),
       CreateFeature(),
-      CreateHelpers(),
+      CreateServices(),
     ],
   ),
   RunBuildRunner(),

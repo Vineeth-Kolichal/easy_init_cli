@@ -29,14 +29,14 @@ class TddCleanStructure extends Structure {
             path: "lib/common/widgets",
           ),
         ),
-        CleanDirName.commonHelpers: Directory(
-          replaceAsExpected(
-            path: "lib/common/helpers",
-          ),
-        ),
         CleanDirName.core: Directory(
           replaceAsExpected(
             path: "lib/core",
+          ),
+        ),
+        CleanDirName.services: Directory(
+          replaceAsExpected(
+            path: "lib/core/services",
           ),
         ),
         CleanDirName.apiEndpoints: Directory(
@@ -197,7 +197,7 @@ class TddCleanStructure extends Structure {
           responsiveContent,
         ),
         FileModel(
-          directoryStructure[CleanDirName.commonHelpers]!.path,
+          directoryStructure[CleanDirName.services]!.path,
           ".gitkeep",
           '',
         ),
@@ -298,7 +298,7 @@ class TddCleanStructure extends Structure {
         ),
         FileModel(
           directoryStructure[CleanDirName.typography]!.path,
-          "ui_text_style.dart",
+          "app_text_styles.dart",
           textStyles,
         ),
         FileModel(
@@ -465,7 +465,7 @@ class CleanDirName {
   //configurations
   static String common = "common";
   static String commonWidgets = "widgets";
-  static String commonHelpers = "helpers";
+  static String services = "services";
   static String features = "features";
   static String core = "core";
   static String apiEndpoints = "apiEndpoints";

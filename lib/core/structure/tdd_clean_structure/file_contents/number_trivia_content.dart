@@ -243,7 +243,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/extensions/extensions.dart';
 import '../../../../common/widgets/loading.dart';
-import '../../../../core/theme/app_colors.dart'; // Importing custom theme colors
 import '../blocs/number_trivia_bloc/number_trivia_bloc.dart'; // Importing the NumberTriviaBloc
 
 /// to validate form [_formKey] is used
@@ -256,7 +255,6 @@ class NumberTriviaScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     /// Getting instance of NumberTriviaBloc using context
     NumberTriviaBloc triviaBloc = context.read<NumberTriviaBloc>();
-    AppColors? appColors = context.appColors;
     return Scaffold(
       appBar: AppBar(
         title: const Text("Number Trivia by Easy Init"), // AppBar title
@@ -351,10 +349,7 @@ class NumberTriviaScreen extends StatelessWidget {
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           // Setting button background color
-                          backgroundColor: context.setThemeBasedColor(
-                            darkThemeColor: appColors?.white,
-                            lightThemeColor: appColors?.black,
-                          ),
+                          backgroundColor: context.appColors?.onSurface,
                         ),
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
@@ -365,10 +360,7 @@ class NumberTriviaScreen extends StatelessWidget {
                         child: Text(
                           "Get Trivia", // Button text
                           style: context.labelLarge(
-                            color: context.setThemeBasedColor(
-                              darkThemeColor: appColors?.black,
-                              lightThemeColor: appColors?.white,
-                            ),
+                            color: context.appColors?.surfaceColor,
                           ),
                         ),
                       ),
