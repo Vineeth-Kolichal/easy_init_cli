@@ -593,11 +593,13 @@ String networkClientContent = '''
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 
+import '../api_endpoints/api_endpoints.dart';
+import '../services/sharedprefs_services.dart';
 import 'network_exceptions.dart';
 
 /// If you have to pass token with api requests then use,[getWithToken],[postWithToken],
 /// [putWithToken],[patchWithToken],[deleteWithToken], methods, if you are not using any token then
-/// you can use [getWithoutToken] and [postWithoutToken] methods. 
+/// you can use [getWithoutToken] and [postWithoutToken] methods.
 /// You can implement Put,Patch,delete without token  methods as per your needs.
 /// You can modify this code as per your needs.
 
@@ -607,17 +609,20 @@ class NetworkClient {
   final Dio _dio;
   NetworkClient(this._dio);
 
-  ///If you are storing token in SharedPreferences or any other storage,
-  ///then write code for retrieving token and assign to [token]
-  String? token;
+  final Dio _dioNoToken = Dio(BaseOptions(baseUrl: ApiEndpoints.baseUrl));
+
+  //to get access token from other area like sockets
+  Future<String?> get getAccessToken => _getToken();
+
   //GET request with token
   Future<dynamic> getWithToken(
       {required String path, dynamic data, dynamic queryParameters}) async {
-    _dio.options.headers = {
-      "Content-Type": "application/json",
-      "authorization": "Bearer \$token"
-    };
     try {
+      final token = await _getToken();
+      _dio.options.headers = {
+        "Content-Type": "application/json",
+        "authorization": "Bearer \$token"
+      };
       final response =
           await _dio.get(path, data: data, queryParameters: queryParameters);
       return response;
@@ -628,11 +633,12 @@ class NetworkClient {
 
   //POST request with token
   Future<dynamic> postWithToken({required String path, dynamic data}) async {
-    _dio.options.headers = {
-      "Content-Type": "application/json",
-      "authorization": "Bearer \$token"
-    };
     try {
+      final token = await _getToken();
+      _dio.options.headers = {
+        "Content-Type": "application/json",
+        "authorization": "Bearer \$token"
+      };
       final response = await _dio.post(path, data: data);
       return response;
     } on DioException catch (e) {
@@ -644,11 +650,12 @@ class NetworkClient {
 
   //PUT request with token
   Future<dynamic> putWithToken({required String path, dynamic data}) async {
-    _dio.options.headers = {
-      "Content-Type": "application/json",
-      "authorization": "Bearer \$token"
-    };
     try {
+      final token = await _getToken();
+      _dio.options.headers = {
+        "Content-Type": "application/json",
+        "authorization": "Bearer \$token"
+      };
       final response = await _dio.put(path, data: data);
       return response;
     } on DioException catch (e) {
@@ -660,11 +667,12 @@ class NetworkClient {
 
   //PATCH request with token
   Future<dynamic> patchWithToken({required String path, dynamic data}) async {
-    _dio.options.headers = {
-      "Content-Type": "application/json",
-      "authorization": "Bearer \$token"
-    };
     try {
+      final token = await _getToken();
+      _dio.options.headers = {
+        "Content-Type": "application/json",
+        "authorization": "Bearer \$token"
+      };
       final response = await _dio.patch(path, data: data);
       return response;
     } on DioException catch (e) {
@@ -676,11 +684,12 @@ class NetworkClient {
 
   //DELETE request with token
   Future<dynamic> deleteWithToken({required String path, dynamic data}) async {
-    _dio.options.headers = {
-      "Content-Type": "application/json",
-      "authorization": "Bearer \$token"
-    };
     try {
+      final token = await _getToken();
+      _dio.options.headers = {
+        "Content-Type": "application/json",
+        "authorization": "Bearer \$token"
+      };
       final response = await _dio.delete(path, data: data);
       return response;
     } on DioException catch (e) {
@@ -693,12 +702,12 @@ class NetworkClient {
   //GET request without token
   Future<dynamic> getWithoutToken(
       {required String path, dynamic data, dynamic queryParameters}) async {
-    _dio.options.headers = {
+    _dioNoToken.options.headers = {
       "Content-Type": "application/json",
     };
     try {
-      final response =
-          await _dio.get(path, data: data, queryParameters: queryParameters);
+      final response = await _dioNoToken.get(path,
+          data: data, queryParameters: queryParameters);
       return response;
     } on DioException catch (e) {
       throw CustomException.fromDioException(e);
@@ -709,11 +718,11 @@ class NetworkClient {
 
   //POST request without token
   Future<dynamic> postWithoutToken({required String path, dynamic data}) async {
-    _dio.options.headers = {
+    _dioNoToken.options.headers = {
       "Content-Type": "application/json",
     };
     try {
-      final response = await _dio.post(path, data: data);
+      final response = await _dioNoToken.post(path, data: data);
       return response;
     } on DioException catch (e) {
       throw CustomException.fromDioException(e);
@@ -721,7 +730,52 @@ class NetworkClient {
       throw CustomException.otherException(e.toString());
     }
   }
+
+  //Function to get token
+  Future<String?> _getToken() async {
+    DateTime currentTime = DateTime.now();
+    DateTime? accessTokenTime =
+        SharedPrefsServices.instance.getAccessTokenTime();
+    //finding the time reminint time to expiry of access token
+    Duration difference = currentTime.difference(
+      accessTokenTime!,
+    );
+    //TODO: change the time difference based on the access token expiry time
+    // if access token is near to expiry time
+    if (difference.inMinutes > 55) {
+      try {
+        //TODO: update the following commented code as per your token refresh api request and response
+
+        // String? refreshToken = SharedPrefsServices.instance.getRefreshToken();
+
+        // //Accessing new refresh and access token from api using existing refresh token
+        // final Response response = await _dio.post(
+        //   ApiEndpoints.tokenRefresh,
+        //   data: {"refreshToken": refreshToken},
+        // );
+
+        // //Retrive new access and refresh token from api response
+        // final newAccessToken = response.data["token"] as String;
+        // final newRefreshToken = response.data["refreshToken"] as String;
+
+        // //Store new refresh and access token to shared preferences
+        // await SharedPrefsServices.instance.setAccessToken(newAccessToken);
+        // await SharedPrefsServices.instance.setRefreshToken(newRefreshToken);
+
+        // //return new access token
+        // return newAccessToken;
+
+        //TODO: return new access token
+        return "new_access_token";
+      } catch (e) {
+        rethrow;
+      }
+    } else {
+      return SharedPrefsServices.instance.getAccessToken();
+    }
+  }
 }
+
 
 ''';
 
@@ -1043,16 +1097,16 @@ class FcmServices {
   ///   runApp(MyApp());
   /// }
   /// ```
-  /// 
+  ///
   ///  Warning:
   /// ----------------
-  ///  - This code is just basic setup, you may need to add more 
+  ///  - This code is just basic setup, you may need to add more
   ///    functionalities as per your requirement.
   ///  - FCM needs some setups in platform specific folders. You should do that
   ///    before using this code.
   ///  - The project should be connected with a firebase project and Cloud messaging
   ///    should be enabled in firebase.
-  /// 
+  ///
 
   static FcmServices instance = FcmServices._internal();
   factory FcmServices() {
@@ -1074,10 +1128,8 @@ class FcmServices {
         AndroidInitializationSettings(
             '@mipmap/ic_launcher'); //TODO: change notification icon
     //IOS settings
-    final DarwinInitializationSettings darwinInitializationSettings =
-        DarwinInitializationSettings(
-      onDidReceiveLocalNotification: (id, title, body, payload) {},
-    );
+    DarwinInitializationSettings darwinInitializationSettings =
+        const DarwinInitializationSettings();
     //Initialization of local notification settings
     final InitializationSettings initializationSettings =
         InitializationSettings(
@@ -1156,6 +1208,7 @@ class FcmServices {
 
   FcmServices._internal();
 }
+
 ''';
 
 const sharedPrefsServices = '''
@@ -1171,7 +1224,7 @@ class SharedPrefsServices {
   /// ### initialize SharedPreferences
   /// ------------------------
   /// call initialize() method to initialize SharedPreferences instance
-  /// 
+  ///
   /// ```
   /// Example:
   /// Future<void> main()async{
@@ -1179,8 +1232,7 @@ class SharedPrefsServices {
   ///   runApp(MyApp());
   /// }
   /// ```
-  /// 
-  
+  ///
 
   late SharedPreferences sharedPreferences;
   static SharedPrefsServices instance = SharedPrefsServices._internal();
@@ -1193,12 +1245,45 @@ class SharedPrefsServices {
     sharedPreferences = await SharedPreferences.getInstance();
   }
 
+  /// Set methods>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
   Future<bool> setAccessToken(String token) async {
-    return await sharedPreferences.setString(StorageKeys.accessToken, token);
+    return await sharedPreferences.setString(
+          StorageKeys.accessToken,
+          token,
+        ) &&
+        await sharedPreferences.setString(
+          StorageKeys.accessTokenTime,
+          DateTime.now().toString(),
+        );
   }
 
+  Future<bool> setRefreshToken(String token) async {
+    return await sharedPreferences.setString(
+          StorageKeys.refreshToken,
+          token,
+        ) &&
+        await sharedPreferences.setString(
+          StorageKeys.refreshTokenTime,
+          DateTime.now().toString(),
+        );
+  }
+
+  /// Get methods--------------------------------------
   String? getAccessToken() {
     return sharedPreferences.getString(StorageKeys.accessToken);
+  }
+
+  String? getRefreshToken() {
+    return sharedPreferences.getString(StorageKeys.refreshToken);
+  }
+
+  DateTime? getAccessTokenTime() {
+    final time = sharedPreferences.getString(StorageKeys.accessTokenTime);
+    if (time != null) {
+      return DateTime.parse(time);
+    } else {
+      return null;
+    }
   }
 
   bool isTokenAvailable() {
@@ -1216,6 +1301,9 @@ class SharedPrefsServices {
 
 class StorageKeys {
   static const accessToken = "accessToken";
+  static const refreshToken = "refreshToken";
+  static const accessTokenTime = "accessTokenTime";
+  static const refreshTokenTime = "refreshTokenTime";
 }
 
 
