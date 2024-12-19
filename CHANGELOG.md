@@ -1,3 +1,9 @@
+## 1.2.1
+  - Updations in clean architecture
+    - Theme configurations
+    - NetworkClient
+    - Shared prefs services
+  - and Bug fixes
 ## 1.2.0
   - Updations in clean architecture structure
   - MVC architecture temporarly disabled for updations
