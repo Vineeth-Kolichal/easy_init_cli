@@ -86,32 +86,43 @@ Future<void> main(List<String> args) async {
 String appContent = '''
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'core/dependancy_injection/config/configure_injection.dart';
 import 'core/routes/app_routes.dart';
-import 'core/theme/app_theme.dart'; 
-import 'features/home/presentation/blocs/home_bloc/home_bloc.dart';
+import 'core/theme/theme.dart';
+import 'features/number_trivia/presentation/blocs/number_trivia_bloc/number_trivia_bloc.dart';
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key, required this.appRoutes});
-  final AppRoutes appRoutes;
+  const MyApp({
+    super.key,
+    required this.appRoutes,
+  });
+  final AppRoutes appRoutes; 
+
   @override
   Widget build(BuildContext context) {
+    //Text styles
+    TextTheme appTextTheme = AppTextStyles.getTextTheme();
+    //Theme
+    AppTheme theme = AppTheme(appTextTheme);
     return MultiBlocProvider(
+      // Providing multiple blocs at the root of the widget tree
       providers: [
         BlocProvider(
-          create: (context) => HomeBloc(),
+          create: (context) => getIt<
+              NumberTriviaBloc>(), // Creating and providing NumberTriviaBloc using dependency injection
         )
       ],
       child: MaterialApp(
-        title: "App title",
-        themeMode: ThemeMode.light,
-        theme: AppTheme.lightTheme,
-        darkTheme: AppTheme.darkTheme,
-        onGenerateRoute: appRoutes.onGenerateRoute,
+        title: "App title", // App title
+        themeMode: ThemeMode.system, // theme is based on system setting
+        theme: theme.light(), // Setting light theme
+        darkTheme: theme.dark(), // Setting dark theme
+        onGenerateRoute: appRoutes.onGenerateRoute, // Handling route generation
       ),
     );
   }
 }
-
 
 ''';
 

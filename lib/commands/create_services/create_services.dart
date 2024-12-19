@@ -9,9 +9,9 @@ import 'package:easy_init_cli/interfaces/command.dart';
 import 'package:easy_init_cli/utils/shell_utils.dart';
 import 'package:easy_init_cli/utils/user_input.dart';
 
-class CreateHelpers extends Command {
+class CreateServices extends Command {
   @override
-  String get commandName => "helper";
+  String get commandName => "services";
 
   @override
   Future<void> excecute() async {
@@ -20,10 +20,10 @@ class CreateHelpers extends Command {
       final arch = findCurrentArchitecture();
       if (arch != null) {
         var choice = UserInput.menu(
-            options: ["FCM helper", "Shared Preferences helper"],
-            promt: "Choose any available helpers (example:1)");
+            options: ["FCM Services", "Shared Preferences Services"],
+            promt: "Choose any available services (example:1)");
         print("");
-        blueLog("creating helper file in lib/common/helpers/ directory...");
+        blueLog("creating services file in lib/core/services/ directory...");
         print("");
         switch (choice) {
           case 1:
@@ -43,9 +43,8 @@ class CreateHelpers extends Command {
   }
 
   Future<void> createFcmHelper() async {
-    if (Directory(TddCleanStructure()
-            .directoryStructure[CleanDirName.commonHelpers]!
-            .path)
+    if (Directory(
+            TddCleanStructure().directoryStructure[CleanDirName.services]!.path)
         .existsSync()) {
       await ShellUtils().addDependencies(
         dependencies:
@@ -53,39 +52,36 @@ class CreateHelpers extends Command {
       );
       createFiles([
         FileModel(
-          TddCleanStructure()
-              .directoryStructure[CleanDirName.commonHelpers]!
-              .path,
-          "fcm_helper.dart",
-          fcmHelperContent,
+          TddCleanStructure().directoryStructure[CleanDirName.services]!.path,
+          "fcm_services.dart",
+          fcmServicesContent,
         ),
       ]);
       greenLog("Successfully created FCM helper ");
     } else {
-      redLog("[ERROR] lib/common/helpers directory not found");
+      redLog(
+          "[ERROR] lib/core/services directory not found\n [ERROR] please create lib/core/services folder and try again");
     }
   }
 
   Future<void> createSharedPrefsHelper() async {
-    if (Directory(TddCleanStructure()
-            .directoryStructure[CleanDirName.commonHelpers]!
-            .path)
+    if (Directory(
+            TddCleanStructure().directoryStructure[CleanDirName.services]!.path)
         .existsSync()) {
       await ShellUtils().addDependencies(
         dependencies: "shared_preferences",
       );
       createFiles([
         FileModel(
-          TddCleanStructure()
-              .directoryStructure[CleanDirName.commonHelpers]!
-              .path,
-          "sharedprefs_helper.dart",
-          sharedPrefsHelper,
+          TddCleanStructure().directoryStructure[CleanDirName.services]!.path,
+          "sharedprefs_services.dart",
+          sharedPrefsServices,
         ),
       ]);
-      greenLog("Successfully created SharedPrefshelper ");
+      greenLog("Successfully created SharedPrefServices ");
     } else {
-      redLog("[ERROR] lib/common/helpers directory not found");
+      redLog(
+          "[ERROR] lib/core/services directory not found\n [ERROR] please create lib/core/services folder and try again");
     }
   }
 }

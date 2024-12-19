@@ -1,43 +1,116 @@
 String themeContent = '''
 import 'package:flutter/material.dart';
 
-import 'theme.dart';
+import 'app_colors.dart';
 
 class AppTheme {
-  static ThemeData lightTheme = ThemeData(
-    brightness: Brightness.light,
-    useMaterial3: true,
-    //Text theme
-    textTheme: uiTextTheme,
-    //Color extension
-    extensions: const <ThemeExtension<dynamic>>[AppColors.light],
-  );
+  final TextTheme textTheme;
 
-  static ThemeData darkTheme = ThemeData(
-    brightness: Brightness.dark,
-    useMaterial3: true,
-    //Text theme
-    textTheme: uiTextTheme,
-    //color extension
-    extensions: const <ThemeExtension<dynamic>>[AppColors.light],
-  );
+  const AppTheme(this.textTheme);
 
-  //Text theme
-  static final uiTextTheme = TextTheme(
-    displayLarge: UITextStyle.headline1,
-    displayMedium: UITextStyle.headline2,
-    displaySmall: UITextStyle.headline3,
-    headlineMedium: UITextStyle.headline4,
-    headlineSmall: UITextStyle.headline5,
-    titleLarge: UITextStyle.headline6,
-    titleMedium: UITextStyle.subtitle1,
-    titleSmall: UITextStyle.subtitle2,
-    bodyLarge: UITextStyle.bodyText1,
-    bodyMedium: UITextStyle.bodyText2,
-    labelLarge: UITextStyle.button,
-    bodySmall: UITextStyle.caption,
-    labelSmall: UITextStyle.overline,
-  );
+  //Light theme Colors
+  static AppColors lightThemeColors() => const AppColors(
+        primary: Color(0xFF0F34E9),
+        secondary: Color(0xFFD3F5B7),
+        surfaceColor: Color(0xFFFFFFFF),
+        onSurface: Color(0xFF000000),
+        appBarColor: Color(0xFFFFFFFF),
+      );
+  // Light theme ColorScheme
+  static ColorScheme lightScheme() {
+    return ColorScheme.fromSeed(
+      seedColor: const Color(0xFF0F34E9),
+      brightness: Brightness.light,
+      errorContainer: const Color(0xFFFFF2EC),
+      onErrorContainer: const Color(0xFFF44336),
+    );
+  }
+
+  ThemeData light() {
+    return theme(lightScheme(), lightThemeColors());
+  }
+
+  //Dark Theme colors
+  static AppColors darkThemeColors() => const AppColors(
+        primary: Color(0xFF0F9D58),
+        secondary: Color(0xFF1DE9B6),
+        surfaceColor: Color(0xFF121212),
+        onSurface: Color(0xFFFFFFFF),
+        appBarColor: Color(0xFF1F1F1F),
+      );
+
+  //Dark ColorScheme
+  static ColorScheme darkScheme() {
+    return ColorScheme.fromSeed(
+      seedColor: const Color(0xFF0F34E9),
+      brightness: Brightness.dark,
+      error: const Color(0xFFCF6679),
+      onError: const Color(0xFF1E1213),
+      errorContainer: const Color(0xFF8E001A),
+      onErrorContainer: const Color(0xFFFFDAD6),
+    );
+  }
+
+  ThemeData dark() {
+    return theme(darkScheme(), darkThemeColors());
+  }
+
+  ThemeData theme(ColorScheme colorScheme, AppColors appColors) => ThemeData(
+        //Material 3 style
+        useMaterial3: true,
+
+        // Theme mode
+        brightness: colorScheme.brightness,
+
+        //Color scheme -set of all colors
+        colorScheme: colorScheme,
+
+        //Theme extensions
+        extensions: <ThemeExtension<dynamic>>[appColors],
+
+        //Default font family
+        // fontFamily: FontFamily.inter,
+
+        //Text theme for configure typography of app
+        textTheme: textTheme.apply(
+          bodyColor: colorScheme.onSurface,
+          displayColor: appColors.primary,
+        ),
+
+        //Scffold background color of the app
+        scaffoldBackgroundColor: appColors.surfaceColor,
+
+        //Canvas color
+        canvasColor: colorScheme.surfaceContainer,
+
+        //Bottom navigation bar theme
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          elevation: 0,
+          backgroundColor: appColors.surfaceColor,
+          selectedItemColor: appColors.primary,
+          unselectedItemColor: appColors.onSurface?.withOpacity(0.5),
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          type: BottomNavigationBarType.fixed,
+        ),
+
+        //Button theme
+        buttonTheme: ButtonThemeData(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(
+              45,
+            ),
+          ),
+        ),
+
+
+        //Appbar theme
+        appBarTheme: AppBarTheme(
+          scrolledUnderElevation: 0,
+          backgroundColor: appColors.appBarColor,
+          iconTheme: IconThemeData(color: appColors.onSurface),
+        ),
+      );
 }
 
 ''';
@@ -46,43 +119,77 @@ import 'package:flutter/material.dart';
 
 @immutable
 class AppColors extends ThemeExtension<AppColors> {
-  final Color black = Colors.black;
-  final Color white = Colors.white;
-  final Color? primaryColor;
-  final Color? secondaryColor;
+  //TODO: Add branding based theme colors
+  final Color? primary;
+  final Color? secondary;
+
+  //Utility colors
+  final Color? surfaceColor;
+  final Color? onSurface;
+  final Color? appBarColor;
+
+  //constant colors
+  final Color kBlack;
+  final Color kWhite;
 
   const AppColors({
-    this.primaryColor,
-    this.secondaryColor,
+    required this.primary,
+    required this.secondary,
+    required this.surfaceColor,
+    required this.onSurface,
+    required this.appBarColor,
+    this.kBlack = Colors.black,
+    this.kWhite = Colors.white,
   });
 
   @override
-  ThemeExtension<AppColors> copyWith({
-    Color? primaryColor,
-    Color? secondaryColor,
+  AppColors copyWith({
+    Color? primary,
+    Color? secondary,
+    Color? surfaceColor,
+    Color? onSurface,
+    Color? appBarColor,
   }) {
     return AppColors(
-      primaryColor: primaryColor ?? this.primaryColor,
-      secondaryColor: secondaryColor ?? this.secondaryColor,
+      primary: primary ?? this.primary,
+      secondary: secondary ?? this.secondary,
+      surfaceColor: surfaceColor ?? this.surfaceColor,
+      onSurface: onSurface ?? this.onSurface,
+      appBarColor: appBarColor ?? this.appBarColor,
     );
   }
 
   @override
-  ThemeExtension<AppColors> lerp(
-      covariant ThemeExtension<AppColors>? other, double t) {
+  AppColors lerp(covariant ThemeExtension<AppColors>? other, double t) {
     if (other is! AppColors) return this;
     return AppColors(
-      primaryColor: Color.lerp(primaryColor, other.primaryColor, t),
-      secondaryColor: Color.lerp(secondaryColor, other.secondaryColor, t),
+      primary: Color.lerp(
+        primary,
+        other.primary,
+        t,
+      ),
+      secondary: Color.lerp(
+        secondary,
+        other.secondary,
+        t,
+      ),
+      surfaceColor: Color.lerp(
+        surfaceColor,
+        other.surfaceColor,
+        t,
+      ),
+      onSurface: Color.lerp(
+        onSurface,
+        other.onSurface,
+        t,
+      ),
+      appBarColor: Color.lerp(
+        appBarColor,
+        other.appBarColor,
+        t,
+      ),
     );
   }
-
-  static const AppColors light = AppColors(
-    primaryColor: Colors.purple,
-  );
-  static const AppColors dark = AppColors(
-    primaryColor: Colors.green,
-  );
 }
 
 ''';
@@ -115,136 +222,77 @@ abstract class AppFontWeight {
 const textStyles = '''
 import 'package:flutter/material.dart';
 
-import 'app_font_weight.dart';
+abstract class AppTextStyles {
+  static TextTheme getTextTheme() {
 
-/// UI Text Style Definitions
-abstract class UITextStyle {
-  static const _baseTextStyle = TextStyle(
-    fontWeight: AppFontWeight.regular,
-    // fontFamily: 'Poppins',
-    decoration: TextDecoration.none,
-    textBaseline: TextBaseline.alphabetic,
-  );
+    //Base text style 
+    TextStyle baseTextStyle = const TextStyle(
+      decoration: TextDecoration.none,
+    );
+    return TextTheme(
+      //Display
+      displayLarge: baseTextStyle.copyWith(
+        fontSize: 57,
+      ),
+      displayMedium: baseTextStyle.copyWith(
+        fontSize: 45,
+      ),
+      displaySmall: baseTextStyle.copyWith(
+        fontSize: 36,
+      ),
 
-  /// Display 2 Text Style
-  static final TextStyle display2 = _baseTextStyle.copyWith(
-    fontSize: 57,
-    fontWeight: AppFontWeight.bold,
-    height: 1.12,
-    letterSpacing: -0.25,
-  );
+      //Headline
+      headlineLarge: baseTextStyle.copyWith(
+        fontSize: 32,
+      ),
+      headlineMedium: baseTextStyle.copyWith(
+        fontSize: 28,
+      ),
+      headlineSmall: baseTextStyle.copyWith(
+        fontSize: 24,
+      ),
 
-  /// Display 3 Text Style
-  static final TextStyle display3 = _baseTextStyle.copyWith(
-    fontSize: 45,
-    fontWeight: AppFontWeight.bold,
-    height: 1.15,
-  );
+      //Title
+      titleLarge: baseTextStyle.copyWith(
+        fontSize: 22,
+      ),
+      titleMedium: baseTextStyle.copyWith(
+        fontSize: 16,
+      ),
+      titleSmall: baseTextStyle.copyWith(
+        fontSize: 14,
+      ),
 
-  /// Headline 1 Text Style
-  static final TextStyle headline1 = _baseTextStyle.copyWith(
-    fontSize: 36,
-    fontWeight: AppFontWeight.bold,
-    height: 1.22,
-  );
+      //Label
+      labelLarge: baseTextStyle.copyWith(
+        fontSize: 14,
+      ),
+      labelMedium: baseTextStyle.copyWith(
+        fontSize: 12,
+      ),
+      labelSmall: baseTextStyle.copyWith(
+        fontSize: 11,
+      ),
 
-  /// Headline 2 Text Style
-  static final TextStyle headline2 = _baseTextStyle.copyWith(
-    fontSize: 32,
-    fontWeight: AppFontWeight.bold,
-    height: 1.25,
-  );
-
-  /// Headline 3 Text Style
-  static final TextStyle headline3 = _baseTextStyle.copyWith(
-    fontSize: 28,
-    fontWeight: AppFontWeight.semiBold,
-    height: 1.28,
-  );
-
-  /// Headline 4 Text Style
-  static final TextStyle headline4 = _baseTextStyle.copyWith(
-    fontSize: 24,
-    fontWeight: AppFontWeight.semiBold,
-    height: 1.33,
-  );
-
-  /// Headline 5 Text Style
-  static final TextStyle headline5 = _baseTextStyle.copyWith(
-    fontSize: 22,
-    fontWeight: AppFontWeight.regular,
-    height: 1.27,
-  );
-
-  /// Headline 6 Text Style
-  static final TextStyle headline6 = _baseTextStyle.copyWith(
-    fontSize: 18,
-    fontWeight: AppFontWeight.semiBold,
-    height: 1.33,
-  );
-
-  /// Subtitle 1 Text Style
-  static final TextStyle subtitle1 = _baseTextStyle.copyWith(
-    fontSize: 16,
-    height: 1.5,
-    letterSpacing: 0.1,
-  );
-
-  /// Subtitle 2 Text Style
-  static final TextStyle subtitle2 = _baseTextStyle.copyWith(
-    fontSize: 14,
-    height: 1.42,
-    letterSpacing: 0.1,
-  );
-
-  /// Body Text 1 Text Style
-  static final TextStyle bodyText1 = _baseTextStyle.copyWith(
-    fontSize: 16,
-    height: 1.5,
-    letterSpacing: 0.5,
-  );
-
-  /// Body Text 2 Text Style (the default)
-  static final TextStyle bodyText2 = _baseTextStyle.copyWith(
-    fontSize: 14,
-    height: 1.42,
-    letterSpacing: 0.25,
-  );
-
-  /// Caption Text Style
-  static final TextStyle caption = _baseTextStyle.copyWith(
-    fontSize: 12,
-    height: 1.33,
-    letterSpacing: 0.4,
-  );
-
-  /// Button Text Style
-  static final TextStyle button = _baseTextStyle.copyWith(
-    fontSize: 16,
-    height: 1.42,
-    letterSpacing: 0.1,
-  );
-
-  /// Overline Text Style
-  static final TextStyle overline = _baseTextStyle.copyWith(
-    fontSize: 12,
-    height: 1.33,
-    letterSpacing: 0.5,
-  );
-
-  /// Label Small Text Style
-  static final TextStyle labelSmall = _baseTextStyle.copyWith(
-    fontSize: 11,
-    height: 1.45,
-    letterSpacing: 0.5,
-  );
+      //Body
+      bodyLarge: baseTextStyle.copyWith(
+        fontSize: 16,
+      ),
+      bodyMedium: baseTextStyle.copyWith(
+        fontSize: 14,
+      ),
+      bodySmall: baseTextStyle.copyWith(
+        fontSize: 12,
+      ),
+    );
+  }
 }
 
 ''';
 
 const typography = '''
 export 'app_font_weight.dart';
-export 'ui_text_style.dart';
+export 'app_text_styles.dart';
 
 ''';
 
@@ -313,16 +361,13 @@ class Loading extends StatelessWidget {
         child,
         if (isLoading)
           Container(
-            color: appColors?.black.withOpacity(0.3),
+            color: appColors?.kBlack.withOpacity(0.3),
             child: Center(
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 height: 70,
                 decoration: BoxDecoration(
-                  color: context.setThemeBasedColor(
-                    darkThemeColor: appColors?.black,
-                    lightThemeColor: appColors?.white,
-                  ),
+                  color: appColors?.surfaceColor,
                   borderRadius: BorderRadius.circular(7),
                 ),
                 child: Row(
@@ -349,6 +394,7 @@ class Loading extends StatelessWidget {
     );
   }
 }
+
 
 ''';
 
@@ -547,11 +593,12 @@ String networkClientContent = '''
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 
+import '../api_endpoints/api_endpoints.dart';
 import 'network_exceptions.dart';
 
 /// If you have to pass token with api requests then use,[getWithToken],[postWithToken],
 /// [putWithToken],[patchWithToken],[deleteWithToken], methods, if you are not using any token then
-/// you can use [getWithoutToken] and [postWithoutToken] methods. 
+/// you can use [getWithoutToken] and [postWithoutToken] methods.
 /// You can implement Put,Patch,delete without token  methods as per your needs.
 /// You can modify this code as per your needs.
 
@@ -561,17 +608,20 @@ class NetworkClient {
   final Dio _dio;
   NetworkClient(this._dio);
 
-  ///If you are storing token in SharedPreferences or any other storage,
-  ///then write code for retrieving token and assign to [token]
-  String? token;
+  final Dio _dioNoToken = Dio(BaseOptions(baseUrl: ApiEndpoints.baseUrl));
+
+  //to get access token from other area like sockets
+  Future<String?> get getAccessToken => _getToken();
+
   //GET request with token
   Future<dynamic> getWithToken(
       {required String path, dynamic data, dynamic queryParameters}) async {
-    _dio.options.headers = {
-      "Content-Type": "application/json",
-      "authorization": "Bearer \$token"
-    };
     try {
+      final token = await _getToken();
+      _dio.options.headers = {
+        "Content-Type": "application/json",
+        "authorization": "Bearer \$token"
+      };
       final response =
           await _dio.get(path, data: data, queryParameters: queryParameters);
       return response;
@@ -582,11 +632,12 @@ class NetworkClient {
 
   //POST request with token
   Future<dynamic> postWithToken({required String path, dynamic data}) async {
-    _dio.options.headers = {
-      "Content-Type": "application/json",
-      "authorization": "Bearer \$token"
-    };
     try {
+      final token = await _getToken();
+      _dio.options.headers = {
+        "Content-Type": "application/json",
+        "authorization": "Bearer \$token"
+      };
       final response = await _dio.post(path, data: data);
       return response;
     } on DioException catch (e) {
@@ -598,11 +649,12 @@ class NetworkClient {
 
   //PUT request with token
   Future<dynamic> putWithToken({required String path, dynamic data}) async {
-    _dio.options.headers = {
-      "Content-Type": "application/json",
-      "authorization": "Bearer \$token"
-    };
     try {
+      final token = await _getToken();
+      _dio.options.headers = {
+        "Content-Type": "application/json",
+        "authorization": "Bearer \$token"
+      };
       final response = await _dio.put(path, data: data);
       return response;
     } on DioException catch (e) {
@@ -614,11 +666,12 @@ class NetworkClient {
 
   //PATCH request with token
   Future<dynamic> patchWithToken({required String path, dynamic data}) async {
-    _dio.options.headers = {
-      "Content-Type": "application/json",
-      "authorization": "Bearer \$token"
-    };
     try {
+      final token = await _getToken();
+      _dio.options.headers = {
+        "Content-Type": "application/json",
+        "authorization": "Bearer \$token"
+      };
       final response = await _dio.patch(path, data: data);
       return response;
     } on DioException catch (e) {
@@ -630,11 +683,12 @@ class NetworkClient {
 
   //DELETE request with token
   Future<dynamic> deleteWithToken({required String path, dynamic data}) async {
-    _dio.options.headers = {
-      "Content-Type": "application/json",
-      "authorization": "Bearer \$token"
-    };
     try {
+      final token = await _getToken();
+      _dio.options.headers = {
+        "Content-Type": "application/json",
+        "authorization": "Bearer \$token"
+      };
       final response = await _dio.delete(path, data: data);
       return response;
     } on DioException catch (e) {
@@ -647,12 +701,12 @@ class NetworkClient {
   //GET request without token
   Future<dynamic> getWithoutToken(
       {required String path, dynamic data, dynamic queryParameters}) async {
-    _dio.options.headers = {
+    _dioNoToken.options.headers = {
       "Content-Type": "application/json",
     };
     try {
-      final response =
-          await _dio.get(path, data: data, queryParameters: queryParameters);
+      final response = await _dioNoToken.get(path,
+          data: data, queryParameters: queryParameters);
       return response;
     } on DioException catch (e) {
       throw CustomException.fromDioException(e);
@@ -663,17 +717,60 @@ class NetworkClient {
 
   //POST request without token
   Future<dynamic> postWithoutToken({required String path, dynamic data}) async {
-    _dio.options.headers = {
+    _dioNoToken.options.headers = {
       "Content-Type": "application/json",
     };
     try {
-      final response = await _dio.post(path, data: data);
+      final response = await _dioNoToken.post(path, data: data);
       return response;
     } on DioException catch (e) {
       throw CustomException.fromDioException(e);
     } catch (e) {
       throw CustomException.otherException(e.toString());
     }
+  }
+
+  //Function to get token
+  Future<String?> _getToken() async {
+    //TODO: update the following commented code as per your token refresh api request and response
+
+    // DateTime currentTime = DateTime.now();
+    // DateTime? accessTokenTime =
+    //     SharedPrefsServices.instance.getAccessTokenTime();
+    // //finding the time remining time to expiry of access token
+    // Duration difference = currentTime.difference(
+    //   accessTokenTime!,
+    // );
+    // //TODO: change the time difference based on the access token expiry time
+    // // if access token is near to expiry time
+    // if (difference.inMinutes > 55) {
+    //   try {
+    //     String? refreshToken = SharedPrefsServices.instance.getRefreshToken();
+
+    //     //Accessing new refresh and access token from api using existing refresh token
+    //     final Response response = await _dio.post(
+    //       ApiEndpoints.tokenRefresh,
+    //       data: {"refreshToken": refreshToken},
+    //     );
+
+    //     //Retrive new access and refresh token from api response
+    //     final newAccessToken = response.data["token"] as String;
+    //     final newRefreshToken = response.data["refreshToken"] as String;
+
+    //     //Store new refresh and access token to shared preferences
+    //     await SharedPrefsServices.instance.setAccessToken(newAccessToken);
+    //     await SharedPrefsServices.instance.setRefreshToken(newRefreshToken);
+
+    //     //return new access token
+    //     return newAccessToken;
+    //   } catch (e) {
+    //     rethrow;
+    //   }
+    // } else {
+    //   return SharedPrefsServices.instance.getAccessToken();
+    // }
+
+    return "access token";
   }
 }
 
@@ -979,13 +1076,13 @@ export './app_navigation_ext.dart';
 export './number_ext.dart';
 ''';
 
-const fcmHelperContent = '''
+const fcmServicesContent = '''
 import 'dart:convert';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-class FcmHelper {
+class FcmServices {
   //TODO:complete notification setup
   ///
   ///### init notification:
@@ -993,23 +1090,23 @@ class FcmHelper {
   /// ```
   /// Example:
   /// Future<void> main()async{
-  ///   await initNotifications();
+  ///   await FcmServices.instance.initNotifications();
   ///   runApp(MyApp());
   /// }
   /// ```
-  /// 
+  ///
   ///  Warning:
   /// ----------------
-  ///  - This code is just basic setup, you may need to add more 
+  ///  - This code is just basic setup, you may need to add more
   ///    functionalities as per your requirement.
   ///  - FCM needs some setups in platform specific folders. You should do that
   ///    before using this code.
   ///  - The project should be connected with a firebase project and Cloud messaging
   ///    should be enabled in firebase.
-  /// 
+  ///
 
-  static FcmHelper instance = FcmHelper._internal();
-  factory FcmHelper() {
+  static FcmServices instance = FcmServices._internal();
+  factory FcmServices() {
     return instance;
   }
 
@@ -1028,10 +1125,8 @@ class FcmHelper {
         AndroidInitializationSettings(
             '@mipmap/ic_launcher'); //TODO: change notification icon
     //IOS settings
-    final DarwinInitializationSettings darwinInitializationSettings =
-        DarwinInitializationSettings(
-      onDidReceiveLocalNotification: (id, title, body, payload) {},
-    );
+    DarwinInitializationSettings darwinInitializationSettings =
+        const DarwinInitializationSettings();
     //Initialization of local notification settings
     final InitializationSettings initializationSettings =
         InitializationSettings(
@@ -1108,38 +1203,38 @@ class FcmHelper {
     );
   }
 
-  FcmHelper._internal();
+  FcmServices._internal();
 }
+
 ''';
 
-const sharedPrefsHelper = '''
+const sharedPrefsServices = '''
 import 'dart:async';
 
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 @lazySingleton
-class SharedPrefsHelper {
+class SharedPrefsServices {
   ///TODO: modify the code as per the need
   ///
   /// ### initialize SharedPreferences
   /// ------------------------
   /// call initialize() method to initialize SharedPreferences instance
-  /// 
+  ///
   /// ```
   /// Example:
   /// Future<void> main()async{
-  ///   await SharedPrefsHelper.instance.initialize();
+  ///   await SharedPrefsServices.instance.initialize();
   ///   runApp(MyApp());
   /// }
   /// ```
-  /// 
-  
+  ///
 
   late SharedPreferences sharedPreferences;
-  static SharedPrefsHelper instance = SharedPrefsHelper._internal();
+  static SharedPrefsServices instance = SharedPrefsServices._internal();
 
-  factory SharedPrefsHelper() {
+  factory SharedPrefsServices() {
     return instance;
   }
 
@@ -1147,12 +1242,45 @@ class SharedPrefsHelper {
     sharedPreferences = await SharedPreferences.getInstance();
   }
 
+  /// Set methods>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
   Future<bool> setAccessToken(String token) async {
-    return await sharedPreferences.setString(StorageKeys.accessToken, token);
+    return await sharedPreferences.setString(
+          StorageKeys.accessToken,
+          token,
+        ) &&
+        await sharedPreferences.setString(
+          StorageKeys.accessTokenTime,
+          DateTime.now().toString(),
+        );
   }
 
+  Future<bool> setRefreshToken(String token) async {
+    return await sharedPreferences.setString(
+          StorageKeys.refreshToken,
+          token,
+        ) &&
+        await sharedPreferences.setString(
+          StorageKeys.refreshTokenTime,
+          DateTime.now().toString(),
+        );
+  }
+
+  /// Get methods--------------------------------------
   String? getAccessToken() {
     return sharedPreferences.getString(StorageKeys.accessToken);
+  }
+
+  String? getRefreshToken() {
+    return sharedPreferences.getString(StorageKeys.refreshToken);
+  }
+
+  DateTime? getAccessTokenTime() {
+    final time = sharedPreferences.getString(StorageKeys.accessTokenTime);
+    if (time != null) {
+      return DateTime.parse(time);
+    } else {
+      return null;
+    }
   }
 
   bool isTokenAvailable() {
@@ -1165,11 +1293,14 @@ class SharedPrefsHelper {
     await sharedPreferences.clear();
   }
 
-  SharedPrefsHelper._internal();
+  SharedPrefsServices._internal();
 }
 
 class StorageKeys {
   static const accessToken = "accessToken";
+  static const refreshToken = "refreshToken";
+  static const accessTokenTime = "accessTokenTime";
+  static const refreshTokenTime = "refreshTokenTime";
 }
 
 
