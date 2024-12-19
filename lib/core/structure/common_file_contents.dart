@@ -594,7 +594,6 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 
 import '../api_endpoints/api_endpoints.dart';
-import '../services/sharedprefs_services.dart';
 import 'network_exceptions.dart';
 
 /// If you have to pass token with api requests then use,[getWithToken],[postWithToken],
@@ -733,49 +732,47 @@ class NetworkClient {
 
   //Function to get token
   Future<String?> _getToken() async {
-    DateTime currentTime = DateTime.now();
-    DateTime? accessTokenTime =
-        SharedPrefsServices.instance.getAccessTokenTime();
-    //finding the time reminint time to expiry of access token
-    Duration difference = currentTime.difference(
-      accessTokenTime!,
-    );
-    //TODO: change the time difference based on the access token expiry time
-    // if access token is near to expiry time
-    if (difference.inMinutes > 55) {
-      try {
-        //TODO: update the following commented code as per your token refresh api request and response
+    //TODO: update the following commented code as per your token refresh api request and response
 
-        // String? refreshToken = SharedPrefsServices.instance.getRefreshToken();
+    // DateTime currentTime = DateTime.now();
+    // DateTime? accessTokenTime =
+    //     SharedPrefsServices.instance.getAccessTokenTime();
+    // //finding the time remining time to expiry of access token
+    // Duration difference = currentTime.difference(
+    //   accessTokenTime!,
+    // );
+    // //TODO: change the time difference based on the access token expiry time
+    // // if access token is near to expiry time
+    // if (difference.inMinutes > 55) {
+    //   try {
+    //     String? refreshToken = SharedPrefsServices.instance.getRefreshToken();
 
-        // //Accessing new refresh and access token from api using existing refresh token
-        // final Response response = await _dio.post(
-        //   ApiEndpoints.tokenRefresh,
-        //   data: {"refreshToken": refreshToken},
-        // );
+    //     //Accessing new refresh and access token from api using existing refresh token
+    //     final Response response = await _dio.post(
+    //       ApiEndpoints.tokenRefresh,
+    //       data: {"refreshToken": refreshToken},
+    //     );
 
-        // //Retrive new access and refresh token from api response
-        // final newAccessToken = response.data["token"] as String;
-        // final newRefreshToken = response.data["refreshToken"] as String;
+    //     //Retrive new access and refresh token from api response
+    //     final newAccessToken = response.data["token"] as String;
+    //     final newRefreshToken = response.data["refreshToken"] as String;
 
-        // //Store new refresh and access token to shared preferences
-        // await SharedPrefsServices.instance.setAccessToken(newAccessToken);
-        // await SharedPrefsServices.instance.setRefreshToken(newRefreshToken);
+    //     //Store new refresh and access token to shared preferences
+    //     await SharedPrefsServices.instance.setAccessToken(newAccessToken);
+    //     await SharedPrefsServices.instance.setRefreshToken(newRefreshToken);
 
-        // //return new access token
-        // return newAccessToken;
+    //     //return new access token
+    //     return newAccessToken;
+    //   } catch (e) {
+    //     rethrow;
+    //   }
+    // } else {
+    //   return SharedPrefsServices.instance.getAccessToken();
+    // }
 
-        //TODO: return new access token
-        return "new_access_token";
-      } catch (e) {
-        rethrow;
-      }
-    } else {
-      return SharedPrefsServices.instance.getAccessToken();
-    }
+    return "access token";
   }
 }
-
 
 ''';
 
