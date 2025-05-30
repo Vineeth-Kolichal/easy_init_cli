@@ -226,7 +226,7 @@ const triviaState = '''
 part of 'number_trivia_bloc.dart';
 
 @freezed
-class NumberTriviaState with _\$NumberTriviaState {
+sealed class NumberTriviaState with _\$NumberTriviaState {
   const factory NumberTriviaState({
     required bool isLoading,
     String? error,
