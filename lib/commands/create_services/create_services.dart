@@ -19,9 +19,11 @@ class CreateServices extends Command {
     if (lib.existsSync()) {
       final arch = findCurrentArchitecture();
       if (arch != null) {
-        var choice = UserInput.menu(
-            options: ["FCM Services", "Shared Preferences Services"],
-            promt: "Choose any available services (example:1)");
+        var choice = UserInput.menu(options: [
+          "FCM Services",
+          "Token Manager",
+          "Shared Preferences Services"
+        ], promt: "Choose any available services (example:1)");
         print("");
         blueLog("creating services file in lib/core/services/ directory...");
         print("");
@@ -30,6 +32,9 @@ class CreateServices extends Command {
             await createFcmHelper();
             break;
           case 2:
+            await createTokenManager();
+            break;
+          case 3:
             await createSharedPrefsHelper();
             break;
           default:
@@ -79,6 +84,27 @@ class CreateServices extends Command {
         ),
       ]);
       greenLog("Successfully created SharedPrefServices ");
+    } else {
+      redLog(
+          "[ERROR] lib/core/services directory not found\n [ERROR] please create lib/core/services folder and try again");
+    }
+  }
+
+  Future<void> createTokenManager() async {
+    if (Directory(
+            TddCleanStructure().directoryStructure[CleanDirName.services]!.path)
+        .existsSync()) {
+      await ShellUtils().addDependencies(
+        dependencies: "flutter_secure_storage",
+      );
+      createFiles([
+        FileModel(
+          TddCleanStructure().directoryStructure[CleanDirName.services]!.path,
+          "token_manager.dart",
+          tokenHandler,
+        ),
+      ]);
+      greenLog("Successfully created Token manager ");
     } else {
       redLog(
           "[ERROR] lib/core/services directory not found\n [ERROR] please create lib/core/services folder and try again");
