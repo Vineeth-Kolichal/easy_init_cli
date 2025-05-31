@@ -612,6 +612,7 @@ class NetworkClient {
     required String path,
     dynamic data,
     dynamic queryParameters,
+    Function(int, int)? onReceiveProgress,
     bool requiresAuth = true,
   }) async {
     try {
@@ -620,6 +621,7 @@ class NetworkClient {
         data: data,
         queryParameters: queryParameters,
         options: Options(extra: {'requiresAuth': requiresAuth}),
+        onReceiveProgress: onReceiveProgress,
       );
       return response;
     } on DioException catch (e) {
@@ -633,6 +635,7 @@ class NetworkClient {
   Future<dynamic> post({
     required String path,
     dynamic data,
+    Function(int, int)? onSendProgress,
     bool requiresAuth = true,
   }) async {
     try {
@@ -640,6 +643,7 @@ class NetworkClient {
         path,
         data: data,
         options: Options(extra: {'requiresAuth': requiresAuth}),
+        onSendProgress: onSendProgress,
       );
       return response;
     } on DioException catch (e) {
@@ -653,12 +657,14 @@ class NetworkClient {
   Future<dynamic> put({
     required String path,
     dynamic data,
+    dynamic queryParameters,
     bool requiresAuth = true,
   }) async {
     try {
       final response = await _dio.put(
         path,
         data: data,
+        queryParameters: queryParameters,
         options: Options(extra: {'requiresAuth': requiresAuth}),
       );
       return response;
@@ -709,9 +715,29 @@ class NetworkClient {
     }
   }
 
+  Future<Response<dynamic>> download({
+    required String url,
+    required targetPath,
+    bool requiresAuth = false,
+    void Function(int, int)? onReceiveProgress,
+  }) async {
+    try {
+      return await _dio.download(
+        url,
+        targetPath,
+        options: Options(extra: {'requiresAuth': requiresAuth}),
+        onReceiveProgress: onReceiveProgress,
+      );
+    } on DioException catch (e) {
+      throw CustomException.fromDioException(e);
+    } catch (e) {
+      throw CustomException.otherException(e.toString());
+    }
+  }
+
   //Function to get token and token refresh
   Future<String?> _getToken() async {
-    String accesToken = '';
+    String? accesToken;
     //TODO: update the following commented code as per your token refresh api request and response
     //If you want to generate token manager run the command 'easy create services' and select Token Manager from the list
 
@@ -745,7 +771,6 @@ class AuthInterceptor extends Interceptor {
 
   // You can also add onResponse and onError methods if needed
 }
-
 
 ''';
 
