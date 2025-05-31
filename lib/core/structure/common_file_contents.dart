@@ -499,7 +499,7 @@ class CustomException implements Exception {
   String _handleError(statusCode) {
     switch (statusCode) {
       case 400:
-        return 'Bad request';
+        return 'An error occured';
       case 401:
         return 'Unauthorized request';
       case 404:
@@ -593,52 +593,58 @@ String networkClientContent = '''
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 
-import '../api_endpoints/api_endpoints.dart';
 import 'network_exceptions.dart';
-
-/// If you have to pass token with api requests then use,[getWithToken],[postWithToken],
-/// [putWithToken],[patchWithToken],[deleteWithToken], methods, if you are not using any token then
-/// you can use [getWithoutToken] and [postWithoutToken] methods.
-/// You can implement Put,Patch,delete without token  methods as per your needs.
-/// You can modify this code as per your needs.
 
 @lazySingleton
 @injectable
 class NetworkClient {
   final Dio _dio;
-  NetworkClient(this._dio);
-
-  final Dio _dioNoToken = Dio(BaseOptions(baseUrl: ApiEndpoints.baseUrl));
+  NetworkClient(this._dio) {
+    final authInterceptor = AuthInterceptor(_getToken);
+    _dio.interceptors.add(authInterceptor);
+  }
 
   //to get access token from other area like sockets
   Future<String?> get getAccessToken => _getToken();
 
   //GET request with token
-  Future<dynamic> getWithToken(
-      {required String path, dynamic data, dynamic queryParameters}) async {
+  Future<dynamic> get({
+    required String path,
+    dynamic data,
+    dynamic queryParameters,
+    Function(int, int)? onReceiveProgress,
+    bool requiresAuth = true,
+  }) async {
     try {
-      final token = await _getToken();
-      _dio.options.headers = {
-        "Content-Type": "application/json",
-        "authorization": "Bearer \$token"
-      };
-      final response =
-          await _dio.get(path, data: data, queryParameters: queryParameters);
+      final response = await _dio.get(
+        path,
+        data: data,
+        queryParameters: queryParameters,
+        options: Options(extra: {'requiresAuth': requiresAuth}),
+        onReceiveProgress: onReceiveProgress,
+      );
       return response;
     } on DioException catch (e) {
       throw CustomException.fromDioException(e);
+    } catch (e) {
+      throw CustomException.otherException(e.toString());
     }
   }
 
   //POST request with token
-  Future<dynamic> postWithToken({required String path, dynamic data}) async {
+  Future<dynamic> post({
+    required String path,
+    dynamic data,
+    Function(int, int)? onSendProgress,
+    bool requiresAuth = true,
+  }) async {
     try {
-      final token = await _getToken();
-      _dio.options.headers = {
-        "Content-Type": "application/json",
-        "authorization": "Bearer \$token"
-      };
-      final response = await _dio.post(path, data: data);
+      final response = await _dio.post(
+        path,
+        data: data,
+        options: Options(extra: {'requiresAuth': requiresAuth}),
+        onSendProgress: onSendProgress,
+      );
       return response;
     } on DioException catch (e) {
       throw CustomException.fromDioException(e);
@@ -648,14 +654,19 @@ class NetworkClient {
   }
 
   //PUT request with token
-  Future<dynamic> putWithToken({required String path, dynamic data}) async {
+  Future<dynamic> put({
+    required String path,
+    dynamic data,
+    dynamic queryParameters,
+    bool requiresAuth = true,
+  }) async {
     try {
-      final token = await _getToken();
-      _dio.options.headers = {
-        "Content-Type": "application/json",
-        "authorization": "Bearer \$token"
-      };
-      final response = await _dio.put(path, data: data);
+      final response = await _dio.put(
+        path,
+        data: data,
+        queryParameters: queryParameters,
+        options: Options(extra: {'requiresAuth': requiresAuth}),
+      );
       return response;
     } on DioException catch (e) {
       throw CustomException.fromDioException(e);
@@ -665,14 +676,17 @@ class NetworkClient {
   }
 
   //PATCH request with token
-  Future<dynamic> patchWithToken({required String path, dynamic data}) async {
+  Future<dynamic> patch({
+    required String path,
+    dynamic data,
+    bool requiresAuth = true,
+  }) async {
     try {
-      final token = await _getToken();
-      _dio.options.headers = {
-        "Content-Type": "application/json",
-        "authorization": "Bearer \$token"
-      };
-      final response = await _dio.patch(path, data: data);
+      final response = await _dio.patch(
+        path,
+        data: data,
+        options: Options(extra: {'requiresAuth': requiresAuth}),
+      );
       return response;
     } on DioException catch (e) {
       throw CustomException.fromDioException(e);
@@ -682,14 +696,17 @@ class NetworkClient {
   }
 
   //DELETE request with token
-  Future<dynamic> deleteWithToken({required String path, dynamic data}) async {
+  Future<dynamic> delete({
+    required String path,
+    dynamic data,
+    bool requiresAuth = true,
+  }) async {
     try {
-      final token = await _getToken();
-      _dio.options.headers = {
-        "Content-Type": "application/json",
-        "authorization": "Bearer \$token"
-      };
-      final response = await _dio.delete(path, data: data);
+      final response = await _dio.delete(
+        path,
+        data: data,
+        options: Options(extra: {'requiresAuth': requiresAuth}),
+      );
       return response;
     } on DioException catch (e) {
       throw CustomException.fromDioException(e);
@@ -698,16 +715,19 @@ class NetworkClient {
     }
   }
 
-  //GET request without token
-  Future<dynamic> getWithoutToken(
-      {required String path, dynamic data, dynamic queryParameters}) async {
-    _dioNoToken.options.headers = {
-      "Content-Type": "application/json",
-    };
+  Future<Response<dynamic>> download({
+    required String url,
+    required targetPath,
+    bool requiresAuth = false,
+    void Function(int, int)? onReceiveProgress,
+  }) async {
     try {
-      final response = await _dioNoToken.get(path,
-          data: data, queryParameters: queryParameters);
-      return response;
+      return await _dio.download(
+        url,
+        targetPath,
+        options: Options(extra: {'requiresAuth': requiresAuth}),
+        onReceiveProgress: onReceiveProgress,
+      );
     } on DioException catch (e) {
       throw CustomException.fromDioException(e);
     } catch (e) {
@@ -715,63 +735,41 @@ class NetworkClient {
     }
   }
 
-  //POST request without token
-  Future<dynamic> postWithoutToken({required String path, dynamic data}) async {
-    _dioNoToken.options.headers = {
-      "Content-Type": "application/json",
-    };
-    try {
-      final response = await _dioNoToken.post(path, data: data);
-      return response;
-    } on DioException catch (e) {
-      throw CustomException.fromDioException(e);
-    } catch (e) {
-      throw CustomException.otherException(e.toString());
-    }
-  }
-
-  //Function to get token
+  //Function to get token and token refresh
   Future<String?> _getToken() async {
+    String? accesToken;
     //TODO: update the following commented code as per your token refresh api request and response
+    //If you want to generate token manager run the command 'easy create services' and select Token Manager from the list
 
-    // DateTime currentTime = DateTime.now();
-    // DateTime? accessTokenTime =
-    //     SharedPrefsServices.instance.getAccessTokenTime();
-    // //finding the time remining time to expiry of access token
-    // Duration difference = currentTime.difference(
-    //   accessTokenTime!,
-    // );
-    // //TODO: change the time difference based on the access token expiry time
-    // // if access token is near to expiry time
-    // if (difference.inMinutes > 55) {
-    //   try {
-    //     String? refreshToken = SharedPrefsServices.instance.getRefreshToken();
-
-    //     //Accessing new refresh and access token from api using existing refresh token
-    //     final Response response = await _dio.post(
-    //       ApiEndpoints.tokenRefresh,
-    //       data: {"refreshToken": refreshToken},
-    //     );
-
-    //     //Retrive new access and refresh token from api response
-    //     final newAccessToken = response.data["token"] as String;
-    //     final newRefreshToken = response.data["refreshToken"] as String;
-
-    //     //Store new refresh and access token to shared preferences
-    //     await SharedPrefsServices.instance.setAccessToken(newAccessToken);
-    //     await SharedPrefsServices.instance.setRefreshToken(newRefreshToken);
-
-    //     //return new access token
-    //     return newAccessToken;
-    //   } catch (e) {
-    //     rethrow;
-    //   }
-    // } else {
-    //   return SharedPrefsServices.instance.getAccessToken();
-    // }
-
-    return "access token";
+    return accesToken;
   }
+}
+
+class AuthInterceptor extends Interceptor {
+  final Future<String?> Function() _getToken;
+
+  AuthInterceptor(this._getToken);
+
+  @override
+  void onRequest(
+    RequestOptions options,
+    RequestInterceptorHandler handler,
+  ) async {
+    // Check if the request explicitly needs a token or if it's generally required
+    // You might add a custom `extra` option to `RequestOptions` to control this.
+    // For simplicity, let's say all requests need a token unless specified otherwise.
+
+    if (options.extra['requiresAuth'] ?? true) {
+      // Default to true if not specified
+      final token = await _getToken();
+      if (token != null && token.isNotEmpty) {
+        options.headers["authorization"] = "Bearer \$token";
+      }
+    }
+    super.onRequest(options, handler);
+  }
+
+  // You can also add onResponse and onError methods if needed
 }
 
 ''';
@@ -1242,51 +1240,14 @@ class SharedPrefsServices {
     sharedPreferences = await SharedPreferences.getInstance();
   }
 
-  /// Set methods>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-  Future<bool> setAccessToken(String token) async {
-    return await sharedPreferences.setString(
-          StorageKeys.accessToken,
-          token,
-        ) &&
-        await sharedPreferences.setString(
-          StorageKeys.accessTokenTime,
-          DateTime.now().toString(),
-        );
+  ///------------------Sample  Set method--------------------------
+  Future<bool> setValue(String token) async {
+    return await sharedPreferences.setString(StorageKeys.key, token);
   }
 
-  Future<bool> setRefreshToken(String token) async {
-    return await sharedPreferences.setString(
-          StorageKeys.refreshToken,
-          token,
-        ) &&
-        await sharedPreferences.setString(
-          StorageKeys.refreshTokenTime,
-          DateTime.now().toString(),
-        );
-  }
-
-  /// Get methods--------------------------------------
-  String? getAccessToken() {
-    return sharedPreferences.getString(StorageKeys.accessToken);
-  }
-
-  String? getRefreshToken() {
-    return sharedPreferences.getString(StorageKeys.refreshToken);
-  }
-
-  DateTime? getAccessTokenTime() {
-    final time = sharedPreferences.getString(StorageKeys.accessTokenTime);
-    if (time != null) {
-      return DateTime.parse(time);
-    } else {
-      return null;
-    }
-  }
-
-  bool isTokenAvailable() {
-    final access = getAccessToken();
-
-    return (access != null);
+  ///------------------Sample  Get methods-------------------------
+  String? getValue() {
+    return sharedPreferences.getString(StorageKeys.key);
   }
 
   Future<void> clearAll() async {
@@ -1297,11 +1258,159 @@ class SharedPrefsServices {
 }
 
 class StorageKeys {
-  static const accessToken = "accessToken";
-  static const refreshToken = "refreshToken";
-  static const accessTokenTime = "accessTokenTime";
-  static const refreshTokenTime = "refreshTokenTime";
+  static const key = "key";
 }
 
+''';
 
+const tokenHandler = '''
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:injectable/injectable.dart';
+
+
+class AuthTokens {
+  final String? accessToken;
+  final String? refreshToken;
+  final DateTime? expiryTime; // UTC DateTime when the access token expires
+
+  AuthTokens({this.accessToken, this.refreshToken, this.expiryTime});
+
+  // Check if both tokens are present
+  bool get isValid => (accessToken != null && refreshToken != null);
+
+  // Check if only the access token has expired.
+  bool get isAccessTokenExpired {
+    if (accessToken == null) {
+      return true; // No access token means it's effectively expired/missing
+    }
+    // If expiryTime is null, we can't determine expiry, so consider it not expired
+    // for this check, or adjust logic based on your API's behavior.
+    return expiryTime != null && DateTime.now().toUtc().isAfter(expiryTime!);
+  }
+
+  @override
+  String toString() {
+    return 'AuthTokens('
+        'accessToken: \${accessToken != null ? '****' : 'null'}, '
+        'refreshToken: \${refreshToken != null ? '****' : 'null'}, '
+        'expiryTime: \${expiryTime?.toIso8601String() ?? 'null'}'
+        ')';
+  }
+}
+
+// Manages the loading, saving, and in-memory caching of authentication tokens.
+@lazySingleton
+class TokenManager {
+  // Use a singleton pattern to ensure only one instance of TokenManager exists.
+  // This helps in centralizing token management.
+  static final TokenManager instance = TokenManager._internal();
+
+  factory TokenManager() {
+    return instance;
+  }
+
+  TokenManager._internal();
+
+  // The FlutterSecureStorage instance for secure persistence.
+  final FlutterSecureStorage _secureStorage = const FlutterSecureStorage();
+
+  // Keys for storing tokens in secure storage.
+  static const String _accessTokenKey = 'access_token';
+  static const String _refreshTokenKey = 'refresh_token';
+  static const String _expiryTimeKey = 'expiry_time'; // New key for expiry time
+
+  // In-memory cache for the tokens.
+  // This is where you'll store the tokens after the initial read.
+  AuthTokens? _currentTokens;
+
+  // Getter to access the current tokens from memory.
+  AuthTokens? get currentTokens => _currentTokens;
+
+  // Initializes the TokenManager by attempting to load tokens from secure storage.
+  // This method should be called once, typically at app startup or when
+  // your authentication service initializes.
+  Future<void> initialize() async {
+    _currentTokens = await _readTokensFromStorage();
+  }
+
+  // Reads the access and refresh tokens (and expiry time) from FlutterSecureStorage.
+  // This operation is typically done only once during initialization.
+  Future<AuthTokens> _readTokensFromStorage() async {
+    try {
+      final String? accessToken = await _secureStorage.read(
+        key: _accessTokenKey,
+      );
+      final String? refreshToken = await _secureStorage.read(
+        key: _refreshTokenKey,
+      );
+      final String? expiryTimeString = await _secureStorage.read(
+        key: _expiryTimeKey,
+      );
+
+      DateTime? expiryTime;
+      if (expiryTimeString != null) {
+        try {
+          expiryTime =
+              DateTime.parse(expiryTimeString).toUtc(); // Parse and ensure UTC
+        } catch (e) {
+          rethrow;
+        }
+      }
+      return AuthTokens(
+        accessToken: accessToken,
+        refreshToken: refreshToken,
+        expiryTime: expiryTime,
+      );
+    } catch (e) {
+      return AuthTokens(); // Return empty tokens on error
+    }
+  }
+
+  // Saves the given tokens (and expiry time) to FlutterSecureStorage and updates the in-memory cache.
+  // This method should be called whenever new tokens are obtained (e.g., after login or refresh).
+  Future<void> saveTokens(AuthTokens newTokens) async {
+    _currentTokens = newTokens; // Update in-memory cache immediately
+    try {
+      if (newTokens.accessToken != null) {
+        await _secureStorage.write(
+          key: _accessTokenKey,
+          value: newTokens.accessToken,
+        );
+      } else {
+        await _secureStorage.delete(key: _accessTokenKey); // Clear if null
+      }
+      if (newTokens.refreshToken != null) {
+        await _secureStorage.write(
+          key: _refreshTokenKey,
+          value: newTokens.refreshToken,
+        );
+      } else {
+        await _secureStorage.delete(key: _refreshTokenKey); // Clear if null
+      }
+      if (newTokens.expiryTime != null) {
+        // Store expiry time as ISO 8601 string (UTC)
+        await _secureStorage.write(
+          key: _expiryTimeKey,
+          value: newTokens.expiryTime!.toIso8601String(),
+        );
+      } else {
+        await _secureStorage.delete(key: _expiryTimeKey); // Clear if null
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  // This should be called on logout.
+  Future<void> clearTokens() async {
+    _currentTokens = null; // Clear in-memory cache
+    try {
+      await _secureStorage.delete(key: _accessTokenKey);
+      await _secureStorage.delete(key: _refreshTokenKey);
+      await _secureStorage.delete(key: _expiryTimeKey); // Clear expiry time too
+    } catch (e) {
+      rethrow;
+    }
+  }
+}
 ''';

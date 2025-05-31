@@ -76,6 +76,12 @@ import '../../api_endpoints/api_endpoints.dart';
 @module
 abstract class DioModule {
   @lazySingleton
-  Dio get dioInstance => Dio(BaseOptions(baseUrl: ApiEndpoints.baseUrl));
+  Dio get dioInstance => Dio(
+    BaseOptions(
+      baseUrl: ApiEndpoints.baseUrl,
+      connectTimeout: const Duration(seconds: 60),
+      receiveTimeout: const Duration(seconds: 60),
+    ),
+  );
 }
 ''';

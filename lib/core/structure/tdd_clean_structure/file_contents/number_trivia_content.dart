@@ -26,8 +26,10 @@ class NumberTriviaDataSourceImpl implements NumberTriviaDataSource {
   Future<TriviaModel> getConcreteTrivia(NumberParam params) async {
     try {
       // Making GET request to fetch trivia
-      final response =
-          await client.getWithoutToken(path: "/\${params.number}/trivia?json");
+    final response = await client.get(
+        path: "/\${params.number}/trivia?json",
+        requiresAuth: false,
+      );
       // Parsing response data into TriviaModel
       return TriviaModel.fromJson(response.data);
     } catch (e) {
@@ -226,7 +228,7 @@ const triviaState = '''
 part of 'number_trivia_bloc.dart';
 
 @freezed
-class NumberTriviaState with _\$NumberTriviaState {
+sealed class NumberTriviaState with _\$NumberTriviaState {
   const factory NumberTriviaState({
     required bool isLoading,
     String? error,

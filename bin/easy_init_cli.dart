@@ -4,7 +4,7 @@ import 'package:easy_init_cli/easy_init_logo.dart';
 import 'package:easy_init_cli/utils/shell_utils.dart';
 import 'package:easy_init_cli/core/generator.dart';
 
-const String version = '1.2.1';
+const String version = '1.2.2';
 
 ArgParser buildParser() {
   return ArgParser()
@@ -55,7 +55,6 @@ void main(List<String> arguments) async {
       return;
     }
     final command = EasyInitCli(arguments).findCommand();
-    print(command.commandName);
     await command.excecute();
   } on FormatException catch (e) {
     // Print usage information if an invalid argument was provided.

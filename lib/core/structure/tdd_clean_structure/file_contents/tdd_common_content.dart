@@ -30,7 +30,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'failures.freezed.dart';
 
 @freezed
-class Failure with _\$Failure {
+sealed class Failure with _\$Failure {
   factory Failure.apiRequestFailure(String error) = ApiRequestFailure;
 }
 ''';
@@ -264,7 +264,7 @@ const String homeStateContent = '''
 part of 'home_bloc.dart';
 
 @freezed
-class HomeState with _\$HomeState {
+sealed class HomeState with _\$HomeState {
   const factory HomeState({required int count}) = _Initial;
   factory HomeState.initial() => const HomeState(count: 0);
 }
