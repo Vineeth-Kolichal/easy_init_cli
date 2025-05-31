@@ -499,7 +499,7 @@ class CustomException implements Exception {
   String _handleError(statusCode) {
     switch (statusCode) {
       case 400:
-        return 'Bad request';
+        return 'An error occured';
       case 401:
         return 'Unauthorized request';
       case 404:
@@ -593,52 +593,54 @@ String networkClientContent = '''
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 
-import '../api_endpoints/api_endpoints.dart';
 import 'network_exceptions.dart';
-
-/// If you have to pass token with api requests then use,[getWithToken],[postWithToken],
-/// [putWithToken],[patchWithToken],[deleteWithToken], methods, if you are not using any token then
-/// you can use [getWithoutToken] and [postWithoutToken] methods.
-/// You can implement Put,Patch,delete without token  methods as per your needs.
-/// You can modify this code as per your needs.
 
 @lazySingleton
 @injectable
 class NetworkClient {
   final Dio _dio;
-  NetworkClient(this._dio);
-
-  final Dio _dioNoToken = Dio(BaseOptions(baseUrl: ApiEndpoints.baseUrl));
+  NetworkClient(this._dio) {
+    final authInterceptor = AuthInterceptor(_getToken);
+    _dio.interceptors.add(authInterceptor);
+  }
 
   //to get access token from other area like sockets
   Future<String?> get getAccessToken => _getToken();
 
   //GET request with token
-  Future<dynamic> getWithToken(
-      {required String path, dynamic data, dynamic queryParameters}) async {
+  Future<dynamic> get({
+    required String path,
+    dynamic data,
+    dynamic queryParameters,
+    bool requiresAuth = true,
+  }) async {
     try {
-      final token = await _getToken();
-      _dio.options.headers = {
-        "Content-Type": "application/json",
-        "authorization": "Bearer \$token"
-      };
-      final response =
-          await _dio.get(path, data: data, queryParameters: queryParameters);
+      final response = await _dio.get(
+        path,
+        data: data,
+        queryParameters: queryParameters,
+        options: Options(extra: {'requiresAuth': requiresAuth}),
+      );
       return response;
     } on DioException catch (e) {
       throw CustomException.fromDioException(e);
+    } catch (e) {
+      throw CustomException.otherException(e.toString());
     }
   }
 
   //POST request with token
-  Future<dynamic> postWithToken({required String path, dynamic data}) async {
+  Future<dynamic> post({
+    required String path,
+    dynamic data,
+    bool requiresAuth = true,
+  }) async {
     try {
-      final token = await _getToken();
-      _dio.options.headers = {
-        "Content-Type": "application/json",
-        "authorization": "Bearer \$token"
-      };
-      final response = await _dio.post(path, data: data);
+      final response = await _dio.post(
+        path,
+        data: data,
+        options: Options(extra: {'requiresAuth': requiresAuth}),
+      );
       return response;
     } on DioException catch (e) {
       throw CustomException.fromDioException(e);
@@ -648,14 +650,17 @@ class NetworkClient {
   }
 
   //PUT request with token
-  Future<dynamic> putWithToken({required String path, dynamic data}) async {
+  Future<dynamic> put({
+    required String path,
+    dynamic data,
+    bool requiresAuth = true,
+  }) async {
     try {
-      final token = await _getToken();
-      _dio.options.headers = {
-        "Content-Type": "application/json",
-        "authorization": "Bearer \$token"
-      };
-      final response = await _dio.put(path, data: data);
+      final response = await _dio.put(
+        path,
+        data: data,
+        options: Options(extra: {'requiresAuth': requiresAuth}),
+      );
       return response;
     } on DioException catch (e) {
       throw CustomException.fromDioException(e);
@@ -665,14 +670,17 @@ class NetworkClient {
   }
 
   //PATCH request with token
-  Future<dynamic> patchWithToken({required String path, dynamic data}) async {
+  Future<dynamic> patch({
+    required String path,
+    dynamic data,
+    bool requiresAuth = true,
+  }) async {
     try {
-      final token = await _getToken();
-      _dio.options.headers = {
-        "Content-Type": "application/json",
-        "authorization": "Bearer \$token"
-      };
-      final response = await _dio.patch(path, data: data);
+      final response = await _dio.patch(
+        path,
+        data: data,
+        options: Options(extra: {'requiresAuth': requiresAuth}),
+      );
       return response;
     } on DioException catch (e) {
       throw CustomException.fromDioException(e);
@@ -682,14 +690,17 @@ class NetworkClient {
   }
 
   //DELETE request with token
-  Future<dynamic> deleteWithToken({required String path, dynamic data}) async {
+  Future<dynamic> delete({
+    required String path,
+    dynamic data,
+    bool requiresAuth = true,
+  }) async {
     try {
-      final token = await _getToken();
-      _dio.options.headers = {
-        "Content-Type": "application/json",
-        "authorization": "Bearer \$token"
-      };
-      final response = await _dio.delete(path, data: data);
+      final response = await _dio.delete(
+        path,
+        data: data,
+        options: Options(extra: {'requiresAuth': requiresAuth}),
+      );
       return response;
     } on DioException catch (e) {
       throw CustomException.fromDioException(e);
@@ -698,81 +709,43 @@ class NetworkClient {
     }
   }
 
-  //GET request without token
-  Future<dynamic> getWithoutToken(
-      {required String path, dynamic data, dynamic queryParameters}) async {
-    _dioNoToken.options.headers = {
-      "Content-Type": "application/json",
-    };
-    try {
-      final response = await _dioNoToken.get(path,
-          data: data, queryParameters: queryParameters);
-      return response;
-    } on DioException catch (e) {
-      throw CustomException.fromDioException(e);
-    } catch (e) {
-      throw CustomException.otherException(e.toString());
-    }
-  }
-
-  //POST request without token
-  Future<dynamic> postWithoutToken({required String path, dynamic data}) async {
-    _dioNoToken.options.headers = {
-      "Content-Type": "application/json",
-    };
-    try {
-      final response = await _dioNoToken.post(path, data: data);
-      return response;
-    } on DioException catch (e) {
-      throw CustomException.fromDioException(e);
-    } catch (e) {
-      throw CustomException.otherException(e.toString());
-    }
-  }
-
-  //Function to get token
+  //Function to get token and token refresh
   Future<String?> _getToken() async {
+    String accesToken = '';
     //TODO: update the following commented code as per your token refresh api request and response
+    //If you want to generate token manager run the command 'easy create services' and select Token Manager from the list
 
-    // DateTime currentTime = DateTime.now();
-    // DateTime? accessTokenTime =
-    //     SharedPrefsServices.instance.getAccessTokenTime();
-    // //finding the time remining time to expiry of access token
-    // Duration difference = currentTime.difference(
-    //   accessTokenTime!,
-    // );
-    // //TODO: change the time difference based on the access token expiry time
-    // // if access token is near to expiry time
-    // if (difference.inMinutes > 55) {
-    //   try {
-    //     String? refreshToken = SharedPrefsServices.instance.getRefreshToken();
-
-    //     //Accessing new refresh and access token from api using existing refresh token
-    //     final Response response = await _dio.post(
-    //       ApiEndpoints.tokenRefresh,
-    //       data: {"refreshToken": refreshToken},
-    //     );
-
-    //     //Retrive new access and refresh token from api response
-    //     final newAccessToken = response.data["token"] as String;
-    //     final newRefreshToken = response.data["refreshToken"] as String;
-
-    //     //Store new refresh and access token to shared preferences
-    //     await SharedPrefsServices.instance.setAccessToken(newAccessToken);
-    //     await SharedPrefsServices.instance.setRefreshToken(newRefreshToken);
-
-    //     //return new access token
-    //     return newAccessToken;
-    //   } catch (e) {
-    //     rethrow;
-    //   }
-    // } else {
-    //   return SharedPrefsServices.instance.getAccessToken();
-    // }
-
-    return "access token";
+    return accesToken;
   }
 }
+
+class AuthInterceptor extends Interceptor {
+  final Future<String?> Function() _getToken;
+
+  AuthInterceptor(this._getToken);
+
+  @override
+  void onRequest(
+    RequestOptions options,
+    RequestInterceptorHandler handler,
+  ) async {
+    // Check if the request explicitly needs a token or if it's generally required
+    // You might add a custom `extra` option to `RequestOptions` to control this.
+    // For simplicity, let's say all requests need a token unless specified otherwise.
+
+    if (options.extra['requiresAuth'] ?? true) {
+      // Default to true if not specified
+      final token = await _getToken();
+      if (token != null && token.isNotEmpty) {
+        options.headers["authorization"] = "Bearer \$token";
+      }
+    }
+    super.onRequest(options, handler);
+  }
+
+  // You can also add onResponse and onError methods if needed
+}
+
 
 ''';
 
