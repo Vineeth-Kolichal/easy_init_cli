@@ -607,7 +607,8 @@ class NetworkClient {
   //to get access token from other area like sockets
   Future<String?> get getAccessToken => _getToken();
 
-  //GET request with token
+  /// GET request with authoruzation by default.
+  /// If you want to make an api call without token pass [requiresAuth] value as false
   Future<dynamic> get({
     required String path,
     dynamic data,
@@ -631,7 +632,8 @@ class NetworkClient {
     }
   }
 
-  //POST request with token
+  ///POST request with authoruzation by default.
+  /// Ff you want to make an api call without token pass [requiresAuth] value as false
   Future<dynamic> post({
     required String path,
     dynamic data,
@@ -653,7 +655,8 @@ class NetworkClient {
     }
   }
 
-  //PUT request with token
+  /// PUT request with authoruzation by default.
+  /// If you want to make an api call without token pass [requiresAuth] value as false
   Future<dynamic> put({
     required String path,
     dynamic data,
@@ -675,7 +678,8 @@ class NetworkClient {
     }
   }
 
-  //PATCH request with token
+  /// PATCH request with authoruzation by default.
+  /// If you want to make an api call without token pass [requiresAuth] value as false
   Future<dynamic> patch({
     required String path,
     dynamic data,
@@ -695,7 +699,8 @@ class NetworkClient {
     }
   }
 
-  //DELETE request with token
+  /// DELETE request with authoruzation by default.
+  /// If you want to make an api call without token pass [requiresAuth] value as false
   Future<dynamic> delete({
     required String path,
     dynamic data,
@@ -737,9 +742,55 @@ class NetworkClient {
 
   //Function to get token and token refresh
   Future<String?> _getToken() async {
-    String? accesToken;
-    //TODO: update the following commented code as per your token refresh api request and response
+    //Example token refresh logic
+    //----------------------------------------------
+    // final tokens = tokenManager.currentTokens;
+
+    // // if access token is near to expiry time
+    // if (tokens?.isAccessTokenExpired == true) {
+    //   try {
+    //     String? refreshToken = tokens?.refreshToken;
+
+    //     //Accessing new refresh and access token from api using existing refresh token
+    //     final Response response = await post(
+    //       requiresAuth: false,
+    //       path: ApiEndpoints.tokenRefresh,
+    //       data: {"refreshToken": refreshToken},
+    //     );
+
+    //     //Retrive new access and refresh token from api response
+    //     final newAccessToken = response.data["token"] as String;
+    //     final newRefreshToken = response.data["refreshToken"] as String;
+    //     final expiryTime = DateTime.now().toUtc().add(Duration(minutes: 55));// 55 minute is a sample duration. Change it based on your token expiry time
+
+    //     final newTokens = AuthTokens(
+    //         accessToken: newAccessToken,
+    //         refreshToken: newRefreshToken,
+    //         expiryTime: expiryTime);
+    //     await tokenManager.saveTokens(newTokens);
+    //     //return new access token
+    //     return newAccessToken;
+    //   } catch (e) {
+    //     return null;
+    //   }
+    // } else {
+    //   return tokens?.accessToken;
+    // }
+    //--------------------------------------------
+
+    //The above given example code is using token manager
     //If you want to generate token manager run the command 'easy create services' and select Token Manager from the list
+    //To inject token manager to network client using dependancy injection modify NetworkClient like following
+
+    //class NetworkClient {
+    // final Dio _dio;
+    // final TokenManager tokenManager;
+    // NetworkClient(this._dio, this.tokenManager) {
+    //   final authInterceptor = AuthInterceptor(_getToken);
+    //   _dio.interceptors.add(authInterceptor);
+    // }
+
+    String? accesToken;
 
     return accesToken;
   }
