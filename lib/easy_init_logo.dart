@@ -14,6 +14,6 @@ String logo = '''
       ####  ##      ##  ####      ##
 
          Made with 🩵  by Vineeth
-              Version :1.2.2
+              Version :1.2.3
 
 ''';

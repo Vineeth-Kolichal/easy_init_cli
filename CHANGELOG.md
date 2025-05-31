@@ -1,3 +1,5 @@
+## 1.2.3
+  -  Bug fixes
 ## 1.2.2
   - Updations in clean architecture
     - NetworkClient
