@@ -1,3 +1,8 @@
+## 1.2.2
+  - Updations in clean architecture
+    - NetworkClient
+    - Token manager service creation added
+    - and Bug fixes
 ## 1.2.1
   - Updations in clean architecture
     - Theme configurations
