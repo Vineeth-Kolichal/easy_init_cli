@@ -4,7 +4,7 @@ import 'package:easy_init_cli/easy_init_logo.dart';
 import 'package:easy_init_cli/utils/shell_utils.dart';
 import 'package:easy_init_cli/core/generator.dart';
 
-const String version = '1.2.3';
+const String version = '1.2.4';
 
 ArgParser buildParser() {
   return ArgParser()
@@ -35,7 +35,7 @@ void main(List<String> arguments) async {
   final ArgParser argParser = buildParser();
   try {
     if (arguments.isEmpty) {
-      print(blue(logo));
+      print(yellow(logo));
       //printUsage(argParser);
       return;
     }
