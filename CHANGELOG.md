@@ -1,3 +1,5 @@
+## 1.2.5
+  -  Logo update
 ## 1.2.4
   -  Bug fixes
 ## 1.2.3
