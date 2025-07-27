@@ -609,7 +609,7 @@ class NetworkClient {
 
   /// GET request with authoruzation by default.
   /// If you want to make an api call without token pass [requiresAuth] value as false
-  Future<dynamic> get({
+  Future<Response<T>> get<T>({
     required String path,
     dynamic data,
     dynamic queryParameters,
@@ -617,7 +617,7 @@ class NetworkClient {
     bool requiresAuth = true,
   }) async {
     try {
-      final response = await _dio.get(
+      final response = await _dio.get<T>(
         path,
         data: data,
         queryParameters: queryParameters,
@@ -634,14 +634,14 @@ class NetworkClient {
 
   ///POST request with authoruzation by default.
   /// Ff you want to make an api call without token pass [requiresAuth] value as false
-  Future<dynamic> post({
+  Future<Response<T>> post<T>({
     required String path,
     dynamic data,
     Function(int, int)? onSendProgress,
     bool requiresAuth = true,
   }) async {
     try {
-      final response = await _dio.post(
+      final response = await _dio.post<T>(
         path,
         data: data,
         options: Options(extra: {'requiresAuth': requiresAuth}),
@@ -657,14 +657,14 @@ class NetworkClient {
 
   /// PUT request with authoruzation by default.
   /// If you want to make an api call without token pass [requiresAuth] value as false
-  Future<dynamic> put({
+  Future<Response<T>> put<T>({
     required String path,
     dynamic data,
     dynamic queryParameters,
     bool requiresAuth = true,
   }) async {
     try {
-      final response = await _dio.put(
+      final response = await _dio.put<T>(
         path,
         data: data,
         queryParameters: queryParameters,
@@ -680,13 +680,13 @@ class NetworkClient {
 
   /// PATCH request with authoruzation by default.
   /// If you want to make an api call without token pass [requiresAuth] value as false
-  Future<dynamic> patch({
+  Future<Response<T>> patch<T>({
     required String path,
     dynamic data,
     bool requiresAuth = true,
   }) async {
     try {
-      final response = await _dio.patch(
+      final response = await _dio.patch<T>(
         path,
         data: data,
         options: Options(extra: {'requiresAuth': requiresAuth}),
@@ -701,13 +701,13 @@ class NetworkClient {
 
   /// DELETE request with authoruzation by default.
   /// If you want to make an api call without token pass [requiresAuth] value as false
-  Future<dynamic> delete({
+  Future<Response<T>> delete<T>({
     required String path,
     dynamic data,
     bool requiresAuth = true,
   }) async {
     try {
-      final response = await _dio.delete(
+      final response = await _dio.delete<T>(
         path,
         data: data,
         options: Options(extra: {'requiresAuth': requiresAuth}),
