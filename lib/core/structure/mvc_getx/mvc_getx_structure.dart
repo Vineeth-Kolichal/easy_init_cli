@@ -119,11 +119,6 @@ class MvcGetXStructure extends Structure {
   @override
   List<FileModel> get coreFiles => [
         FileModel(
-          Directory.current.path,
-          "easy_init_mvc_grl",
-          initWarning,
-        ),
-        FileModel(
           'lib',
           "main.dart",
           mvcMainContent,

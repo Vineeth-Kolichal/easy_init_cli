@@ -3,12 +3,17 @@ import 'dart:io';
 
 import 'package:easy_init_cli/core/structure/models/structure.dart';
 import 'package:easy_init_cli/functions/find_current_architecture.dart';
+import 'package:easy_init_cli/core/structure/mvc_getx/mvc_getx_structure.dart';
+import 'package:easy_init_cli/core/structure/tdd_clean_structure/tdd_clean_structure.dart';
 import 'package:easy_init_cli/utils/user_input.dart';
 import 'package:easy_init_cli/utils/shell_utils.dart';
 import 'package:easy_init_cli/core/structure/export_structure.dart';
 import 'package:easy_init_cli/functions/create.dart';
 import 'package:easy_init_cli/interfaces/command.dart';
 import 'package:recase/recase.dart';
+import 'package:easy_init_cli/core/config/config.dart';
+import 'package:easy_init_cli/functions/config_manager.dart';
+import 'package:easy_init_cli/core/version.dart';
 
 class InitProject extends Command {
   @override
@@ -89,6 +94,26 @@ class InitProject extends Command {
       await ShellUtils().pubGet();
       await ShellUtils().runBuildRunner();
     }
+
+    // Determine architecture and pattern for config
+    String architecture = "";
+    String pattern = "";
+    if (structure is TddCleanStructure) {
+      architecture = "tdd_clean";
+      pattern = "brf";
+    } else if (structure is MvcGetXStructure) {
+      architecture = "mvc";
+      pattern = "grl";
+    }
+
+    // Create config file
+    await ConfigManager.createConfig(
+      Config(
+        architecture: architecture,
+        pattern: pattern,
+        version: packageVersion,
+      ),
+    );
 
     greenLog(
       "Project initialized with ${structure.architectureName} architecture",

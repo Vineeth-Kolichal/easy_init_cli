@@ -1,3 +1,4 @@
+import 'package:easy_init_cli/functions/config_manager.dart';
 import 'dart:io';
 
 String? findCurrentArchitecture() {
@@ -14,6 +15,20 @@ String? findCurrentArchitecture() {
   ///---------------
   ///suffix order -> state management + data source type(rest api or not)+ architecture type
   ///example:  'brf' means bloc+rest api+feature wise architecture
+
+  // Use ConfigManager to get the current architecture
+  if (ConfigManager.isInitialized) {
+    final config = ConfigManager.getConfig();
+    if (config != null) {
+      if (config.architecture == 'tdd_clean' && config.pattern == 'brf') {
+        return "tdd-brf";
+      } else if (config.architecture == 'mvc' && config.pattern == 'grl') {
+        return "mvc-grl";
+      }
+    }
+  }
+
+  // Fallback for older projects that might still use marker files
   if (File('easy_init_tdd_clean_brf').existsSync()) {
     return "tdd-brf";
   } else if (File('easy_init_mvc_grl').existsSync()) {
