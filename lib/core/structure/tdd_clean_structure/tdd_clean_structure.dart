@@ -49,6 +49,11 @@ class TddCleanStructure extends Structure {
             path: "lib/core/base_usecase",
           ),
         ),
+        CleanDirName.mainConfig: Directory(
+          replaceAsExpected(
+            path: "lib/core/config",
+          ),
+        ),
         CleanDirName.dependancyInjection: Directory(
           replaceAsExpected(
             path: "lib/core/dependancy_injection",
@@ -202,6 +207,11 @@ class TddCleanStructure extends Structure {
           '',
         ),
         FileModel(
+          directoryStructure[CleanDirName.mainConfig]!.path,
+          "flavor_config.dart",
+          flavorConfigContent,
+        ),
+        FileModel(
           directoryStructure[CleanDirName.apiEndpoints]!.path,
           "api_endpoints.dart",
           apiEndpointContent,
@@ -310,6 +320,11 @@ class TddCleanStructure extends Structure {
           'lib',
           "main.dart",
           mainContent,
+        ),
+        FileModel(
+          'lib',
+          "app_runner.dart",
+          appRunnerContent,
         ),
         FileModel(
           'lib',
@@ -479,6 +494,7 @@ class CleanDirName {
   static String typography = "typography";
   static String config = "config";
   static String modules = "modules";
+  static String mainConfig = "config";
   //features
   static String featureNm = CreateFeature.featureName.snakeCase;
   static String data = "data";

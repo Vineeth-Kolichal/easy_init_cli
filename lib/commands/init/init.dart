@@ -32,7 +32,7 @@ class InitProject extends Command {
             await _initArchitecture(
               structure: TddCleanStructure(),
               dependencies:
-                  "dartz flutter_bloc injectable freezed_annotation get_it dio intl",
+                  "dartz flutter_bloc injectable freezed_annotation get_it dio intl go_router",
               devDependencies:
                   "build_runner freezed injectable_generator mocktail",
             );
