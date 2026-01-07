@@ -21,6 +21,8 @@ executables:
   easy: easy_init_cli
 
 platforms:
+  android:
+  ios:
   linux:
   macos:
   windows:

@@ -3,8 +3,7 @@ import 'package:dcli/dcli.dart';
 import 'package:easy_init_cli/easy_init_logo.dart';
 import 'package:easy_init_cli/utils/shell_utils.dart';
 import 'package:easy_init_cli/core/generator.dart';
-
-const String version = '1.2.6';
+import 'package:easy_init_cli/core/version.dart';
 
 ArgParser buildParser() {
   return ArgParser()
@@ -47,7 +46,7 @@ void main(List<String> arguments) async {
       return;
     }
     if (results.wasParsed('version')) {
-      print('easy_init_cli version: $version');
+      print('easy_init_cli version: $packageVersion');
       return;
     }
     if (results.wasParsed('update')) {
