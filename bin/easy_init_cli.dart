@@ -26,7 +26,18 @@ ArgParser buildParser() {
 }
 
 void printUsage(ArgParser argParser) {
-  print('Usage: dart easy_init_cli.dart <flags> [arguments]');
+  print('Usage: easy <command> [arguments]');
+  print('');
+  print('Available commands:');
+  print('  create project      Create a new Flutter project');
+  print('  init                Initialize project with architecture');
+  print('  create feature      Create a new feature');
+  print(
+      '  create services     Add services (FCM, Token Manager, Shared Prefs)');
+  print('  build               Run build_runner');
+  print('  update              Update easy_init_cli');
+  print('');
+  print('Global flags:');
   print(argParser.usage);
 }
 
