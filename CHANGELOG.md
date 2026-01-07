@@ -1,3 +1,7 @@
+## 1.2.6
+    - Critical bug fixes in directory creation
+    - README improvements
+    - Recursive directory creation enabled
 ## 1.2.5
   -  Logo update
 ## 1.2.4
