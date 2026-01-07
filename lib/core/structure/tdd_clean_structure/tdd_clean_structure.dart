@@ -278,7 +278,7 @@ class TddCleanStructure extends Structure {
         ),
         FileModel(
           directoryStructure[CleanDirName.routes]!.path,
-          "app_routes.dart",
+          "app_router.dart",
           routeContentRest,
         ),
         FileModel(
@@ -494,7 +494,7 @@ class CleanDirName {
   static String typography = "typography";
   static String config = "config";
   static String modules = "modules";
-  static String mainConfig = "config";
+  static String mainConfig = "main_config";
   //features
   static String featureNm = CreateFeature.featureName.snakeCase;
   static String data = "data";
