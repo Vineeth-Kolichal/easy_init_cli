@@ -3,14 +3,11 @@ import 'dart:io';
 
 import 'package:easy_init_cli/core/structure/models/structure.dart';
 import 'package:easy_init_cli/functions/find_current_architecture.dart';
-import 'package:easy_init_cli/core/structure/mvc_getx/mvc_getx_structure.dart';
-import 'package:easy_init_cli/core/structure/tdd_clean_structure/tdd_clean_structure.dart';
 import 'package:easy_init_cli/utils/user_input.dart';
 import 'package:easy_init_cli/utils/shell_utils.dart';
 import 'package:easy_init_cli/core/structure/export_structure.dart';
 import 'package:easy_init_cli/functions/create.dart';
 import 'package:easy_init_cli/interfaces/command.dart';
-import 'package:recase/recase.dart';
 import 'package:easy_init_cli/core/config/config.dart';
 import 'package:easy_init_cli/functions/config_manager.dart';
 import 'package:easy_init_cli/core/version.dart';
@@ -125,7 +122,7 @@ class InitProject extends Command {
         "[WARNING] Project is already initialized with ${archName.toUpperCase()} architecture pattern");
     print('''If you wanted to change architecture pattern;
  > Remove all folders and files from lib folder.
- > Remove 'easy_init_${archName.snakeCase}_$suffix' file from root folder. 
+ > Remove 'easy_init.json' file from root folder. 
  > Run 'easy init' command again''');
   }
 }
