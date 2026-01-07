@@ -1,101 +1,117 @@
+# Easy Init CLI
+
+[![Pub Version](https://img.shields.io/pub/v/easy_init_cli)](https://pub.dev/packages/easy_init_cli)
+[![Likes](https://img.shields.io/pub/likes/easy_init_cli)](https://pub.dev/packages/easy_init_cli)
+[![License](https://img.shields.io/badge/license-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
 ![easy_init](https://github.com/Vineeth-Kolichal/easy_init_cli/assets/92266542/1e82177d-f4f0-4b51-bbf2-856616ed2a1f)
 
+## 🚀 Overview
 
-# Exploring the CLI
+**Easy Init CLI** is a powerful command-line tool designed to streamline the initialization of Flutter projects. It automatically sets up your project with a well-structured, scalable, and testable architecture, saving you time on boilerplate setup.
 
-Easy Init CLI is a command-line tool that streamlines the creation of Flutter projects. It initializes the project with boilerplate code following a well-structured and maintainable architecture pattern.
+Currently, it supports **TDD + Clean Architecture**, a robust pattern favoured by many professional Flutter developers for its separation of concerns and testability.
 
-### Installation
-You can install the package from the command line:
+## ✨ Key Features
+
+- **Automated Project Setup**: Instantly generate a complete project structure.
+- **Clean Architecture**: Follows industry-standard TDD + Clean Architecture principles.
+- **Feature Generation**: Easily add new features (like Authentication) with a single command.
+- **Dependency Management**: Automatically adds necessary dependencies and dev-dependencies.
+- **Customizable**: Generated code is a starting point you can tailor to your needs.
+
+## 📦 Installation
+
+Install the package globally from the command line:
+
 ```shell
 dart pub global activate easy_init_cli
 ```
 
-### Create Project
+## 🛠️ Usage Guide
+
+### 1. Create a New Project
+
+Generate a new Flutter project with a custom organization domain:
+
 ```shell
 easy create project
 ```
-Use this command to create new flutter project. This command will prompt you to provide a project name and organization domain. 
- (example- project name : todo app, organization domain : com.example )
-### Initialize project
-```sh
-#replace project_name with your project's name
-cd project_name
+
+Follow the prompts to enter your project name and organization domain (e.g., `com.example`).
+
+### 2. Initialize Architecture
+
+Navigate to your project directory:
+
+```shell
+cd <your_project_name>
 ```
-Use the cd command in the terminal to navigate to the project's root directory.
+
+Initialize the project structure:
+
 ```shell
 easy init
 ```
-Use this command to initialize your project with a well-structured architectural pattern. This command will prompt you to select the architecture. 
 
-![Screenshot from 2024-04-11 15-37-44](https://github.com/Vineeth-Kolichal/easy_init_cli/assets/92266542/b4fd61a6-5c54-4af6-8b48-e22b136f315f)
+You will be prompted to select an architecture. Currently, **TDD + Clean Architecture** is the supported pattern.
 
-Currently only one architecture pattern is available in ```easy_init_cli```
+![Architecture Selection](https://github.com/Vineeth-Kolichal/easy_init_cli/assets/92266542/b4fd61a6-5c54-4af6-8b48-e22b136f315f)
 
-1. #### TDD + Clean Architecture
-The folder structure of TDD + Clean Architecture looks like this:
+### 3. Create a Feature
 
+Generate a new feature module following Clean Architecture principles:
 
-![Screenshot from 2024-04-11 15-31-36](https://github.com/Vineeth-Kolichal/easy_init_cli/assets/92266542/ac1cc2ea-69ad-4b2d-87dd-2796507e451d)
-
-To learn more about TDD + Clean architecture refer [Reso Coder](https://resocoder.com/flutter-clean-architecture-tdd/)'s website
-
-```txt
-- MVC architecture pattern creation is temporarly disabled for updations.
-
-```
-
-
-<!-- 2. #### MVC
-The folder structure of MVC Architecture looks like this:
-
-
-![Screenshot from 2024-04-11 15-28-09](https://github.com/Vineeth-Kolichal/easy_init_cli/assets/92266542/1c1b9bdf-7cf5-46cf-9668-0cf64ace629f) -->
-
-
-
-
-###### Note
-
-```txt
-- As an initial step, the code for a number trivia feature will be implemented in both architectures.
-  This will serve as a learning tool to understand the call flow within the chosen architectural pattern.
-
-- The number trivia feature can then be removed when development on the core project functionalities commences.
-
-- All required dependencies and dev dependencies will added automatically, you can add or remove dependencies as per your need.
-
-- The generated files can be customized to suit your specific needs.
-```
-
-### Create feature
 ```shell
 easy create feature
 ```
-Use this command to create new Clean architecture feature. this command will promt you to provide a feature name.
 
-OR 
+Or specify the feature name directly:
 
 ```shell
-easy create feature:feature_name
-
+easy create feature:<feature_name>
 ```
-The ```screens``` folder will contain authentication-related screen files if the feature name is either 'auth' or 'authentication'
 
-### Run build-runner
-```sh
+> **Note**: If you name your feature `auth` or `authentication`, the CLI will automatically include authentication-related screen files.
+
+### 4. Run Build Runner
+
+Simplify running the build_runner for code generation:
+
+```shell
 easy build
 ```
-Use this command to run build runner easly.
 
-### Update easy_init_cli
-```sh
+### 5. Update CLI
+
+Keep your CLI up to date with the latest features and fixes:
+
+```shell
 easy update
 ```
-To update easy_init_cli to latest version run this command
 
+## 🏗️ Architecture
 
+### TDD + Clean Architecture
 
+This architecture separates the code into three main layers: **Data**, **Domain**, and **Presentation**, ensuring independence and testability.
 
+![Folder Structure](https://github.com/Vineeth-Kolichal/easy_init_cli/assets/92266542/ac1cc2ea-69ad-4b2d-87dd-2796507e451d)
 
+For a deep dive into this architecture, we recommend [Reso Coder's Flutter Clean Architecture Course](https://resocoder.com/flutter-clean-architecture-tdd/).
+
+> **Note**: A "Number Trivia" feature is generated by default to demonstrate the architecture's flow. You can use this as a reference or remove it when you start building your core features.
+
+## 🤝 Contributing
+
+Contributions are welcome! If you find a bug or have a feature request, please open an issue.
+
+1. Fork the repository.
+2. Create your feature branch (`git checkout -b feature/my-feature`).
+3. Commit your changes (`git commit -m 'Add some feature'`).
+4. Push to the branch (`git push origin feature/my-feature`).
+5. Open a Pull Request.
+
+## 📄 License
+
+This project is licensed under the BSD 3-Clause License - see the [LICENSE](LICENSE) file for details.
