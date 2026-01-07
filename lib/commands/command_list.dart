@@ -33,5 +33,5 @@ class CommandParent extends Command {
   String get commandName => _name;
 
   @override
-  Future<void> excecute() async {}
+  Future<void> execute() async {}
 }

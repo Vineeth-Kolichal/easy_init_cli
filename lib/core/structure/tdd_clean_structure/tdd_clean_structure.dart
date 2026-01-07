@@ -4,7 +4,7 @@ import 'package:recase/recase.dart';
 
 import '../../../commands/create_feature/create_feature.dart';
 import 'file_contents/file_contents.dart';
-import '../structure.dart';
+import '../models/structure.dart';
 
 class TddCleanStructure extends Structure {
   @override
@@ -49,9 +49,14 @@ class TddCleanStructure extends Structure {
             path: "lib/core/base_usecase",
           ),
         ),
-        CleanDirName.dependancyInjection: Directory(
+        CleanDirName.mainConfig: Directory(
           replaceAsExpected(
-            path: "lib/core/dependancy_injection",
+            path: "lib/core/config",
+          ),
+        ),
+        CleanDirName.dependencyInjection: Directory(
+          replaceAsExpected(
+            path: "lib/core/dependency_injection",
           ),
         ),
         CleanDirName.extensions: Directory(
@@ -86,12 +91,12 @@ class TddCleanStructure extends Structure {
         ),
         CleanDirName.config: Directory(
           replaceAsExpected(
-            path: "lib/core/dependancy_injection/config",
+            path: "lib/core/dependency_injection/config",
           ),
         ),
         CleanDirName.modules: Directory(
           replaceAsExpected(
-            path: "lib/core/dependancy_injection/modules",
+            path: "lib/core/dependency_injection/modules",
           ),
         ),
         CleanDirName.features: Directory(
@@ -182,11 +187,6 @@ class TddCleanStructure extends Structure {
   @override
   List<FileModel> get coreFiles => [
         FileModel(
-          Directory.current.path,
-          "easy_init_tdd_clean_brf",
-          initWarning,
-        ),
-        FileModel(
           directoryStructure[CleanDirName.commonWidgets]!.path,
           "loading.dart",
           loadingContent,
@@ -200,6 +200,11 @@ class TddCleanStructure extends Structure {
           directoryStructure[CleanDirName.services]!.path,
           ".gitkeep",
           '',
+        ),
+        FileModel(
+          directoryStructure[CleanDirName.mainConfig]!.path,
+          "flavor_config.dart",
+          flavorConfigContent,
         ),
         FileModel(
           directoryStructure[CleanDirName.apiEndpoints]!.path,
@@ -268,7 +273,7 @@ class TddCleanStructure extends Structure {
         ),
         FileModel(
           directoryStructure[CleanDirName.routes]!.path,
-          "app_routes.dart",
+          "app_router.dart",
           routeContentRest,
         ),
         FileModel(
@@ -310,6 +315,11 @@ class TddCleanStructure extends Structure {
           'lib',
           "main.dart",
           mainContent,
+        ),
+        FileModel(
+          'lib',
+          "app_runner.dart",
+          appRunnerContent,
         ),
         FileModel(
           'lib',
@@ -470,7 +480,7 @@ class CleanDirName {
   static String core = "core";
   static String apiEndpoints = "apiEndpoints";
   static String baseUsecase = "base_usecase";
-  static String dependancyInjection = "dependancy_injection";
+  static String dependencyInjection = "dependency_injection";
   static String extensions = "extensions";
   static String failures = "failures";
   static String network = "network";
@@ -479,6 +489,7 @@ class CleanDirName {
   static String typography = "typography";
   static String config = "config";
   static String modules = "modules";
+  static String mainConfig = "main_config";
   //features
   static String featureNm = CreateFeature.featureName.snakeCase;
   static String data = "data";

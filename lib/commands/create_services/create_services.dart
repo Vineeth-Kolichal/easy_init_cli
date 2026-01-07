@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:easy_init_cli/core/structure/structure.dart';
+import 'package:easy_init_cli/core/structure/models/structure.dart';
 import 'package:easy_init_cli/core/structure/tdd_clean_structure/file_contents/file_contents.dart';
 import 'package:easy_init_cli/core/structure/tdd_clean_structure/tdd_clean_structure.dart';
 import 'package:easy_init_cli/functions/create.dart';
@@ -14,7 +14,7 @@ class CreateServices extends Command {
   String get commandName => "services";
 
   @override
-  Future<void> excecute() async {
+  Future<void> execute() async {
     final lib = Directory('lib');
     if (lib.existsSync()) {
       final arch = findCurrentArchitecture();
@@ -23,7 +23,7 @@ class CreateServices extends Command {
           "FCM Services",
           "Token Manager",
           "Shared Preferences Services"
-        ], promt: "Choose any available services (example:1)");
+        ], prompt: "Choose any available services (example:1)");
         print("");
         blueLog("creating services file in lib/core/services/ directory...");
         print("");

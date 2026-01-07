@@ -1,3 +1,11 @@
+
+## 1.2.6
+    - Reorganized `lib/core/structure` directory for better maintainability.
+    - Implemented `easy_init.json` for robust project configuration management.
+    - Enhanced `help` command output with better formatting and detailed descriptions.
+    - Fixed directory creation issues and improved recursive creation logic.
+    - Updated `README.md` with detailed project structure.
+    - Consolidated version management to a single source of truth.
 ## 1.2.5
   -  Logo update
 ## 1.2.4
@@ -5,19 +13,19 @@
 ## 1.2.3
   -  Bug fixes
 ## 1.2.2
-  - Updations in clean architecture
+  - Updates in clean architecture
     - NetworkClient
     - Token manager service creation added
     - and Bug fixes
 ## 1.2.1
-  - Updations in clean architecture
+  - Updates in clean architecture
     - Theme configurations
     - NetworkClient
     - Shared prefs services
   - and Bug fixes
 ## 1.2.0
-  - Updations in clean architecture structure
-  - MVC architecture temporarly disabled for updations
+  - Updates in clean architecture structure
+  - MVC architecture temporarly disabled for updates
   - Bug fixes
 ## 1.1.2
   - Network exception handling file updated

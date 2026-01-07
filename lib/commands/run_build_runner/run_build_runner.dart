@@ -6,7 +6,7 @@ class RunBuildRunner extends Command {
   String get commandName => "build";
 
   @override
-  Future<void> excecute() async {
+  Future<void> execute() async {
     await ShellUtils().runBuildRunner();
   }
 }
