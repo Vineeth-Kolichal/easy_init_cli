@@ -119,7 +119,7 @@ String appContent = '''
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'core/dependancy_injection/config/configure_injection.dart';
+import 'core/dependency_injection/config/configure_injection.dart';
 import 'core/routes/app_router.dart';
 import 'core/theme/theme.dart';
 import 'features/number_trivia/presentation/blocs/number_trivia_bloc/number_trivia_bloc.dart';
@@ -299,7 +299,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'app.dart';
 import 'core/config/flavor_config.dart';
-import 'core/dependancy_injection/config/configure_injection.dart';
+import 'core/dependency_injection/config/configure_injection.dart';
 
 Future<void> runApplication(Flavor flavor) async {
   WidgetsFlutterBinding.ensureInitialized();

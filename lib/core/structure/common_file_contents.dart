@@ -780,7 +780,7 @@ class NetworkClient {
 
     //The above given example code is using token manager
     //If you want to generate token manager run the command 'easy create services' and select Token Manager from the list
-    //To inject token manager to network client using dependancy injection modify NetworkClient like following
+    //To inject token manager to network client using dependency injection modify NetworkClient like following
 
     //class NetworkClient {
     // final Dio _dio;
