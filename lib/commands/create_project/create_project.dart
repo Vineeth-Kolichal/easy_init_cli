@@ -11,7 +11,7 @@ class CreateProject extends Command {
   String get commandName => "project";
 
   @override
-  Future<void> excecute() async {
+  Future<void> execute() async {
     final name = UserInput.askQuestion("Your project name", "todo app");
     bool isExist = await isProjectExist(name.snakeCase);
     if (isExist) {

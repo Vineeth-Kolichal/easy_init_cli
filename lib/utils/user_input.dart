@@ -13,21 +13,21 @@ class UserInput {
     }
   }
 
-  static int menu({required String promt, required List<String> options}) {
+  static int menu({required String prompt, required List<String> options}) {
     print('');
     for (var i = 0; i < options.length; i++) {
       print(yellow("  ${i + 1}. ${options[i]}"));
     }
     print('');
-    print(blue(promt));
+    print(blue(prompt));
     var ans = stdin.readLineSync();
     if (ans == null) {
-      return menu(promt: promt, options: options);
+      return menu(prompt: prompt, options: options);
     } else {
       var s = int.parse(ans);
       if (s == 0 || s > options.length) {
         print(red("[ERROR] Invalid selection!"));
-        return menu(promt: promt, options: options);
+        return menu(prompt: prompt, options: options);
       } else {
         return s;
       }

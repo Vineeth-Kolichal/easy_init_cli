@@ -15,7 +15,7 @@ class InitProject extends Command {
   String get commandName => "init";
 
   @override
-  Future<void> excecute() async {
+  Future<void> execute() async {
     final lib = Directory('lib');
     if (lib.existsSync()) {
       final arch = findCurrentArchitecture();
@@ -23,7 +23,7 @@ class InitProject extends Command {
         var choice = UserInput.menu(options: [
           "TDD+Clean Architecture - BLoC - REST API - Feature wise",
           // "MVC - GetX - REST API - Layer wise"
-        ], promt: "Choose architecture pattern (example:1)");
+        ], prompt: "Choose architecture pattern (example:1)");
         print("");
         blueLog("Initializing your project...");
         print("");

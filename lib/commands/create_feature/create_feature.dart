@@ -16,7 +16,7 @@ class CreateFeature extends Command {
   String get commandName => "feature";
 
   @override
-  Future<void> excecute() async {
+  Future<void> execute() async {
     final arch = findCurrentArchitecture();
     if (arch == null) {
       redLog(

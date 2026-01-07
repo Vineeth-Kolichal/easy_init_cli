@@ -55,11 +55,13 @@ void main(List<String> arguments) async {
       return;
     }
     final command = EasyInitCli(arguments).findCommand();
-    await command.excecute();
+    await command.execute();
   } on FormatException catch (e) {
     // Print usage information if an invalid argument was provided.
     print(e.message);
     print('');
     printUsage(argParser);
+  } catch (e) {
+    print(red("[ERROR] An unexpected error occurred: $e"));
   }
 }

@@ -6,7 +6,7 @@ class Update extends Command {
   String get commandName => "update";
 
   @override
-  Future<void> excecute() async {
+  Future<void> execute() async {
     await ShellUtils().update();
   }
 }

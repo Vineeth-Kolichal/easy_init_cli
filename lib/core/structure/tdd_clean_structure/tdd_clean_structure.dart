@@ -54,9 +54,9 @@ class TddCleanStructure extends Structure {
             path: "lib/core/config",
           ),
         ),
-        CleanDirName.dependancyInjection: Directory(
+        CleanDirName.dependencyInjection: Directory(
           replaceAsExpected(
-            path: "lib/core/dependancy_injection",
+            path: "lib/core/dependency_injection",
           ),
         ),
         CleanDirName.extensions: Directory(
@@ -91,12 +91,12 @@ class TddCleanStructure extends Structure {
         ),
         CleanDirName.config: Directory(
           replaceAsExpected(
-            path: "lib/core/dependancy_injection/config",
+            path: "lib/core/dependency_injection/config",
           ),
         ),
         CleanDirName.modules: Directory(
           replaceAsExpected(
-            path: "lib/core/dependancy_injection/modules",
+            path: "lib/core/dependency_injection/modules",
           ),
         ),
         CleanDirName.features: Directory(
@@ -485,7 +485,7 @@ class CleanDirName {
   static String core = "core";
   static String apiEndpoints = "apiEndpoints";
   static String baseUsecase = "base_usecase";
-  static String dependancyInjection = "dependancy_injection";
+  static String dependencyInjection = "dependency_injection";
   static String extensions = "extensions";
   static String failures = "failures";
   static String network = "network";
