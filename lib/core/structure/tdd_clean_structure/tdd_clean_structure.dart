@@ -4,7 +4,7 @@ import 'package:recase/recase.dart';
 
 import '../../../commands/create_feature/create_feature.dart';
 import 'file_contents/file_contents.dart';
-import '../structure.dart';
+import '../models/structure.dart';
 
 class TddCleanStructure extends Structure {
   @override

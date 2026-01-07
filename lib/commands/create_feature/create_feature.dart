@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:easy_init_cli/core/structure/structure.dart';
+import 'package:easy_init_cli/core/structure/models/structure.dart';
 import 'package:easy_init_cli/functions/find_current_architecture.dart';
 import 'package:easy_init_cli/utils/user_input.dart';
 import 'package:easy_init_cli/interfaces/command.dart';

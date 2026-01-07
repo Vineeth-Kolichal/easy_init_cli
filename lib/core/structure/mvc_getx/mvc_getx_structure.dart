@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:easy_init_cli/core/structure/mvc_getx/file_contents/mvc_trivia_content.dart';
-import 'package:easy_init_cli/core/structure/structure.dart';
+import 'package:easy_init_cli/core/structure/models/structure.dart';
 import 'package:recase/recase.dart';
 import '../../../commands/create_feature/create_feature.dart';
 import 'file_contents/mvc_file_contents.dart';

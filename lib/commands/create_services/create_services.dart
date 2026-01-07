@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:easy_init_cli/core/structure/structure.dart';
+import 'package:easy_init_cli/core/structure/models/structure.dart';
 import 'package:easy_init_cli/core/structure/tdd_clean_structure/file_contents/file_contents.dart';
 import 'package:easy_init_cli/core/structure/tdd_clean_structure/tdd_clean_structure.dart';
 import 'package:easy_init_cli/functions/create.dart';

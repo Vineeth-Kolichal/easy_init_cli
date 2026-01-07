@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import '../core/structure/structure.dart';
+import '../core/structure/models/structure.dart';
 
 void createListDirectories(List<Directory> directories) {
   for (var dir in directories) {
