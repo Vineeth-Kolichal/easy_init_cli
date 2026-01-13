@@ -90,6 +90,21 @@ Keep your CLI up to date with the latest features and fixes:
 easy update
 ```
 
+### 6. Create Services
+
+Generate common service helpers and utilities:
+
+```shell
+easy create services
+```
+
+You will be prompted to choose from available services:
+- **FCM Services**: Firebase Cloud Messaging setup.
+- **Token Manager**: Secure storage defined token management.
+- **Shared Preferences Services**: Shared Preferences helper.
+
+The CLI will automatically add the necessary dependencies to your `pubspec.yaml` and create the service files in `lib/core/services/`.
+
 ## 🏗️ Architecture
 
 ### TDD + Clean Architecture
