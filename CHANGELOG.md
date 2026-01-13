@@ -1,4 +1,7 @@
 
+## 1.2.7
+  - Documentation update: Added `create services` command usage to README.
+
 ## 1.2.6
   - Reorganized `lib/core/structure` directory for better maintainability.
   - Implemented `easy_init.json` for robust project configuration management.
