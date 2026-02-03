@@ -1,11 +1,14 @@
 
+## 1.2.7
+  - Documentation update: Added `create services` command usage to README.
+
 ## 1.2.6
-    - Reorganized `lib/core/structure` directory for better maintainability.
-    - Implemented `easy_init.json` for robust project configuration management.
-    - Enhanced `help` command output with better formatting and detailed descriptions.
-    - Fixed directory creation issues and improved recursive creation logic.
-    - Updated `README.md` with detailed project structure.
-    - Consolidated version management to a single source of truth.
+  - Reorganized `lib/core/structure` directory for better maintainability.
+  - Implemented `easy_init.json` for robust project configuration management.
+  - Enhanced `help` command output with better formatting and detailed descriptions.
+  - Fixed directory creation issues and improved recursive creation logic.
+  - Updated `README.md` with detailed project structure.
+  - Consolidated version management to a single source of truth.
 ## 1.2.5
   -  Logo update
 ## 1.2.4
