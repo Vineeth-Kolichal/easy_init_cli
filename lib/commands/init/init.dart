@@ -23,7 +23,7 @@ class InitProject extends Command {
       final arch = findCurrentArchitecture();
       if (arch == null) {
         var choice = UserInput.menu(options: [
-          "TDD+Clean Architecture - BLoC - Feature wise",
+          "Clean Architecture - BLoC - Feature wise",
           // "MVC - GetX - REST API - Layer wise"
         ], prompt: "Choose architecture pattern (example:1)");
         print("");
