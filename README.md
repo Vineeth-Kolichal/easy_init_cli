@@ -162,8 +162,8 @@ Contributions are welcome! If you find a bug or have a feature request, please o
 
 ## � Contributors
 
-<a href="https://github.com/Vineeth-Kolichal">
-  <img src="https://github.com/Vineeth-Kolichal.png" width="50" style="border-radius:50%"/>
+<a href="https://github.com/Vineeth-Kolichal/easy_init_cli/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Vineeth-Kolichal/easy_init_cli" />
 </a>
 
 ## �📄 License
