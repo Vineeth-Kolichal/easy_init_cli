@@ -1,3 +1,6 @@
+## 1.2.8
+    - Added `ai_docs` folder generation with `styling_guide.md` and `api_flow_guide.md` for AI Vibe Coding.
+    - Updated `README.md` generation to include detailed project structure and AI docs reference.
 
 ## 1.2.7
   - Documentation update: Added `create services` command usage to README.

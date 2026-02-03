@@ -104,6 +104,11 @@ class TddCleanStructure extends Structure {
             path: "lib/features",
           ),
         ),
+        CleanDirName.aiDocs: Directory(
+          replaceAsExpected(
+            path: "ai_docs",
+          ),
+        ),
       };
 // Clean architecture feature directory structure
   @override
@@ -190,6 +195,21 @@ class TddCleanStructure extends Structure {
           directoryStructure[CleanDirName.commonWidgets]!.path,
           "loading.dart",
           loadingContent,
+        ),
+        FileModel(
+          directoryStructure[CleanDirName.aiDocs]!.path,
+          "styling_guide.md",
+          stylingGuideArgs,
+        ),
+        FileModel(
+          directoryStructure[CleanDirName.aiDocs]!.path,
+          "api_flow_guide.md",
+          apiFlowGuideArgs,
+        ),
+        FileModel(
+          Directory.current.path,
+          "README.md",
+          readmeContentArgs,
         ),
         FileModel(
           directoryStructure[CleanDirName.commonWidgets]!.path,
@@ -506,4 +526,5 @@ class CleanDirName {
   static String widgets = "widgets";
   static String homeBloc = "home_bloc";
   static String numberTriviaBloc = "number_trivia_bloc";
+  static String aiDocs = "ai_docs";
 }
