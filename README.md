@@ -160,6 +160,12 @@ Contributions are welcome! If you find a bug or have a feature request, please o
 4. Push to the branch (`git push origin feature/my-feature`).
 5. Open a Pull Request.
 
-## 📄 License
+## � Contributors
+
+<a href="https://github.com/Vineeth-Kolichal">
+  <img src="https://github.com/Vineeth-Kolichal.png" width="50" style="border-radius:50%"/>
+</a>
+
+## �📄 License
 
 This project is licensed under the BSD 3-Clause License - see the [LICENSE](LICENSE) file for details.
