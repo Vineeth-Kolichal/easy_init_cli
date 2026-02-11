@@ -4,6 +4,7 @@ import 'package:easy_init_cli/easy_init_logo.dart';
 import 'package:easy_init_cli/utils/shell_utils.dart';
 import 'package:easy_init_cli/core/generator.dart';
 import 'package:easy_init_cli/core/version.dart';
+import 'package:easy_init_cli/core/update_checker.dart';
 
 ArgParser buildParser() {
   return ArgParser()
@@ -49,6 +50,10 @@ void main(List<String> arguments) async {
       //printUsage(argParser);
       return;
     }
+
+    // Check for updates
+    await UpdateChecker.checkForUpdate();
+
     final ArgResults results = argParser.parse(arguments);
 
     // Process the parsed arguments.
