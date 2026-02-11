@@ -1,3 +1,8 @@
+## 1.2.10
+    - Implemented "What's New" feature:
+        - Automatically displays the changelog from pub.dev after a successful update.
+        - Keeps users informed about the latest features and fixes immediately.
+        
 ## 1.2.9
     - Added update check feature to notify users when a new version of the CLI is available.
     
