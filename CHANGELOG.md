@@ -1,3 +1,6 @@
+## 1.2.9
+    - Added update check feature to notify users when a new version of the CLI is available.
+    
 ## 1.2.8
     - Added `ai_docs` folder generation with `styling_guide.md` and `api_flow_guide.md` for AI Vibe Coding.
     - Updated `README.md` generation to include detailed project structure and AI docs reference.
