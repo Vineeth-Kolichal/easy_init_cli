@@ -1,5 +1,8 @@
 import 'dart:io';
 
+import 'package:easy_init_cli/commands/create_feature/create_feature.dart';
+import 'package:recase/recase.dart';
+
 import 'file_contents/mvvm_ai_docs_content.dart';
 import '../common_file_contents/common_file_contents_export.dart';
 import '../models/structure.dart';
@@ -303,7 +306,7 @@ class MvvmDirName {
   static String apiEndpoints = "apiEndpoints";
   static String config = "config";
   static String dependencyInjection = "dependency_injection";
-  static String diConfig = "config";
+  static String diConfig = "di_config";
   static String modules = "modules";
   static String extensions = "extensions";
   static String failures = "failures";
@@ -314,7 +317,7 @@ class MvvmDirName {
   static String aiDocs = "ai_docs";
 
   // Feature specific
-  static String featureNm = "number_trivia"; // Default for init
+  static String featureNm = CreateFeature.featureName.snakeCase;
   static String data = "data";
   static String dataSource = "data_sources";
   static String repositories = "repositories";

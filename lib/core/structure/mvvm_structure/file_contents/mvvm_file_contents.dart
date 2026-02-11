@@ -153,14 +153,12 @@ class NumberTriviaScreen extends StatelessWidget {
                                 22,
                                 22,
                                 22,
-                                22,
                               ),
                               lightThemeColor: const Color.fromARGB(
                                 255,
                                 244,
                                 244,
                                 244,
-                                59,
                               ),
                             ), // Setting container background color
                           ),

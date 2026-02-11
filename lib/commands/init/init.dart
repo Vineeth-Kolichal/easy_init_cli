@@ -25,7 +25,6 @@ class InitProject extends Command {
         var choice = UserInput.menu(options: [
           "Clean Architecture - BLoC - Feature wise",
           "MVVM - Provider - Feature wise",
-          // "MVC - GetX - REST API - Layer wise"
         ], prompt: "Choose architecture pattern (example:1)");
         print("");
         blueLog("Initializing your project...");
