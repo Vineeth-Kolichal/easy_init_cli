@@ -24,6 +24,8 @@ String? findCurrentArchitecture() {
         return "tdd-brf";
       } else if (config.architecture == 'mvc' && config.pattern == 'grl') {
         return "mvc-grl";
+      } else if (config.architecture == 'mvvm' && config.pattern == 'feature') {
+        return "mvvm-feature";
       }
     }
   }
