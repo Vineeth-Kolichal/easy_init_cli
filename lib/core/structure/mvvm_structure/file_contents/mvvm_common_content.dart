@@ -34,7 +34,6 @@ import 'package:injectable/injectable.dart';
 import '../../../../core/failures/failures.dart';
 import '../../../../core/network/network_exceptions.dart';
 import '../data_sources/${CreateFeature.featureName.snakeCase}_data_source.dart';
-import 'package:dartz/dartz.dart';
 
 import '${CreateFeature.featureName.snakeCase}_repository.dart';
 
