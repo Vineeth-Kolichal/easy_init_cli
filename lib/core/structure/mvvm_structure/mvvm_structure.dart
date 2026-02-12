@@ -8,6 +8,9 @@ import '../common_file_contents/common_file_contents_export.dart';
 import '../models/structure.dart';
 import 'file_contents/mvvm_file_contents.dart';
 
+import 'file_contents/sample_feature_content.dart';
+import 'file_contents/mvvm_common_content.dart';
+
 class MvvmStructure extends Structure {
   @override
   String get architectureName => "MVVM";
@@ -27,6 +30,9 @@ class MvvmStructure extends Structure {
         ),
         MvvmDirName.commonWidgets: Directory(
           replaceAsExpected(path: "lib/common/widgets"),
+        ),
+        MvvmDirName.uiUtils: Directory(
+          replaceAsExpected(path: "lib/common/ui_utils"),
         ),
         MvvmDirName.core: Directory(
           replaceAsExpected(path: "lib/core"),
@@ -125,6 +131,22 @@ class MvvmStructure extends Structure {
           responsiveContent,
         ),
         FileModel(
+          directoryStructure[MvvmDirName.commonWidgets]!.path,
+          "generic_button.dart",
+          genericButtonContent,
+        ),
+        FileModel(
+          directoryStructure[MvvmDirName.commonWidgets]!.path,
+          "custom_text_field.dart",
+          customTextFieldContent,
+        ),
+        // SnackBar
+        FileModel(
+          directoryStructure[MvvmDirName.uiUtils]!.path,
+          "snack_bar.dart",
+          snackBarContent,
+        ),
+        FileModel(
           directoryStructure[MvvmDirName.aiDocs]!.path,
           "styling_guide.md",
           stylingGuideArgs,
@@ -216,6 +238,11 @@ class MvvmStructure extends Structure {
         ),
         FileModel(
           directoryStructure[MvvmDirName.theme]!.path,
+          "theme_service.dart",
+          themeServiceContent,
+        ),
+        FileModel(
+          directoryStructure[MvvmDirName.theme]!.path,
           "theme.dart",
           theme,
         ),
@@ -259,31 +286,58 @@ class MvvmStructure extends Structure {
           "app.dart",
           appContent,
         ),
-        // Number Trivia Feature (Sample)
+        // Sample Feature
+        FileModel(replaceAsExpected(path: "lib/features/sample/view/screens"),
+            "sample_screen.dart", sampleScreenContent),
+        FileModel(replaceAsExpected(path: "lib/features/sample/view/widgets"),
+            "header_section.dart", headerSectionContent),
+        FileModel(
+            replaceAsExpected(path: "lib/features/sample/data/data_sources"),
+            "sample_data_source.dart",
+            sampleDataSourceContent),
+        FileModel(
+            replaceAsExpected(path: "lib/features/sample/data/repositories"),
+            "sample_repository_impl.dart",
+            sampleRepositoryContent),
+        FileModel(replaceAsExpected(path: "lib/features/sample/models"),
+            "user_model.dart", userModelContent),
+        FileModel(replaceAsExpected(path: "lib/features/sample/models"),
+            "cli_details_model.dart", cliDetailsModelContent),
+        FileModel(replaceAsExpected(path: "lib/features/sample/view_model"),
+            "sample_view_model.dart", sampleViewModelContent),
+      ];
+
+  @override
+  List<FileModel> get featureFiles => [
         FileModel(
           featureStructure[MvvmDirName.screens]!.path,
-          "number_trivia_screen.dart",
-          numberTriviaScreenContent,
+          "${MvvmDirName.featureNm}_screen.dart",
+          mvvmScreenContent,
         ),
         FileModel(
           featureStructure[MvvmDirName.dataSource]!.path,
-          "number_trivia_remote_data_source.dart",
-          numberTriviaRemoteDataSourceContent,
+          "${MvvmDirName.featureNm}_data_source.dart",
+          mvvmDataSourceContent,
         ),
         FileModel(
           featureStructure[MvvmDirName.repositories]!.path,
-          "number_trivia_repository.dart",
-          numberTriviaRepositoryContent,
+          "${MvvmDirName.featureNm}_repository.dart",
+          mvvmRepositoryContent,
         ),
         FileModel(
-          featureStructure[MvvmDirName.models]!.path,
-          "trivia_model.dart",
-          triviaModelContent,
+          featureStructure[MvvmDirName.repositories]!.path,
+          "${MvvmDirName.featureNm}_repository_impl.dart",
+          mvvmRepoImplContent,
         ),
         FileModel(
           featureStructure[MvvmDirName.viewModel]!.path,
-          "number_trivia_view_model.dart",
-          numberTriviaViewModelContent,
+          "${MvvmDirName.featureNm}_view_model.dart",
+          mvvmViewModelContent,
+        ),
+        FileModel(
+          featureStructure[MvvmDirName.models]!.path,
+          "${MvvmDirName.featureNm}_model.dart",
+          mvvmModelContent,
         ),
         FileModel(
           featureStructure[MvvmDirName.widgets]!.path,
@@ -291,15 +345,12 @@ class MvvmStructure extends Structure {
           "",
         ),
       ];
-
-  @override
-  List<FileModel> get featureFiles =>
-      []; // TODO: Implement feature generation if needed later
 }
 
 class MvvmDirName {
   static String common = "common";
   static String commonWidgets = "widgets";
+  static String uiUtils = "ui_utils";
   static String services = "services";
   static String features = "features";
   static String core = "core";

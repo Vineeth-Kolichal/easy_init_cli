@@ -79,9 +79,10 @@ class CustomException implements Exception {
 
 String apiEndpointContent = '''
 class ApiEndpoints {
-  /// change the [baseUrl] value as per your api
-  static String baseUrl = "http://numbersapi.com";
+  static const String users = "/api/user";
+  static const String cliDetails = "/api/cli-details";
 }
+
 
 ''';
 

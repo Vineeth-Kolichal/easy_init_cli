@@ -10,7 +10,7 @@ import '../../core/structure/export_structure.dart';
 import '../../functions/create.dart';
 
 class CreateFeature extends Command {
-  static String featureName = "number trivia";
+  static String featureName = "sample";
 
   @override
   String get commandName => "feature";
