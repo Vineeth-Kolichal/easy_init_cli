@@ -1,19 +1,25 @@
+## 1.3.1
+  - **Documentation Enhancements**:
+    - Updated README.md with a new layout, directing users to the official documentation site.
+    - Added high-quality, clickable contributor avatars.
+    - Added MVVM Architecture support mention in the overview.
+
 ## 1.3.0
-    - **New Architecture: MVVM with Provider**:
-        - Added support for initializing projects with MVVM architecture using Provider for state management.
-    - **Major Update: TDD Clean Architecture Refactor**:
-        - Replaced `number_trivia` sample with a more comprehensive `sample` feature.
-    - **Safety & Stability**:
-        - Implemented robust error handling for directory structure access.
-        - Enabled full stack trace printing for unexpected errors to aid debugging.
-    - **Improvements**:
-        - Updated `init` command to correctly warn users when re-initializing `mvvm-feature` projects.
-        - Enhanced `CommonWidgets` (SnackBar, CustomTextField, GenericButton) with improved theming support.
+  - **New Architecture: MVVM with Provider**:
+    - Added support for initializing projects with MVVM architecture using Provider for state management.
+  - **Major Update: TDD Clean Architecture Refactor**:
+    - Replaced `number_trivia` sample with a more comprehensive `sample` feature.
+  - **Safety & Stability**:
+    - Implemented robust error handling for directory structure access.
+    - Enabled full stack trace printing for unexpected errors to aid debugging.
+  - **Improvements**:
+    - Updated `init` command to correctly warn users when re-initializing `mvvm-feature` projects.
+    - Enhanced `CommonWidgets` (SnackBar, CustomTextField, GenericButton) with improved theming support.
 
 ## 1.2.10
-    - Implemented "What's New" feature:
-        - Automatically displays the changelog from pub.dev after a successful update.
-        - Keeps users informed about the latest features and fixes immediately.
+  - Implemented "What's New" feature:
+    - Automatically displays the changelog from pub.dev after a successful update.
+    - Keeps users informed about the latest features and fixes immediately.
         
 ## 1.2.9
     - Added update check feature to notify users when a new version of the CLI is available.
