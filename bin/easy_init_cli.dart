@@ -47,7 +47,7 @@ void main(List<String> arguments) async {
   try {
     if (arguments.isEmpty) {
       print(yellow(logo));
-      //printUsage(argParser);
+      printUsage(argParser);
       return;
     }
 
@@ -76,7 +76,8 @@ void main(List<String> arguments) async {
     print(e.message);
     print('');
     printUsage(argParser);
-  } catch (e) {
+  } catch (e, stackTrace) {
     print(red("[ERROR] An unexpected error occurred: $e"));
+    print(red(stackTrace.toString()));
   }
 }

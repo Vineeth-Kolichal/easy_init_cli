@@ -10,16 +10,20 @@ class AppTheme {
 
   //Light theme Colors
   static AppColors lightThemeColors() => const AppColors(
-        primary: Color(0xFF0F34E9),
-        secondary: Color(0xFFD3F5B7),
-        surfaceColor: Color(0xFFFFFFFF),
-        onSurface: Color(0xFF000000),
-        appBarColor: Color(0xFFFFFFFF),
-      );
+    primary: Color(0xFF135BEC),
+    secondary: Color(0xFFD3F5B7),
+    surfaceColor: Color(0xFFF6F6F8),
+    onSurface: Color(0xFF000000),
+    appBarColor: Color(0xFFFFFFFF),
+    contentBorder: Color(0xFF334155),
+    subtext: Color(0xFF64748B),
+    cardBg: Color(0xFFFFFFFF),
+    errorRed: Color(0xFFFF3B30),
+  );
   // Light theme ColorScheme
   static ColorScheme lightScheme() {
     return ColorScheme.fromSeed(
-      seedColor: const Color(0xFF0F34E9),
+      seedColor: const Color(0xFF135BEC),
       brightness: Brightness.light,
       errorContainer: const Color(0xFFFFF2EC),
       onErrorContainer: const Color(0xFFF44336),
@@ -32,17 +36,21 @@ class AppTheme {
 
   //Dark Theme colors
   static AppColors darkThemeColors() => const AppColors(
-        primary: Color(0xFF0F9D58),
-        secondary: Color(0xFF1DE9B6),
-        surfaceColor: Color(0xFF121212),
-        onSurface: Color(0xFFFFFFFF),
-        appBarColor: Color(0xFF1F1F1F),
-      );
+    primary: Color(0xFF135BEC),
+    secondary: Color(0xFF1DE9B6),
+    surfaceColor: Color(0xFF101622),
+    onSurface: Color(0xFFFFFFFF),
+    appBarColor: Color(0xFF1F1F1F),
+    contentBorder: Color(0xFF334155),
+    subtext: Color(0xFF64748B),
+    cardBg: Color(0xFF1F1F1F),
+    errorRed: Color(0xFFFF453A),
+  );
 
   //Dark ColorScheme
   static ColorScheme darkScheme() {
     return ColorScheme.fromSeed(
-      seedColor: const Color(0xFF0F34E9),
+      seedColor: const Color(0xFF135BEC),
       brightness: Brightness.dark,
       error: const Color(0xFFCF6679),
       onError: const Color(0xFF1E1213),
@@ -56,63 +64,57 @@ class AppTheme {
   }
 
   ThemeData theme(ColorScheme colorScheme, AppColors appColors) => ThemeData(
-        //Material 3 style
-        useMaterial3: true,
+    //Material 3 style
+    useMaterial3: true,
 
-        // Theme mode
-        brightness: colorScheme.brightness,
+    // Theme mode
+    brightness: colorScheme.brightness,
 
-        //Color scheme -set of all colors
-        colorScheme: colorScheme,
+    //Color scheme -set of all colors
+    colorScheme: colorScheme,
 
-        //Theme extensions
-        extensions: <ThemeExtension<dynamic>>[appColors],
+    //Theme extensions
+    extensions: <ThemeExtension<dynamic>>[appColors],
 
-        //Default font family
-        // fontFamily: FontFamily.inter,
+    //Default font family
+    // fontFamily: FontFamily.inter,
 
-        //Text theme for configure typography of app
-        textTheme: textTheme.apply(
-          bodyColor: colorScheme.onSurface,
-          displayColor: appColors.primary,
-        ),
+    //Text theme for configure typography of app
+    textTheme: textTheme.apply(
+      bodyColor: colorScheme.onSurface,
+      displayColor: appColors.primary,
+    ),
 
-        //Scffold background color of the app
-        scaffoldBackgroundColor: appColors.surfaceColor,
+    //Scffold background color of the app
+    scaffoldBackgroundColor: appColors.surfaceColor,
 
-        //Canvas color
-        canvasColor: colorScheme.surfaceContainer,
+    //Canvas color
+    canvasColor: colorScheme.surfaceContainer,
 
-        //Bottom navigation bar theme
-        bottomNavigationBarTheme: BottomNavigationBarThemeData(
-          elevation: 0,
-          backgroundColor: appColors.surfaceColor,
-          selectedItemColor: appColors.primary,
-          unselectedItemColor: appColors.onSurface?.withOpacity(0.5),
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
-          type: BottomNavigationBarType.fixed,
-        ),
+    //Bottom navigation bar theme
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      elevation: 0,
+      backgroundColor: appColors.surfaceColor,
+      selectedItemColor: appColors.primary,
+      unselectedItemColor: appColors.onSurface?.withOpacity(0.5),
+      showSelectedLabels: false,
+      showUnselectedLabels: false,
+      type: BottomNavigationBarType.fixed,
+    ),
 
-        //Button theme
-        buttonTheme: ButtonThemeData(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(
-              45,
-            ),
-          ),
-        ),
+    //Button theme
+    buttonTheme: ButtonThemeData(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(45)),
+    ),
 
-
-        //Appbar theme
-        appBarTheme: AppBarTheme(
-          scrolledUnderElevation: 0,
-          backgroundColor: appColors.appBarColor,
-          iconTheme: IconThemeData(color: appColors.onSurface),
-        ),
-      );
+    //Appbar theme
+    appBarTheme: AppBarTheme(
+      scrolledUnderElevation: 0,
+      backgroundColor: appColors.appBarColor,
+      iconTheme: IconThemeData(color: appColors.onSurface),
+    ),
+  );
 }
-
 ''';
 String colorsContent = '''
 import 'package:flutter/material.dart';
@@ -127,6 +129,10 @@ class AppColors extends ThemeExtension<AppColors> {
   final Color? surfaceColor;
   final Color? onSurface;
   final Color? appBarColor;
+  final Color? contentBorder;
+  final Color? subtext;
+  final Color? cardBg;
+  final Color? errorRed;
 
   //constant colors
   final Color kBlack;
@@ -138,6 +144,10 @@ class AppColors extends ThemeExtension<AppColors> {
     required this.surfaceColor,
     required this.onSurface,
     required this.appBarColor,
+    required this.contentBorder,
+    required this.subtext,
+    this.cardBg,
+    this.errorRed,
     this.kBlack = Colors.black,
     this.kWhite = Colors.white,
   });
@@ -149,6 +159,10 @@ class AppColors extends ThemeExtension<AppColors> {
     Color? surfaceColor,
     Color? onSurface,
     Color? appBarColor,
+    Color? contentBorder,
+    Color? subtext,
+    Color? cardBg,
+    Color? errorRed,
   }) {
     return AppColors(
       primary: primary ?? this.primary,
@@ -156,6 +170,10 @@ class AppColors extends ThemeExtension<AppColors> {
       surfaceColor: surfaceColor ?? this.surfaceColor,
       onSurface: onSurface ?? this.onSurface,
       appBarColor: appBarColor ?? this.appBarColor,
+      contentBorder: contentBorder ?? this.contentBorder,
+      subtext: subtext ?? this.subtext,
+      cardBg: cardBg ?? this.cardBg,
+      errorRed: errorRed ?? this.errorRed,
     );
   }
 
@@ -163,31 +181,15 @@ class AppColors extends ThemeExtension<AppColors> {
   AppColors lerp(covariant ThemeExtension<AppColors>? other, double t) {
     if (other is! AppColors) return this;
     return AppColors(
-      primary: Color.lerp(
-        primary,
-        other.primary,
-        t,
-      ),
-      secondary: Color.lerp(
-        secondary,
-        other.secondary,
-        t,
-      ),
-      surfaceColor: Color.lerp(
-        surfaceColor,
-        other.surfaceColor,
-        t,
-      ),
-      onSurface: Color.lerp(
-        onSurface,
-        other.onSurface,
-        t,
-      ),
-      appBarColor: Color.lerp(
-        appBarColor,
-        other.appBarColor,
-        t,
-      ),
+      primary: Color.lerp(primary, other.primary, t),
+      secondary: Color.lerp(secondary, other.secondary, t),
+      surfaceColor: Color.lerp(surfaceColor, other.surfaceColor, t),
+      onSurface: Color.lerp(onSurface, other.onSurface, t),
+      appBarColor: Color.lerp(appBarColor, other.appBarColor, t),
+      contentBorder: Color.lerp(contentBorder, other.contentBorder, t),
+      subtext: Color.lerp(subtext, other.subtext, t),
+      cardBg: Color.lerp(cardBg, other.cardBg, t),
+      errorRed: Color.lerp(errorRed, other.errorRed, t),
     );
   }
 }
@@ -300,4 +302,25 @@ const theme = '''
 export './app_colors.dart';
 export './typography/typography.dart';
 export './app_theme.dart';
+''';
+
+const String themeServiceContent = '''
+import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
+
+@singleton
+class ThemeService extends ChangeNotifier {
+  bool _isDarkMode = false;
+  bool get isDarkMode => _isDarkMode;
+
+  void toggleTheme() {
+    _isDarkMode = !_isDarkMode;
+    notifyListeners();
+  }
+
+  void setTheme({required bool isDark}) {
+    _isDarkMode = isDark;
+    notifyListeners();
+  }
+}
 ''';

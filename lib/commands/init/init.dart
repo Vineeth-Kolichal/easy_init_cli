@@ -24,7 +24,7 @@ class InitProject extends Command {
       if (arch == null) {
         var choice = UserInput.menu(options: [
           "Clean Architecture - BLoC - Feature wise",
-          // "MVC - GetX - REST API - Layer wise"
+          "MVVM - Provider - Feature wise",
         ], prompt: "Choose architecture pattern (example:1)");
         print("");
         blueLog("Initializing your project...");
@@ -39,14 +39,15 @@ class InitProject extends Command {
                   "build_runner freezed injectable_generator mocktail",
             );
             break;
-          // case 2:
-          //   await _initArchitecture(
-          //     structure: MvcGetXStructure(),
-          //     dependencies: "dartz get dio intl",
-          //     devDependencies: "build_runner mocktail",
-          //     runBuildRunner: false,
-          //   );
-          //   break;
+          case 2:
+            await _initArchitecture(
+              structure: MvvmStructure(),
+              dependencies:
+                  "provider injectable freezed_annotation get_it dio intl go_router",
+              devDependencies:
+                  "build_runner freezed injectable_generator mocktail",
+            );
+            break;
           default:
             print("Choice not found");
             break;
@@ -56,6 +57,8 @@ class InitProject extends Command {
           showWarning("tdd clean", "brf");
         } else if (arch == "mvc-grl") {
           showWarning('mvc', "grl");
+        } else if (arch == "mvvm-feature") {
+          showWarning('mvvm', "feature");
         }
       }
     } else {
@@ -101,6 +104,9 @@ class InitProject extends Command {
     } else if (structure is MvcGetXStructure) {
       architecture = "mvc";
       pattern = "grl";
+    } else if (structure is MvvmStructure) {
+      architecture = "mvvm";
+      pattern = "feature";
     }
 
     // Create config file

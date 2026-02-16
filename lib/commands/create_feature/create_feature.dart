@@ -10,7 +10,7 @@ import '../../core/structure/export_structure.dart';
 import '../../functions/create.dart';
 
 class CreateFeature extends Command {
-  static String featureName = "number trivia";
+  static String featureName = "sample";
 
   @override
   String get commandName => "feature";
@@ -35,6 +35,8 @@ class CreateFeature extends Command {
         if (arch == 'tdd-brf') {
           _createFeature(
               structure: TddCleanStructure(), featureName: featureName);
+        } else if (arch == "mvvm-feature") {
+          _createFeature(structure: MvvmStructure(), featureName: featureName);
         } else if (arch == "mvc-grl") {
           _createFeature(
               structure: MvcGetXStructure(), featureName: featureName);
@@ -57,6 +59,8 @@ class CreateFeature extends Command {
   Future<bool?> isFeatureExist(String featureName, String arch) async {
     var path = Directory.current.path;
     if (arch == "tdd-brf") {
+      return await Directory("$path/lib/features/$featureName").exists();
+    } else if (arch == "mvvm-feature") {
       return await Directory("$path/lib/features/$featureName").exists();
     } else if (arch == "mvc-grl") {
       return (await Directory("$path/lib/application/views/$featureName")

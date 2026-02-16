@@ -18,98 +18,113 @@ class TddCleanStructure extends Structure {
   }
   // common configuration file structure
   @override
-  Map<String, Directory> get directoryStructure => {
-        CleanDirName.common: Directory(
-          replaceAsExpected(
-            path: "lib/common",
-          ),
-        ),
-        CleanDirName.commonWidgets: Directory(
-          replaceAsExpected(
-            path: "lib/common/widgets",
-          ),
-        ),
-        CleanDirName.core: Directory(
-          replaceAsExpected(
-            path: "lib/core",
-          ),
-        ),
-        CleanDirName.services: Directory(
-          replaceAsExpected(
-            path: "lib/core/services",
-          ),
-        ),
-        CleanDirName.apiEndpoints: Directory(
-          replaceAsExpected(
-            path: "lib/core/api_endpoints",
-          ),
-        ),
-        CleanDirName.baseUsecase: Directory(
-          replaceAsExpected(
-            path: "lib/core/base_usecase",
-          ),
-        ),
-        CleanDirName.mainConfig: Directory(
-          replaceAsExpected(
-            path: "lib/core/config",
-          ),
-        ),
-        CleanDirName.dependencyInjection: Directory(
-          replaceAsExpected(
-            path: "lib/core/dependency_injection",
-          ),
-        ),
-        CleanDirName.extensions: Directory(
-          replaceAsExpected(
-            path: "lib/core/extensions",
-          ),
-        ),
-        CleanDirName.failures: Directory(
-          replaceAsExpected(
-            path: "lib/core/failures",
-          ),
-        ),
-        CleanDirName.network: Directory(
-          replaceAsExpected(
-            path: "lib/core/network",
-          ),
-        ),
-        CleanDirName.routes: Directory(
-          replaceAsExpected(
-            path: "lib/core/routes",
-          ),
-        ),
-        CleanDirName.theme: Directory(
-          replaceAsExpected(
-            path: "lib/core/theme",
-          ),
-        ),
-        CleanDirName.typography: Directory(
-          replaceAsExpected(
-            path: "lib/core/theme/typography",
-          ),
-        ),
-        CleanDirName.config: Directory(
-          replaceAsExpected(
-            path: "lib/core/dependency_injection/config",
-          ),
-        ),
-        CleanDirName.modules: Directory(
-          replaceAsExpected(
-            path: "lib/core/dependency_injection/modules",
-          ),
-        ),
-        CleanDirName.features: Directory(
-          replaceAsExpected(
-            path: "lib/features",
-          ),
-        ),
-        CleanDirName.aiDocs: Directory(
-          replaceAsExpected(
-            path: "ai_docs",
-          ),
-        ),
-      };
+  Map<String, Directory> get directoryStructure => _directoryStructure;
+
+  late final Map<String, Directory> _directoryStructure = {
+    CleanDirName.common: Directory(
+      replaceAsExpected(
+        path: "lib/common",
+      ),
+    ),
+    CleanDirName.commonWidgets: Directory(
+      replaceAsExpected(
+        path: "lib/common/widgets",
+      ),
+    ),
+    CleanDirName.uiUtils: Directory(
+      replaceAsExpected(
+        path: "lib/common/ui_utils",
+      ),
+    ),
+    CleanDirName.core: Directory(
+      replaceAsExpected(
+        path: "lib/core",
+      ),
+    ),
+    CleanDirName.services: Directory(
+      replaceAsExpected(
+        path: "lib/core/services",
+      ),
+    ),
+    CleanDirName.apiEndpoints: Directory(
+      replaceAsExpected(
+        path: "lib/core/api_endpoints",
+      ),
+    ),
+    CleanDirName.baseUsecase: Directory(
+      replaceAsExpected(
+        path: "lib/core/base_usecase",
+      ),
+    ),
+    CleanDirName.mainConfig: Directory(
+      replaceAsExpected(
+        path: "lib/core/config",
+      ),
+    ),
+    CleanDirName.dependencyInjection: Directory(
+      replaceAsExpected(
+        path: "lib/core/dependency_injection",
+      ),
+    ),
+    CleanDirName.extensions: Directory(
+      replaceAsExpected(
+        path: "lib/core/extensions",
+      ),
+    ),
+    CleanDirName.failures: Directory(
+      replaceAsExpected(
+        path: "lib/core/failures",
+      ),
+    ),
+    CleanDirName.network: Directory(
+      replaceAsExpected(
+        path: "lib/core/network",
+      ),
+    ),
+    CleanDirName.routes: Directory(
+      replaceAsExpected(
+        path: "lib/core/routes",
+      ),
+    ),
+    CleanDirName.theme: Directory(
+      replaceAsExpected(
+        path: "lib/core/theme",
+      ),
+    ),
+    CleanDirName.typography: Directory(
+      replaceAsExpected(
+        path: "lib/core/theme/typography",
+      ),
+    ),
+    CleanDirName.config: Directory(
+      replaceAsExpected(
+        path: "lib/core/dependency_injection/config",
+      ),
+    ),
+    CleanDirName.modules: Directory(
+      replaceAsExpected(
+        path: "lib/core/dependency_injection/modules",
+      ),
+    ),
+    CleanDirName.features: Directory(
+      replaceAsExpected(
+        path: "lib/features",
+      ),
+    ),
+    CleanDirName.aiDocs: Directory(
+      replaceAsExpected(
+        path: "ai_docs",
+      ),
+    ),
+  };
+
+  Directory _getDir(String key) {
+    if (!directoryStructure.containsKey(key)) {
+      throw Exception("Directory structure key '$key' is missing");
+    }
+    return directoryStructure[key]!;
+  }
+
 // Clean architecture feature directory structure
   @override
   Map<String, Directory> get featureStructure => {
@@ -179,11 +194,11 @@ class TddCleanStructure extends Structure {
             path: "lib/features/${CleanDirName.featureNm}/presentation/widgets",
           ),
         ),
-        if (CleanDirName.featureNm == "number_trivia")
-          CleanDirName.numberTriviaBloc: Directory(
+        if (CleanDirName.featureNm == "sample")
+          CleanDirName.sampleBloc: Directory(
             replaceAsExpected(
               path:
-                  "lib/features/${CleanDirName.featureNm}/presentation/blocs/${CleanDirName.numberTriviaBloc}",
+                  "lib/features/${CleanDirName.featureNm}/presentation/blocs/${CleanDirName.sampleBloc}",
             ),
           ),
       };
@@ -192,17 +207,32 @@ class TddCleanStructure extends Structure {
   @override
   List<FileModel> get coreFiles => [
         FileModel(
-          directoryStructure[CleanDirName.commonWidgets]!.path,
+          _getDir(CleanDirName.commonWidgets).path,
           "loading.dart",
-          loadingContent,
+          cleanLoadingContent,
         ),
         FileModel(
-          directoryStructure[CleanDirName.aiDocs]!.path,
+          _getDir(CleanDirName.commonWidgets).path,
+          "custom_text_field.dart",
+          cleanCustomTextFieldContent,
+        ),
+        FileModel(
+          _getDir(CleanDirName.commonWidgets).path,
+          "generic_button.dart",
+          cleanGenericButtonContent,
+        ),
+        FileModel(
+          _getDir(CleanDirName.uiUtils).path,
+          "snack_bar.dart",
+          cleanSnackBarContent,
+        ),
+        FileModel(
+          _getDir(CleanDirName.aiDocs).path,
           "styling_guide.md",
           stylingGuideArgs,
         ),
         FileModel(
-          directoryStructure[CleanDirName.aiDocs]!.path,
+          _getDir(CleanDirName.aiDocs).path,
           "api_flow_guide.md",
           apiFlowGuideArgs,
         ),
@@ -212,122 +242,127 @@ class TddCleanStructure extends Structure {
           readmeContentArgs,
         ),
         FileModel(
-          directoryStructure[CleanDirName.commonWidgets]!.path,
+          _getDir(CleanDirName.commonWidgets).path,
           "responsive.dart",
-          responsiveContent,
+          cleanResponsiveContent,
         ),
         FileModel(
-          directoryStructure[CleanDirName.services]!.path,
+          _getDir(CleanDirName.services).path,
           ".gitkeep",
           '',
         ),
         FileModel(
-          directoryStructure[CleanDirName.mainConfig]!.path,
+          _getDir(CleanDirName.mainConfig).path,
           "flavor_config.dart",
-          flavorConfigContent,
+          cleanFlavorConfigContent,
         ),
         FileModel(
-          directoryStructure[CleanDirName.apiEndpoints]!.path,
+          _getDir(CleanDirName.apiEndpoints).path,
           "api_endpoints.dart",
-          apiEndpointContent,
+          cleanApiEndpointContent,
         ),
         FileModel(
-          directoryStructure[CleanDirName.baseUsecase]!.path,
+          _getDir(CleanDirName.baseUsecase).path,
           "base_usecase.dart",
           usecaseContent,
         ),
         FileModel(
-          directoryStructure[CleanDirName.config]!.path,
+          _getDir(CleanDirName.config).path,
           "configure_injection.dart",
           configInjectionContent,
         ),
         FileModel(
-          directoryStructure[CleanDirName.modules]!.path,
+          _getDir(CleanDirName.modules).path,
           "dio_module.dart",
           dioModuleContent,
         ),
         FileModel(
-          directoryStructure[CleanDirName.extensions]!.path,
+          _getDir(CleanDirName.extensions).path,
           "app_navigation_ext.dart",
           navigationExtContent,
         ),
         FileModel(
-          directoryStructure[CleanDirName.extensions]!.path,
+          _getDir(CleanDirName.extensions).path,
           "date_ext.dart",
           dateExtContent,
         ),
         FileModel(
-          directoryStructure[CleanDirName.extensions]!.path,
+          _getDir(CleanDirName.extensions).path,
           "string_ext.dart",
           stringExtContent,
         ),
         FileModel(
-          directoryStructure[CleanDirName.extensions]!.path,
+          _getDir(CleanDirName.extensions).path,
           "theme_ext.dart",
           themeExtContent,
         ),
         FileModel(
-          directoryStructure[CleanDirName.extensions]!.path,
+          _getDir(CleanDirName.extensions).path,
           "number_ext.dart",
           numberExtContent,
         ),
         FileModel(
-          directoryStructure[CleanDirName.extensions]!.path,
+          _getDir(CleanDirName.extensions).path,
           "extensions.dart",
           extensionsContent,
         ),
         FileModel(
-          directoryStructure[CleanDirName.failures]!.path,
+          _getDir(CleanDirName.failures).path,
           "failures.dart",
           failuresContent,
         ),
         FileModel(
-          directoryStructure[CleanDirName.network]!.path,
+          _getDir(CleanDirName.network).path,
           "network_exceptions.dart",
           networkExceptionContent,
         ),
         FileModel(
-          directoryStructure[CleanDirName.network]!.path,
+          _getDir(CleanDirName.network).path,
           "network_client.dart",
           networkClientContent,
         ),
         FileModel(
-          directoryStructure[CleanDirName.routes]!.path,
+          _getDir(CleanDirName.routes).path,
           "app_router.dart",
-          routeContentRest,
+          cleanAppRouterContent,
         ),
         FileModel(
-          directoryStructure[CleanDirName.theme]!.path,
+          _getDir(CleanDirName.theme).path,
           "theme.dart",
           theme,
         ),
         FileModel(
-          directoryStructure[CleanDirName.theme]!.path,
+          _getDir(CleanDirName.theme).path,
+          "theme_service.dart",
+          cleanThemeServiceContent,
+        ),
+        FileModel(
+          _getDir(CleanDirName.theme).path,
           "app_colors.dart",
-          colorsContent,
+          cleanColorsContent,
         ),
         FileModel(
-          directoryStructure[CleanDirName.theme]!.path,
+          _getDir(CleanDirName.theme).path,
           "app_theme.dart",
-          themeContent,
+          cleanThemeContent,
         ),
         FileModel(
-          directoryStructure[CleanDirName.typography]!.path,
+          _getDir(CleanDirName.typography).path,
           "typography.dart",
           typography,
         ),
         FileModel(
-          directoryStructure[CleanDirName.typography]!.path,
+          _getDir(CleanDirName.typography).path,
           "app_font_weight.dart",
           appFontWeight,
         ),
         FileModel(
-          directoryStructure[CleanDirName.typography]!.path,
+          _getDir(CleanDirName.typography).path,
           "app_text_styles.dart",
           textStyles,
         ),
         FileModel(
-          directoryStructure[CleanDirName.features]!.path,
+          _getDir(CleanDirName.features).path,
           ".gitkeep",
           "",
         ),
@@ -344,68 +379,82 @@ class TddCleanStructure extends Structure {
         FileModel(
           'lib',
           "app.dart",
-          appContentRest,
+          cleanAppContent,
         ),
-        //
+        // Sample Feature Files
         FileModel(
-          featureStructure[CleanDirName.screens]!.path,
-          "${CleanDirName.featureNm}_screen.dart",
-          triviaScreen,
-        ),
-        FileModel(
-          featureStructure[CleanDirName.dataSource]!.path,
-          "${CleanDirName.featureNm}_datasource.dart",
-          triviaDataSourceContent,
+          replaceAsExpected(path: "lib/features/sample/presentation/screens"),
+          "sample_screen.dart",
+          cleanSampleScreenContent,
         ),
         FileModel(
-          featureStructure[CleanDirName.repoImpl]!.path,
-          "${CleanDirName.featureNm}_repo_impl.dart",
-          triviaRepoImplContent,
+          replaceAsExpected(path: "lib/features/sample/presentation/widgets"),
+          "header_section.dart",
+          cleanHeaderSectionContent,
         ),
         FileModel(
-          featureStructure[CleanDirName.repositories]!.path,
-          "${CleanDirName.featureNm}_repository.dart",
-          triviaRepoContent,
+          replaceAsExpected(path: "lib/features/sample/data/data_sources"),
+          "sample_datasource.dart",
+          cleanSampleDataSourceContent,
         ),
         FileModel(
-          featureStructure[CleanDirName.models]!.path,
-          "trivia_model.dart",
-          triviaModelContent,
+          replaceAsExpected(path: "lib/features/sample/data/repositories_impl"),
+          "sample_repository_impl.dart",
+          cleanSampleRepositoryImplContent,
         ),
         FileModel(
-          featureStructure[CleanDirName.entities]!.path,
-          "trivia_entity.dart",
-          triviaEntityContent,
+          replaceAsExpected(path: "lib/features/sample/domain/repositories"),
+          "sample_repository.dart",
+          cleanSampleRepositoryContent,
         ),
         FileModel(
-          featureStructure[CleanDirName.usecase]!.path,
-          "get_number_trivia_usecase.dart",
-          triviaUsecase,
+          replaceAsExpected(path: "lib/features/sample/data/models"),
+          "user_model.dart",
+          cleanUserModelContent,
         ),
         FileModel(
-          featureStructure[CleanDirName.widgets]!.path,
-          ".gitkeep",
-          "",
+          replaceAsExpected(path: "lib/features/sample/data/models"),
+          "cli_details_model.dart",
+          cleanCliDetailsModelContent,
         ),
         FileModel(
-          featureStructure[CleanDirName.blocs]!.path,
-          ".gitkeep",
-          "",
+          replaceAsExpected(path: "lib/features/sample/domain/entities"),
+          "user_entity.dart",
+          cleanUserEntityContent,
         ),
         FileModel(
-          featureStructure[CleanDirName.numberTriviaBloc]!.path,
-          "number_trivia_bloc.dart",
-          triviaBloc,
+          replaceAsExpected(path: "lib/features/sample/domain/entities"),
+          "cli_details_entity.dart",
+          cleanCliDetailsEntityContent,
         ),
         FileModel(
-          featureStructure[CleanDirName.numberTriviaBloc]!.path,
-          "number_trivia_state.dart",
-          triviaState,
+          replaceAsExpected(path: "lib/features/sample/domain/usecases"),
+          "get_cli_details_usecase.dart",
+          cleanGetCliDetailsUseCaseContent,
         ),
         FileModel(
-          featureStructure[CleanDirName.numberTriviaBloc]!.path,
-          "number_trivia_event.dart",
-          triviaEvent,
+          replaceAsExpected(path: "lib/features/sample/domain/usecases"),
+          "get_user_usecase.dart",
+          cleanGetUserUseCaseContent,
+        ),
+        // Blocks
+        FileModel(
+          replaceAsExpected(
+              path: "lib/features/sample/presentation/blocs/sample_bloc"),
+          "sample_bloc.dart",
+          cleanSampleBlocContent,
+        ),
+        FileModel(
+          replaceAsExpected(
+              path: "lib/features/sample/presentation/blocs/sample_bloc"),
+          "sample_event.dart",
+          cleanSampleEventContent,
+        ),
+        FileModel(
+          replaceAsExpected(
+              path: "lib/features/sample/presentation/blocs/sample_bloc"),
+          "sample_state.dart",
+          cleanSampleStateContent,
         ),
       ];
 
@@ -495,6 +544,7 @@ class CleanDirName {
   //configurations
   static String common = "common";
   static String commonWidgets = "widgets";
+  static String uiUtils = "ui_utils";
   static String services = "services";
   static String features = "features";
   static String core = "core";
@@ -525,6 +575,6 @@ class CleanDirName {
   static String screens = "screens";
   static String widgets = "widgets";
   static String homeBloc = "home_bloc";
-  static String numberTriviaBloc = "number_trivia_bloc";
+  static String sampleBloc = "sample_bloc";
   static String aiDocs = "ai_docs";
 }
