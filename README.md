@@ -54,7 +54,6 @@ Contributions are welcome! If you find a bug or have a feature request, please o
   <img src="https://contrib.rocks/image?repo=Vineeth-Kolichal/easy_init_cli&anon=1&max=100&cacheBust=1" alt="Contributors" />
 </a>
 
-Made with [contrib.rocks](https://contrib.rocks).
 
 ## 📄 License
 
