@@ -47,7 +47,7 @@ void main(List<String> arguments) async {
   try {
     if (arguments.isEmpty) {
       print(yellow(logo));
-      //printUsage(argParser);
+      printUsage(argParser);
       return;
     }
 
