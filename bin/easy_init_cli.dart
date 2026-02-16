@@ -76,7 +76,8 @@ void main(List<String> arguments) async {
     print(e.message);
     print('');
     printUsage(argParser);
-  } catch (e) {
+  } catch (e, stackTrace) {
     print(red("[ERROR] An unexpected error occurred: $e"));
+    print(red(stackTrace.toString()));
   }
 }
