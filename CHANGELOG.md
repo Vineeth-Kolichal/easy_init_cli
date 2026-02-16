@@ -1,3 +1,9 @@
+## 1.3.1
+  - **Documentation Enhancements**:
+    - Updated README.md with a new layout, directing users to the official documentation site.
+    - Added high-quality, clickable contributor avatars.
+    - Added MVVM Architecture support mention in the overview.
+
 ## 1.3.0
   - **New Architecture: MVVM with Provider**:
     - Added support for initializing projects with MVVM architecture using Provider for state management.
