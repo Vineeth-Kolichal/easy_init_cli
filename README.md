@@ -48,12 +48,14 @@ Contributions are welcome! If you find a bug or have a feature request, please o
 4. Push to the branch (`git push origin feature/my-feature`).
 5. Open a Pull Request.
 
-## � Contributors
+## 👥 Contributors
 
 <a href="https://github.com/Vineeth-Kolichal/easy_init_cli/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=Vineeth-Kolichal/easy_init_cli" />
+  <img src="https://contrib.rocks/image?repo=Vineeth-Kolichal/easy_init_cli&anon=1&max=100&cacheBust=1" alt="Contributors" />
 </a>
 
-## �📄 License
+Made with [contrib.rocks](https://contrib.rocks).
+
+## 📄 License
 
 This project is licensed under the BSD 3-Clause License - see the [LICENSE](LICENSE) file for details.
