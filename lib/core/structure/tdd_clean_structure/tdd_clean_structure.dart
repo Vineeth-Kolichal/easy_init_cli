@@ -383,11 +383,6 @@ class TddCleanStructure extends Structure {
         ),
         // Sample Feature Files
         FileModel(
-          replaceAsExpected(path: "lib/features/sample/view/screens"),
-          "sample_screen.dart",
-          cleanSampleScreenContent,
-        ),
-        FileModel(
           replaceAsExpected(path: "lib/features/sample/presentation/screens"),
           "sample_screen.dart",
           cleanSampleScreenContent,
