@@ -287,24 +287,41 @@ class MvvmStructure extends Structure {
           appContent,
         ),
         // Sample Feature
-        FileModel(replaceAsExpected(path: "lib/features/sample/view/screens"),
-            "sample_screen.dart", sampleScreenContent),
-        FileModel(replaceAsExpected(path: "lib/features/sample/view/widgets"),
-            "header_section.dart", headerSectionContent),
         FileModel(
-            replaceAsExpected(path: "lib/features/sample/data/data_sources"),
-            "sample_data_source.dart",
-            sampleDataSourceContent),
+          replaceAsExpected(path: "lib/features/sample/view/screens"),
+          "sample_screen.dart",
+          sampleScreenContent,
+        ),
         FileModel(
-            replaceAsExpected(path: "lib/features/sample/data/repositories"),
-            "sample_repository_impl.dart",
-            sampleRepositoryContent),
-        FileModel(replaceAsExpected(path: "lib/features/sample/models"),
-            "user_model.dart", userModelContent),
-        FileModel(replaceAsExpected(path: "lib/features/sample/models"),
-            "cli_details_model.dart", cliDetailsModelContent),
-        FileModel(replaceAsExpected(path: "lib/features/sample/view_model"),
-            "sample_view_model.dart", sampleViewModelContent),
+          replaceAsExpected(path: "lib/features/sample/view/widgets"),
+          "header_section.dart",
+          headerSectionContent,
+        ),
+        FileModel(
+          replaceAsExpected(path: "lib/features/sample/data/data_sources"),
+          "sample_data_source.dart",
+          sampleDataSourceContent,
+        ),
+        FileModel(
+          replaceAsExpected(path: "lib/features/sample/data/repositories"),
+          "sample_repository_impl.dart",
+          sampleRepositoryContent,
+        ),
+        FileModel(
+          replaceAsExpected(path: "lib/features/sample/models"),
+          "user_model.dart",
+          userModelContent,
+        ),
+        FileModel(
+          replaceAsExpected(path: "lib/features/sample/models"),
+          "cli_details_model.dart",
+          cliDetailsModelContent,
+        ),
+        FileModel(
+          replaceAsExpected(path: "lib/features/sample/view_model"),
+          "sample_view_model.dart",
+          sampleViewModelContent,
+        ),
       ];
 
   @override
