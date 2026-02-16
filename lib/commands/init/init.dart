@@ -57,6 +57,8 @@ class InitProject extends Command {
           showWarning("tdd clean", "brf");
         } else if (arch == "mvc-grl") {
           showWarning('mvc', "grl");
+        } else if (arch == "mvvm-feature") {
+          showWarning('mvvm', "feature");
         }
       }
     } else {
